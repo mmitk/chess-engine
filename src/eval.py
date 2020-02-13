@@ -1,8 +1,7 @@
 import board
 import chess
 
-def evaluate_board(chessboard):
-    board = chessboard.get_board()
+def evaluate_board(board):
     if board.is_checkmate():
         if board.turn:
             return -9999

@@ -22,7 +22,7 @@ def alphabeta( alpha, beta, depthleft, board ):
 
 def quiesce( alpha, beta, board ):
     # need to import evaluate.py
-    stand_pat = eval.evaluate_board()
+    stand_pat = eval.evaluate_board(board)
     if( stand_pat >= beta ):
         return beta
     if( alpha < stand_pat ):
