@@ -30,8 +30,8 @@ def quiesce( alpha, beta, board ):
 
     for move in board.legal_moves:
         if board.is_capture(move):
-            board.push(move)        
-            score = -quiesce( -beta, -alpha, board )
+            board.push(move)
+            score = -quiesce( -beta, -alpha, board)
             board.pop()
 
             if( score >= beta ):
@@ -55,7 +55,7 @@ def selectmove(depth, board, movehistory):
             board.push(move)
             boardValue = -alphabeta(-beta, -alpha, depth-1,board)
             if boardValue > bestValue:
-                bestValue = boardValue;
+                bestValue = boardValue
                 bestMove = move
             if( boardValue > alpha ):
                 alpha = boardValue

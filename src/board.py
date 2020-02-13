@@ -9,7 +9,7 @@ class chessboard():
  
 
     def get_board(self):
-        return self.board 
+        return self.board
     
     def svg(self):
-        SVG(chess.svg.board(board=board,size=400))
+        SVG(chess.svg.board(board=self.board,size=400))
