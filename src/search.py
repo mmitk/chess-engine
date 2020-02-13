@@ -9,7 +9,7 @@ def alphabeta( alpha, beta, depthleft, board ):
         return quiesce( alpha, beta, board )
     for move in board.legal_moves:
         board.push(move)   
-        score = -alphabeta( -beta, -alpha, depthleft - 1 )
+        score = -alphabeta( -beta, -alpha, depthleft - 1, board )
         board.pop()
         if( score >= beta ):
             return score
