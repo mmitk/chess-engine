@@ -12,4 +12,4 @@ class chessboard():
         return self.board
     
     def svg(self):
-        SVG(chess.svg.board(board=self.board,size=400))
+        display(SVG(chess.svg.board(board=self.board,size=400)))
