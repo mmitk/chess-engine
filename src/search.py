@@ -1,5 +1,6 @@
 import board
 import chess.polyglot
+import eval
 
 # added board as a parameter, to be passed to in main
 def alphabeta( alpha, beta, depthleft, board ):
@@ -21,7 +22,7 @@ def alphabeta( alpha, beta, depthleft, board ):
 
 def quiesce( alpha, beta, board ):
     # need to import evaluate.py
-    stand_pat = evaluate_board()
+    stand_pat = eval.evaluate_board()
     if( stand_pat >= beta ):
         return beta
     if( alpha < stand_pat ):
