@@ -5,6 +5,6 @@ movehistory =[]
 
 board = board.chessboard()
 chessboard = board.get_board()
-mov = selectmove(3)
+mov = search.selectmove(3,board,movehistory)
 chessboard.push(mov)
 board.svg()

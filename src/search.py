@@ -40,7 +40,7 @@ def quiesce( alpha, beta ):
     return alpha
 
 
-def selectmove(depth, board):
+def selectmove(depth, board, movehistory):
     try:
         move = chess.polyglot.MemoryMappedReader("bookfish.bin").weighted_choice(board).move()
         movehistory.append(move)
@@ -52,7 +52,7 @@ def selectmove(depth, board):
         beta = 100000
         for move in board.legal_moves:
             board.push(move)
-            boardValue = -alphabeta(-beta, -alpha, depth-1)
+            boardValue = -alphabeta(-beta, -alpha, depth-1,board)
             if boardValue > bestValue:
                 bestValue = boardValue;
                 bestMove = move
