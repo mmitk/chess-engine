@@ -9,14 +9,14 @@ def alphabeta( alpha, beta, depthleft, board ):
         return quiesce( alpha, beta, board )
     for move in board.legal_moves:
         board.push(move)   
-        score = -alphabeta( -beta, -alpha, depthleft - 1, board )
+        score = -alphabeta( -beta, -alpha, depthleft - 1, board)
         board.pop()
         if( score >= beta ):
             return score
         if( score > bestscore ):
             bestscore = score
         if( score > alpha ):
-            alpha = score   
+            alpha = score
     return bestscore
 
 
@@ -57,7 +57,7 @@ def selectmove(depth, board, movehistory):
             if boardValue > bestValue:
                 bestValue = boardValue
                 bestMove = move
-            if( boardValue > alpha ):
+            if( boardValue > alpha):
                 alpha = boardValue
             board.pop()
         movehistory.append(bestMove)
