@@ -2,6 +2,7 @@
 https://medium.com/applied-data-science/how-to-build-your-own-alphazero-ai-using-python-and-keras-7f664945c188  
         -->     https://github.com/AppliedDataSciencePartners/DeepReinforcementLearning
         -->     https://medium.com/applied-data-science/alphago-zero-explained-in-one-diagram-365f5abf67e0
+        -->     https://medium.com/@andreasstckl/writing-a-chess-program-in-one-day-30daff4610ec
 
 (using search and alpha pruning)
 https://www.freecodecamp.org/news/simple-chess-ai-step-by-step-1d55a9266977/
