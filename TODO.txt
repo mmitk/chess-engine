@@ -3,4 +3,4 @@
     []svm model
     []train model
     []reinforcement training capabilities
-[]re-asses evaluation functions
+[]re-assess evaluation functions
