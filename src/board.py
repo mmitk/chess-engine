@@ -6,7 +6,10 @@ from IPython.display import SVG
 class chessboard():
     def __init__(self):
         self.board = chess.Board()
-        SVG(chess.svg.board(board=board,size=400)) 
+ 
 
     def get_board(self):
         return self.board 
+    
+    def svg(self):
+        SVG(chess.svg.board(board=board,size=400))
