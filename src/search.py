@@ -1,14 +1,15 @@
 import board
 import chess.polyglot
+import eval
 
 # added board as a parameter, to be passed to in main
 def alphabeta( alpha, beta, depthleft, board ):
     bestscore = -9999
     if( depthleft == 0 ):
-        return quiesce( alpha, beta )
+        return quiesce( alpha, beta, board )
     for move in board.legal_moves:
         board.push(move)   
-        score = -alphabeta( -beta, -alpha, depthleft - 1 )
+        score = -alphabeta( -beta, -alpha, depthleft - 1, board )
         board.pop()
         if( score >= beta ):
             return score
@@ -19,9 +20,9 @@ def alphabeta( alpha, beta, depthleft, board ):
     return bestscore
 
 
-def quiesce( alpha, beta ):
+def quiesce( alpha, beta, board ):
     # need to import evaluate.py
-    stand_pat = evaluate_board()
+    stand_pat = eval.evaluate_board()
     if( stand_pat >= beta ):
         return beta
     if( alpha < stand_pat ):
@@ -30,7 +31,7 @@ def quiesce( alpha, beta ):
     for move in board.legal_moves:
         if board.is_capture(move):
             board.push(move)        
-            score = -quiesce( -beta, -alpha )
+            score = -quiesce( -beta, -alpha, board )
             board.pop()
 
             if( score >= beta ):
