@@ -1,0 +1,6 @@
+[]build prototype engine
+[]add learning element
+    []svm model
+    []train model
+    []reinforcement training capabilities
+[]re-asses evaluation functions
