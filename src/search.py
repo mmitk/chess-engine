@@ -5,7 +5,7 @@ import chess.polyglot
 def alphabeta( alpha, beta, depthleft, board ):
     bestscore = -9999
     if( depthleft == 0 ):
-        return quiesce( alpha, beta )
+        return quiesce( alpha, beta, board )
     for move in board.legal_moves:
         board.push(move)   
         score = -alphabeta( -beta, -alpha, depthleft - 1 )
@@ -19,7 +19,7 @@ def alphabeta( alpha, beta, depthleft, board ):
     return bestscore
 
 
-def quiesce( alpha, beta ):
+def quiesce( alpha, beta, board ):
     # need to import evaluate.py
     stand_pat = evaluate_board()
     if( stand_pat >= beta ):
@@ -30,7 +30,7 @@ def quiesce( alpha, beta ):
     for move in board.legal_moves:
         if board.is_capture(move):
             board.push(move)        
-            score = -quiesce( -beta, -alpha )
+            score = -quiesce( -beta, -alpha, board )
             board.pop()
 
             if( score >= beta ):
