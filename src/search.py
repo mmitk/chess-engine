@@ -1,7 +1,26 @@
 import board
 import chess.polyglot
+import random
+import numpy as np
+from models import svm
 import eval
 
+# UCT MCTS implemented here
+###############################################################################################
+visits = {}
+differential = {}
+model = svm
+def record(board, score):
+    dataset = [{'input': board.fen(), 'target': score}]
+    return model.fit(dataset)
+
+def heuristic_value(board):
+    dataset = [{'input': board.fen(), 'target': None}]
+    return model.predict(dataset)
+###############################################################################################
+
+# classic alphabeta search with quiesce
+####################################################################################################
 # added board as a parameter, to be passed to in main
 def alphabeta( alpha, beta, depthleft, board ):
     bestscore = -9999
