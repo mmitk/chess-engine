@@ -4,14 +4,20 @@ import random
 import numpy as np
 from models import svm
 import pandas as pd
+import json
 import eval
 
 # UCT MCTS implemented here
+# currently uses handwritten board evauluation
+# and SVM to calulate (predict) Heursitic values
 ###################################################################################################
 visits = {}
 differential = {}
 data = []
 model = svm
+
+# record new states and scores
+# and retrain models based on these moves (states)
 def record(board, score):
     visits["total"] = visits.get("total",1) + 1
     visits[board.fen()] =  visits.get(board.fen(), 0) + 1
@@ -19,6 +25,7 @@ def record(board, score):
     data.append(dataset)
     return model.fit(data)
 
+# return a predicted (calculated) heuristic given a certain move
 def heuristic_value(board):
     dataset = [{'input': board.fen(), 'target': None}]
     return model.predict(pd.DataFrame(dataset))
@@ -44,6 +51,11 @@ def play_value(board, movehistory = None):
 def monte_carlo (board, N = 150):
     scores = [play_value(board) for i in range(0, N)]
     return np.mean(scores)
+
+def append_data(filename, data):
+    with open(filename, 'a') as f:
+        json.dump(data, f)
+        f.write(os.linesep)
 
 ####################################################################################################
 

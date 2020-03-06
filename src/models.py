@@ -1,11 +1,20 @@
 from sklearn import svm
+import pandas as pd
 import pickle
 
 class svm:
     
-    def __init__(self, filename = None):
-        if not filename:
-            self._model = svm.SVC(kernel = 'rbf')
+    def __init__(self, filename = None, historic = False):
+        if historic and filename is not None:
+            self._model = pickle.load(filename)
+        else:
+            if filename is not None:
+                self._model = svm.SVC(kernel = 'rbf')
+            else:
+                df = pd.read_json(filename)
+                target = df.pop('target')
+                self._model=svm.SVC(kernel = 'rbf').fit(df, target)
+
     
     def fit(self, dataset, formatted = False):
         if not formatted:
