@@ -7,14 +7,20 @@ class svm:
         if not filename:
             self._model = svm.SVC(kernel = 'rbf')
     
-    def fit(self, dataset):
-        self._model.fit(dataset)
+    def fit(self, dataset, formatted = False):
+        if not formatted:
+            target = dataset.pop('target')
+            self._model.fit(dataset, target)
     
-    def predict(self, dataset):
-        return self._model.predict(dataset)
+    def predict(self, dataset, formatted = False):
+        if not formatted:
+            target = dataset.pop('target')
+            return self._model.predict(dataset)
 
-    def predict_proba(self, dataset):
-        return self._model.predict_proba(dataset)
+    def predict_proba(self, dataset, formatted = False):
+         if not formatted:
+            target = dataset.pop('target')
+            return self._model.predict_proba(dataset)
     
     def write_file(self, filename):
         with open(filename, 'wb') as file:

@@ -3,21 +3,49 @@ import chess.polyglot
 import random
 import numpy as np
 from models import svm
+import pandas as pd
 import eval
 
 # UCT MCTS implemented here
-###############################################################################################
+###################################################################################################
 visits = {}
 differential = {}
+data = []
 model = svm
 def record(board, score):
+    visits["total"] = visits.get("total",1) + 1
+    visits[board.fen()] =  visits.get(board.fen(), 0) + 1
     dataset = [{'input': board.fen(), 'target': score}]
-    return model.fit(dataset)
+    data.append(dataset)
+    return model.fit(data)
 
 def heuristic_value(board):
     dataset = [{'input': board.fen(), 'target': None}]
-    return model.predict(dataset)
-###############################################################################################
+    return model.predict(pd.DataFrame(dataset))
+
+def play_value(board, movehistory = None):
+    if board.is_checkmate():
+        record(board, eval.evaluate_board(board))
+        return eval.evaluate_board(board)
+    
+    heuristic_vals = {}
+    for move in board.legal_moves:
+        board.push(move)
+        heuristic_vals[move] = -heuristic_value(board)
+        board.pop
+    move = max(heuristic_vals, key = heuristic_vals.get)
+    board.push(move)
+    value = -play_value(board)
+    board.pop()
+    record(board, value)
+
+    return value
+
+def monte_carlo (board, N = 150):
+    scores = [play_value(board) for i in range(0, N)]
+    return np.mean(scores)
+
+####################################################################################################
 
 # classic alphabeta search with quiesce
 ####################################################################################################
