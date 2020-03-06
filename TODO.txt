@@ -3,4 +3,6 @@
     [x]svm model
     []train model
     []reinforcement training capabilities
+
+[] create dataset saving structures
 []re-assess evaluation functions
