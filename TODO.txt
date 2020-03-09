@@ -1,5 +1,7 @@
 [x]build prototype engine
 []add learning element
+    [x]implement MCTS
+        []create concurrent MCTS model
     [x]svm model
     []train model
     []reinforcement training capabilities

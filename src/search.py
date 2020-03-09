@@ -19,6 +19,7 @@ model = md.svm_eval()
 # record new states and scores
 # and retrain models based on these moves (states)
 def record(board, score):
+    print('record func')
     visits["total"] = visits.get("total",1) + 1
     visits[board.fen()] =  visits.get(board.fen(), 0) + 1
     dataset = [{'input': board.fen().encode('utf8'), 'target': score}]
@@ -27,12 +28,14 @@ def record(board, score):
 
 # return a predicted (calculated) heuristic given a certain move
 def heuristic_value(board):
+    print('heuristic_value func')
     dataset = [{'input': board.fen(), 'target': None}]
     val = model.predict(dataset = board.fen(), formatted = False)
     #print(val)
     return val[0]
 
 def play_value(board, movehistory = None):
+    print('play_value')
     if board.is_checkmate():
         record(board, eval.evaluate_board(board))
         return eval.evaluate_board(board)
@@ -52,10 +55,12 @@ def play_value(board, movehistory = None):
     return value
 
 def monte_carlo (board, N = 150):
+    print('monte_carlo func')
     scores = [play_value(board) for i in range(0, N)]
     return np.mean(scores)
 
 def make_move(board):
+    print('make_move func')
     actions = {}
     for move in board.pseudo_legal_moves:
         board.push(move)
