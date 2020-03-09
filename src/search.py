@@ -2,7 +2,7 @@ import board
 import chess.polyglot
 import random
 import numpy as np
-from models import svm
+from models import model as md
 import pandas as pd
 import json
 import eval
@@ -14,21 +14,23 @@ import eval
 visits = {}
 differential = {}
 data = []
-model = svm
+model = md.svm_eval()
 
 # record new states and scores
 # and retrain models based on these moves (states)
 def record(board, score):
     visits["total"] = visits.get("total",1) + 1
     visits[board.fen()] =  visits.get(board.fen(), 0) + 1
-    dataset = [{'input': board.fen(), 'target': score}]
+    dataset = [{'input': board.fen().encode('utf8'), 'target': score}]
     data.append(dataset)
     return model.fit(data)
 
 # return a predicted (calculated) heuristic given a certain move
 def heuristic_value(board):
     dataset = [{'input': board.fen(), 'target': None}]
-    return model.predict(pd.DataFrame(dataset))
+    val = model.predict(dataset = board.fen(), formatted = False)
+    #print(val)
+    return val[0]
 
 def play_value(board, movehistory = None):
     if board.is_checkmate():
@@ -36,21 +38,30 @@ def play_value(board, movehistory = None):
         return eval.evaluate_board(board)
     
     heuristic_vals = {}
-    for move in board.legal_moves:
+    for move in board.pseudo_legal_moves:
         board.push(move)
         heuristic_vals[move] = -heuristic_value(board)
-        board.pop
+        board.pop()
     move = max(heuristic_vals, key = heuristic_vals.get)
+
     board.push(move)
     value = -play_value(board)
     board.pop()
     record(board, value)
-
+ 
     return value
 
 def monte_carlo (board, N = 150):
     scores = [play_value(board) for i in range(0, N)]
     return np.mean(scores)
+
+def make_move(board):
+    actions = {}
+    for move in board.pseudo_legal_moves:
+        board.push(move)
+        actions[move] = -monte_carlo(board)
+        board.pop()
+    return max(actions, key = actions.get)
 
 def append_data(filename, data):
     with open(filename, 'a') as f:
