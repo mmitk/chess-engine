@@ -51,7 +51,10 @@ class mcts_agent(object):
 
     def monte_carlo_value(self, board, playouts = 100, N = 5):
         with Pool() as p:
-            scores = p.map(self.play_value,[board.mirror() for i in range(0, playouts)])
+            try:
+                scores = p.map(self.play_value,[board.mirror() for i in range(0, playouts)])
+            except Exception as e:
+                return float('-inf')
         return np.mean(scores)
 
     def make_move(self, board, playouts = 100):
