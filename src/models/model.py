@@ -18,9 +18,22 @@ class svm_eval():
     
     def fit(self, dataset, formatted = True):
         if formatted and dataset is not None:
-            df = pd.DataFrame(dataset)
-            target = dataset.pop('target')
-            self._model.fit(dataset, target)
+            input_data = {}
+            target_data = {}
+            i = 0
+            for row in dataset:
+                input_data[i] = row['input']
+                target_data[i] = row['target']
+                i+=1
+            input_df = pd.DataFrame.from_dict(input_data, orient='index')
+            #print(input_df.head())
+            output_df = pd.DataFrame.from_dict(target_data, orient='index')
+            #print(output_df.head())
+            #df = pd.concat([input_df,output_df],axis = 1)
+            #df.head()
+            #target = dataset.pop('target')
+
+            self._model.fit(input_df, output_df)
             '''
         if formatted == False:
             df = pd.DataFrame(dataset)
