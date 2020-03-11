@@ -10,12 +10,14 @@ from multiprocessing import Pool, Manager
 import eval
 
 class mcts_agent(object):
-    def __init__(self, manager, historic=False):
+    def __init__(self, manager, historic=False, filename = None):
         super().__init__
         self.visits = manager.dict()
         self.differential = manager.dict()
         self.data = manager.list()
-        self.model = md.svm_eval()
+        #if historic == True and filename is not None:
+            #self.model = md.svm_eval(filename = filename, historic )
+        self.model = md.svm_eval(filename = filename, historic = historic)
         
     def record(self, board, score):
         self.visits["total"] = self.visits.get("total",1) + 1
@@ -64,6 +66,9 @@ class mcts_agent(object):
             actions[move] = -self.monte_carlo_value(board)
             board.pop()
         return max(actions, key = actions.get)
+
+    def write_model(self, filename):
+        self._model.write_file(filename)
  
     
  

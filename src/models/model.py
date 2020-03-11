@@ -11,8 +11,14 @@ class svm_eval():
         if filename is None:
                 self._model = svm.SVR(kernel = 'rbf')
 
-        #placeholder!!!
-        else:
+
+        elif filename is not None and historic == True:
+            #self._model = svm.SVR(kernel = 'rbf')
+            with open(filename, 'rb') as file:
+                self._model = pickle.load(file)
+                
+        # placeholder!!!
+        else: 
             self._model = svm.SVR(kernel = 'rbf')
       
     
