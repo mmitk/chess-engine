@@ -68,7 +68,7 @@ class mcts_agent(object):
         return max(actions, key = actions.get)
 
     def write_model(self, filename):
-        self._model.write_file(filename)
+        self.model.write_file(filename)
  
     
  

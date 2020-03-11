@@ -3,6 +3,7 @@ import pandas as pd
 import pickle
 import chess
 import numpy as np
+#from __future__ import with_statement
 import eval
 
 class svm_eval():
@@ -14,8 +15,12 @@ class svm_eval():
 
         elif filename is not None and historic == True:
             #self._model = svm.SVR(kernel = 'rbf')
-            with open(filename, 'rb') as file:
-                self._model = pickle.load(file)
+            try:
+                with open(filename, 'rb') as file:
+                    self._model = pickle.load(file)
+            except EnvironmentError as e:
+                print(e)
+                self._model = svm.SVR(kernel = 'rbf')
                 
         # placeholder!!!
         else: 

@@ -4,6 +4,9 @@ import chess
 import chess.engine
 import mcts
 from multiprocessing import Pool, Manager, Process
+import time
+from datetime import date
+import os.path
 
 if __name__ == '__main__':
     movehistory1 = []
@@ -12,7 +15,8 @@ if __name__ == '__main__':
     board = chess.Board()
 #chessboard = board.get_board()
     manager = Manager()
-    m = mcts.mcts_agent(manager,False)
+    m = mcts.mcts_agent(manager,historic = True, filename = 'svm_eval.pkl')
+
 
     while not board.is_checkmate():
         move = search.selectmove(3,board,movehistory1)
@@ -26,7 +30,21 @@ if __name__ == '__main__':
         #move = p.start()
         board.push(move)
         print('move made Agent B')
+        m.write_model('svm_eval.pkl')
+ 
+        d = date.today()
+        t = time.ctime(time.time())
+        save_path = 'C:\\Users\\mmitk\\Documents\\School\\2020\\AI\\project\\backups'
+        backup = 'model_'+t + '.pkl'
+        #m.write_model(backup.replace(" ", "").replace(".","-"))
+        #completeName = os.path.join(save_path, backup)
+        #m.write_model(completeName.replace(" ", "").replace(".","-"))
 #board.svg()
+    #m.write_model('svm_eval.pkl')
+ 
+    #d = date.today()
+    #backup = 'svm_eval' + d.isoformat() + '.pkl'
+
     print('History of Agent 1 (MCTS): ',movehistory1)
 
 
