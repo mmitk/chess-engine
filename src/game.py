@@ -31,11 +31,12 @@ if __name__ == '__main__':
         board.push(move)
         print('move made Agent B')
         m.write_model('svm_eval.pkl')
+        m.write_data('history.json')
  
-        d = date.today()
-        t = time.ctime(time.time())
-        save_path = 'C:\\Users\\mmitk\\Documents\\School\\2020\\AI\\project\\backups'
-        backup = 'model_'+t + '.pkl'
+        #d = date.today()
+        #t = time.ctime(time.time())
+        #save_path = 'C:\\Users\\mmitk\\Documents\\School\\2020\\AI\\project\\backups'
+        #backup = 'model_'+t + '.pkl'
         #m.write_model(backup.replace(" ", "").replace(".","-"))
         #completeName = os.path.join(save_path, backup)
         #m.write_model(completeName.replace(" ", "").replace(".","-"))

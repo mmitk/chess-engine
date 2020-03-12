@@ -5,6 +5,9 @@ import chess
 import numpy as np
 #from __future__ import with_statement
 import eval
+import datetime
+import time
+import os
 
 class svm_eval():
     
@@ -37,14 +40,10 @@ class svm_eval():
                 target_data[i] = row['target']
                 i+=1
             input_df = pd.DataFrame.from_dict(input_data, orient='index')
-            #print(input_df.head())
             output_df = pd.DataFrame.from_dict(target_data, orient='index')
-            #print(output_df.head())
-            #df = pd.concat([input_df,output_df],axis = 1)
-            #df.head()
-            #target = dataset.pop('target')
-
             self._model.fit(input_df, output_df)
+            self.log('Model (Re)TRAINED')
+
             '''
         if formatted == False:
             df = pd.DataFrame(dataset)
@@ -60,13 +59,15 @@ class svm_eval():
             #for inp in df.input:
                 #inp = list(inp.encode('utf8'))
             try:
-                return self._model.predict(np.asarray(list(dataset.encode('utf8'))).reshape(-1, 1))
+                pred = self._model.predict(np.asarray(list(dataset.encode('utf8'))).reshape(-1, 1))
+                self.log('Model PREDICT')
             except Exception as e:
                 #print('EVAL VALUE:',eval.evaluate_board(chess.Board(dataset.input[0].decode('utf8'))))
                 df = pd.DataFrame(np.asarray(list(dataset.encode('utf8'))))
                 df['target'] = float(eval.evaluate_board(chess.Board(dataset)))
                 target = df.pop('target')
                 self._model.fit(df, target)
+                self.log('Model TRAINED and PREDICT')
                 return self._model.predict(np.asarray(list(dataset.encode('utf8'))).reshape(-1, 1))
 
     def predict_proba(self, dataset, formatted = True):
@@ -83,12 +84,13 @@ class svm_eval():
             self._model = pickle.load(file)
 
 
-
-'''
-        #elif historic and filename is not None:
-        #    self._model = pickle.load(filename)
-        #elif filename is not None and not historic:
-        #    df = pd.read_json(filename)
-        #    target = df.pop('target')
-        #    self._model=svm.SVC(kernel = 'rbf').fit(df, target)
-'''
+    def log(self, message):
+        filename = '..\\logs\\'+str(datetime.date.today()) + '.log'
+        try:
+            with open(filename, 'a') as f:
+                f.write(message + '\t'+str(time.ctime()))
+                f.write(os.linesep)
+        except Exception:
+            with open(filename, 'w+') as f:
+                f.write(message + '\t\t'+str(time.ctime()))
+                f.write(os.linesep)

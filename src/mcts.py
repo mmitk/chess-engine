@@ -5,7 +5,9 @@ from models import model as md
 import json
 import multiprocessing
 from multiprocessing import Pool, Manager
-
+import os
+import datetime
+import time 
 
 import eval
 
@@ -24,6 +26,7 @@ class mcts_agent(object):
         self.visits[board.fen()] =  self.visits.get(board.fen(), 0) + 1
         dataset = {'input': np.asarray(list(board.fen().encode('utf8'))), 'target': score}
         self.data.append(dataset)
+        self.log('Visit Recorded')
         return self.model.fit(dataset = self.data)
 
     def play_value(self, board, depth = 150):
@@ -42,7 +45,7 @@ class mcts_agent(object):
         value = -self.play_value(board, depth=depth-1)
         board.pop()
         self.record(board, value)
-
+        #self.log('Playout Complete')
         return value
 
     def heuristic_value(self, board):
@@ -51,7 +54,7 @@ class mcts_agent(object):
     #print(val)
         return np.mean(val)
 
-    def monte_carlo_value(self, board, playouts = 100, N = 5):
+    def monte_carlo_value(self, board, playouts = 50, N = 5):
         with Pool() as p:
             try:
                 scores = p.map(self.play_value,[board.mirror() for i in range(0, playouts)])
@@ -65,11 +68,39 @@ class mcts_agent(object):
             board.push(move)
             actions[move] = -self.monte_carlo_value(board)
             board.pop()
+        self.log('move chosen')
         return max(actions, key = actions.get)
 
     def write_model(self, filename):
         self.model.write_file(filename)
- 
+
+    def write_data(self, filename):
+        #input_data = {}
+        #target_data = {}
+        #i = 0
+        #for row in list(self.data):
+            #input_data[i] = row['input']
+            #target_data[i] = row['target']
+            #i+=1
+        #input_df = pd.DataFrame.from_dict(input_data, orient='index')
+            #print(input_df.head())
+        #output_df = pd.DataFrame.from_dict(target_data, orient='index')
+            #print(output_df.head())
+        #df = pd.concat([input_df,output_df],axis = 1)
+        #df.to_json(filename)
+        with open(filename, 'a') as f:
+            json.dump(dict(self.visits), f)
+            f.write(os.linesep)
     
+    def log(self, message):
+        filename = '..\\logs\\'+str(datetime.date.today()) + '.log'
+        try:
+            with open(filename, 'a') as f:
+                f.write(message + '\t'+str(time.ctime()))
+                f.write(os.linesep)
+        except Exception:
+            with open(filename, 'w+') as f:
+                f.write(message + '\t\t'+str(time.ctime()))
+                f.write(os.linesep)
  
         
