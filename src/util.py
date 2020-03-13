@@ -3,6 +3,7 @@ import datetime
 import time
 import os
 
+DEBUG_LEVEL = 3
 ROOT_DIR = Path(os.path.dirname(os.path.abspath(__file__))).parent # get root of project
 DATA_DIR = Path(ROOT_DIR / "data")
 HISTORY_DIR = Path(DATA_DIR / "history")
@@ -32,6 +33,8 @@ where 1 is of lowest importance, 5 is of highest. Ideally need to implement way 
 and alter logging as a result 
 """
 def log(message, logger_str=None, debug_level=5, filename=None, path=None, write_to_console=False):
+    if debug_level < DEBUG_LEVEL:
+        return
     if not filename:
         filename = str(datetime.date.today()) + '.log' # default filename
     if not path:
