@@ -43,6 +43,7 @@ class mcts_agent(object):
             if val is not None:
                 heuristic_vals[move] = val
             board.pop()
+        move = max(heuristic_vals, key = heuristic_vals.get)
         board.push(move)
         value = -self.play_value(board, depth=depth-1)
         print("value" + str(value))
@@ -58,9 +59,8 @@ class mcts_agent(object):
         if val is None:
             return
         else:
-            print("val=" + str(val))
             v = np.mean(val)
-            print(v)
+            self.log('val=' + str(val)+' VAL MEAN: '+str(v))
             return v
 
     def monte_carlo_value(self, board, playouts = 15, N = 5):
@@ -71,7 +71,8 @@ class mcts_agent(object):
             except Exception as e:
                 exc_type, exc_obj, exc_tb = sys.exc_info()
                 fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
-                util.log(str(exc_type) + " " + str(fname) + " " + str(exc_tb.tb_lineno) + ":" + str(e), logger_str="EXCEPTION", write_to_console=True)
+                util.log(str(exc_type) + " " + str(fname) + " " + str(exc_tb.tb_lineno) + ":" + str(e), logger_str="EXCEPTION", write_to_console=False)
+                return(float('-inf'))
         return np.mean(scores)
 
     def make_move(self, board, playouts = 50):
@@ -118,4 +119,4 @@ class mcts_agent(object):
             csvwriter.writerow(row)
         f.close()
     def log(self, message, debug_level=5):
-        util.log(message, logger_str="mcts", debug_level=debug_level, write_to_console=True)
+        util.log(message, logger_str="mcts", debug_level=debug_level, write_to_console=False)
