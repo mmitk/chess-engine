@@ -8,6 +8,7 @@ from multiprocessing import Pool, Manager
 import os
 import datetime
 import time 
+import csv
 
 import eval
 
@@ -25,7 +26,7 @@ class mcts_agent(object):
         self.visits["total"] = self.visits.get("total",1) + 1
         self.visits[board.fen()] =  self.visits.get(board.fen(), 0) + 1
         dataset = {'input': np.asarray(list(board.fen().encode('utf8'))), 'target': score}
-        self.data.append(dataset)
+        #self.data.append(dataset)
         self.log('Visit Recorded')
         return self.model.fit(dataset = self.data)
 
@@ -50,6 +51,7 @@ class mcts_agent(object):
 
     def heuristic_value(self, board):
         dataset = [{'input': board.fen(), 'target': None}]
+        self.data.append({'input':board.fen().encode('utf8'),  'target':eval.evaluate_board(board)})
         val = self.model.predict(dataset = board.fen(), formatted = False)
     #print(val)
         return np.mean(val)
@@ -88,9 +90,19 @@ class mcts_agent(object):
             #print(output_df.head())
         #df = pd.concat([input_df,output_df],axis = 1)
         #df.to_json(filename)
-        with open(filename, 'a') as f:
-            json.dump(dict(self.visits), f)
-            f.write(os.linesep)
+        dictlist = list(self.data)
+        f = open('history.csv', 'w')
+
+        fieldnames = dictlist[0].keys()
+
+        csvwriter = csv.DictWriter(f, delimiter=',', fieldnames=fieldnames)
+        csvwriter.writerow(dict((fn, fn) for fn in fieldnames))
+        for row in dictlist:
+            csvwriter.writerow(row)
+        f.close()
+        #with open(filename, 'a') as f:
+            #json.dump(list(self.data), f)
+            #f.write(os.linesep)
     
     def log(self, message):
         filename = '..\\logs\\'+str(datetime.date.today()) + '.log'
