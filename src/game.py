@@ -49,15 +49,3 @@ if __name__ == '__main__':
     print('History of Agent 1 (MCTS): ',movehistory1)
 
 
-'''
-if __name__ == "main":
-    engine = chess.engine.SimpleEngine.popen_uci("/usr/bin/stockfish")
-
-    board = chess.Board()
-    while not board.is_game_over():
-        resultEngine = engine.play(board, chess.engine.Limit(time=0.1))
-        board.push(resultEngine.move)
-
-
-    engine.quit()
-'''
