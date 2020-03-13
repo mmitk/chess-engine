@@ -5,14 +5,14 @@ from models import model as md
 import json
 import multiprocessing
 from multiprocessing import Pool, Manager
-import os
+import os, sys
 import datetime
 import time 
 import csv
 from pathlib import Path
 
 import eval
-ROOT_DIR = Path(os.path.dirname(os.path.abspath(__file__))).parent # get root of project
+import util
 class mcts_agent(object):
     def __init__(self, manager, historic=False, filename = None):
         super().__init__
@@ -28,23 +28,24 @@ class mcts_agent(object):
         self.visits[board.fen()] =  self.visits.get(board.fen(), 0) + 1
         dataset = {'input': np.asarray(list(board.fen().encode('utf8'))), 'target': score}
         #self.data.append(dataset)
-        self.log('Visit Recorded')
+        self.log('Visit Recorded', debug_level=2)
         return self.model.fit(dataset = self.data)
 
-    def play_value(self, board, depth = 150):
+    def play_value(self, board, depth = 25):
         if board.is_checkmate() or depth == 0:
             self.record(board, eval.evaluate_board(board))
             return eval.evaluate_board(board)
     
         heuristic_vals = {}
-        for move in board.pseudo_legal_moves:
+        for move in board.legal_moves:
             board.push(move)
-            heuristic_vals[move] = self.heuristic_value(board)
+            val = self.heuristic_value(board)
+            if val is not None:
+                heuristic_vals[move] = val
             board.pop()
-        move = max(heuristic_vals, key = heuristic_vals.get)
-
         board.push(move)
         value = -self.play_value(board, depth=depth-1)
+        print("value" + str(value))
         board.pop()
         self.record(board, value)
         #self.log('Playout Complete')
@@ -54,28 +55,42 @@ class mcts_agent(object):
         dataset = [{'input': board.fen(), 'target': None}]
         self.data.append({'input':board.fen().encode('utf8'),  'target':eval.evaluate_board(board)})
         val = self.model.predict(dataset = board.fen(), formatted = False)
-    #print(val)
-        return np.mean(val)
+        if val is None:
+            return
+        else:
+            print("val=" + str(val))
+            v = np.mean(val)
+            print(v)
+            return v
 
-    def monte_carlo_value(self, board, playouts = 50, N = 5):
+    def monte_carlo_value(self, board, playouts = 15, N = 5):
+        scores = []
         with Pool() as p:
             try:
                 scores = p.map(self.play_value,[board.mirror() for i in range(0, playouts)])
             except Exception as e:
-                return float('-inf')
+                exc_type, exc_obj, exc_tb = sys.exc_info()
+                fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+                util.log(str(exc_type) + " " + str(fname) + " " + str(exc_tb.tb_lineno) + ":" + str(e), logger_str="EXCEPTION", write_to_console=True)
         return np.mean(scores)
 
-    def make_move(self, board, playouts = 100):
+    def make_move(self, board, playouts = 50):
         actions = {}
-        for move in board.pseudo_legal_moves:
+        for move in board.legal_moves:
             board.push(move)
             actions[move] = -self.monte_carlo_value(board)
             board.pop()
-        self.log('move chosen')
-        return max(actions, key = actions.get)
+        for k, v in actions.items():
+            print(str(k) + " = " + str(v))
+        if board.turn:
+            v = max(actions, key=actions.get)
+        else:
+            v = min(actions, key=actions.get)
+        self.log("move made: " + str(v))
+        return v
 
     def write_model(self, filename):
-        self.model.write_file(filename)
+        self.model.write_file(util.MODELS_DIR / filename)
 
     def write_data(self, filename):
         #input_data = {}
@@ -92,7 +107,8 @@ class mcts_agent(object):
         #df = pd.concat([input_df,output_df],axis = 1)
         #df.to_json(filename)
         dictlist = list(self.data)
-        f = open('history.csv', 'w')
+        p = Path(util.HISTORY_DIR / 'history.csv')
+        f = open(p, 'w')
 
         fieldnames = dictlist[0].keys()
 
@@ -101,21 +117,5 @@ class mcts_agent(object):
         for row in dictlist:
             csvwriter.writerow(row)
         f.close()
-        #with open(filename, 'a') as f:
-            #json.dump(list(self.data), f)
-            #f.write(os.linesep)
-    
-    def log(self, message):
-        Path(ROOT_DIR / "logs").mkdir(parents=True, exist_ok=True) # create logs dir if it doesnt exist
-        filename = str(datetime.date.today()) + '.log'
-        p = Path(ROOT_DIR / "logs" / filename)
-        try:
-            with open(p, 'a') as f:
-                f.write(message + '\t'+str(time.ctime()))
-                f.write(os.linesep)
-        except Exception:
-            with open(p, 'w+') as f:
-                f.write(message + '\t\t'+str(time.ctime()))
-                f.write(os.linesep)
- 
-        
+    def log(self, message, debug_level=5):
+        util.log(message, logger_str="mcts", debug_level=debug_level, write_to_console=True)

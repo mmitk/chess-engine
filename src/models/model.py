@@ -8,12 +8,12 @@ import eval
 import datetime
 import time
 import os
-
+import util
 class svm_eval():
     
     def __init__(self, filename = None, historic = False):
         if filename is None:
-                self._model = svm.SVR(kernel = 'rbf')
+                self._model = svm.SVR(kernel = 'rbf', gamma='auto')
 
 
         elif filename is not None and historic == True:
@@ -23,7 +23,7 @@ class svm_eval():
                     self._model = pickle.load(file)
             except EnvironmentError as e:
                 print(e)
-                self._model = svm.SVR(kernel = 'rbf')
+                self._model = svm.SVR(kernel = 'rbf', gamma='auto')
                 
         # placeholder!!!
         else: 
@@ -85,12 +85,4 @@ class svm_eval():
 
 
     def log(self, message):
-        filename = '..\\logs\\'+str(datetime.date.today()) + '.log'
-        try:
-            with open(filename, 'a') as f:
-                f.write(message + '\t'+str(time.ctime()))
-                f.write(os.linesep)
-        except Exception:
-            with open(filename, 'w+') as f:
-                f.write(message + '\t\t'+str(time.ctime()))
-                f.write(os.linesep)
+        util.log(message,logger_str="svm_eval", debug_level=1)
