@@ -9,9 +9,10 @@ import os
 import datetime
 import time 
 import csv
+from pathlib import Path
 
 import eval
-
+ROOT_DIR = Path(os.path.dirname(os.path.abspath(__file__))).parent # get root of project
 class mcts_agent(object):
     def __init__(self, manager, historic=False, filename = None):
         super().__init__
@@ -105,13 +106,15 @@ class mcts_agent(object):
             #f.write(os.linesep)
     
     def log(self, message):
-        filename = '..\\logs\\'+str(datetime.date.today()) + '.log'
+        Path(ROOT_DIR / "logs").mkdir(parents=True, exist_ok=True) # create logs dir if it doesnt exist
+        filename = str(datetime.date.today()) + '.log'
+        p = Path(ROOT_DIR / "logs" / filename)
         try:
-            with open(filename, 'a') as f:
+            with open(p, 'a') as f:
                 f.write(message + '\t'+str(time.ctime()))
                 f.write(os.linesep)
         except Exception:
-            with open(filename, 'w+') as f:
+            with open(p, 'w+') as f:
                 f.write(message + '\t\t'+str(time.ctime()))
                 f.write(os.linesep)
  

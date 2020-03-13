@@ -1,5 +1,6 @@
 *.pyc/
 *.vscode/
 *.log/
+logs/
 src/__pycache__/
 __pycache__/
