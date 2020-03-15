@@ -2,6 +2,7 @@ from pathlib import Path
 import datetime
 import time
 import os
+import argparse
 
 DEBUG_LEVEL = 3
 ROOT_DIR = Path(os.path.dirname(os.path.abspath(__file__))).parent # get root of project
@@ -9,6 +10,7 @@ DATA_DIR = Path(ROOT_DIR / "data")
 HISTORY_DIR = Path(DATA_DIR / "history")
 MODELS_DIR = Path(DATA_DIR / "models")
 LOGS_DIR = Path(DATA_DIR / "logs")
+LOG_FILENAME = ""
 
 
 """
@@ -35,8 +37,12 @@ and alter logging as a result
 def log(message, logger_str=None, debug_level=5, filename=None, path=None, write_to_console=False):
     if debug_level < DEBUG_LEVEL:
         return
+    print("LOGFILENAME:",  LOG_FILENAME)
     if not filename:
-        filename = str(datetime.date.today()) + '.log' # default filename
+        if LOG_FILENAME:
+            filename = LOG_FILENAME
+        else:
+            filename = str(datetime.date.today()) + '.log' # default filename
     if not path:
         path = Path(LOGS_DIR / filename) # default location is /data/logs/filename
     if logger_str:
@@ -50,3 +56,34 @@ def log(message, logger_str=None, debug_level=5, filename=None, path=None, write
             f.write(output)
     if write_to_console:
         print(output)
+
+"""
+Argparse:
+this function should create a parser object, add arguments, and return it to a function in game.py where parse_args will be called
+
+* setting debug level [-d](1-5): -d [1-5]
+* logfile related [-l]- potential options:
+-ln == create new logfile for this run 
+-lo == output filename for the log? (if exists: app, else: w+ )
+* enabling/disabling console output messages (perhaps create CONSOLE_DEBUG_LVL and LOG_DEBUG_LVL)
+"""
+def parse_cmd_line():
+    p = argparse.ArgumentParser()
+    p.add_argument("-d", "--debug", "--debug-level", type=int, choices=range(1,6),help='sets the debug level, values should range from 1-5')
+    p.add_argument("-l", "--log", nargs=1, help='pass a filename that you would like to direct log output to')
+
+    args = p.parse_args()
+    if args.debug:
+        DEBUG_LEVEL = args.debug
+        print(DEBUG_LEVEL)
+    if args.log:
+        global LOG_FILENAME
+        LOG_FILENAME = str(args.log[0])
+        print(LOG_FILENAME)
+
+def type_parse_debug_level(string):
+    v = int(string)
+    if v < 1 or v > 5:
+        msg = "Debug level argument %r is not between 1 and 5" % string
+        raise argparse.ArgumentTypeError(msg)
+    return v

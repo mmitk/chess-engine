@@ -9,13 +9,14 @@ from datetime import date
 import os.path
 import util
 if __name__ == '__main__':
+    util.parse_cmd_line()
     movehistory1 = []
     movehistory2 = []
     util.init_data_dirs()
     board = chess.Board()
 #chessboard = board.get_board()
     manager = Manager()
-    m = mcts.mcts_agent(manager,historic = True, filename = 'svm_eval.pkl')
+    m = mcts.mcts_agent(manager,historic = True, filename = util.MODELS_DIR / 'svm_eval.pkl')
 
 
     while not board.is_checkmate():
