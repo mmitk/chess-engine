@@ -24,3 +24,6 @@ http://www.ficsgames.org/download.html
 
 (AlphaZero explained)
 https://nikcheerla.github.io/deeplearningschool/2018/01/01/AlphaZero-Explained/
+
+(Regression Analysis of Chess)
+http://cs229.stanford.edu/proj2012/DeSa-ClassifyingChessPositions.pdf
