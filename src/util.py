@@ -11,6 +11,7 @@ HISTORY_DIR = Path(DATA_DIR / "history")
 MODELS_DIR = Path(DATA_DIR / "models")
 LOGS_DIR = Path(DATA_DIR / "logs")
 LOG_FILENAME = ""
+CONSOLE_OUTPUT = True
 
 
 """
@@ -34,15 +35,17 @@ if we wanted to print fewer messages we could lower the debug level. Level would
 where 1 is of lowest importance, 5 is of highest. Ideally need to implement way to get debug level from user,
 and alter logging as a result 
 """
-def log(message, logger_str=None, debug_level=5, filename=None, path=None, write_to_console=False):
+def log(message, logger_str=None, debug_level=5, filename=None, path=None, write_to_console=None):
     if debug_level < DEBUG_LEVEL:
         return
-    print("LOGFILENAME:",  LOG_FILENAME)
+    global LOG_FILENAME
+    global CONSOLE_OUTPUT
     if not filename:
         if LOG_FILENAME:
             filename = LOG_FILENAME
         else:
             filename = str(datetime.date.today()) + '.log' # default filename
+            LOG_FILENAME = filename
     if not path:
         path = Path(LOGS_DIR / filename) # default location is /data/logs/filename
     if logger_str:
@@ -54,8 +57,9 @@ def log(message, logger_str=None, debug_level=5, filename=None, path=None, write
     except Exception:
         with open(path, 'w+') as f:
             f.write(output)
-    if write_to_console:
-        print(output)
+    if write_to_console is None:
+        if CONSOLE_OUTPUT:
+            print(output)
 
 """
 Argparse:
@@ -71,15 +75,20 @@ def parse_cmd_line():
     p = argparse.ArgumentParser()
     p.add_argument("-d", "--debug", "--debug-level", type=int, choices=range(1,6),help='sets the debug level, values should range from 1-5')
     p.add_argument("-l", "--log", nargs=1, help='pass a filename that you would like to direct log output to')
-
+    p.add_argument("-c", "--console", nargs='?',type=str_to_bool, help='enables/disables console output, default=true')
     args = p.parse_args()
+    global CONSOLE_OUTPUT
+    
     if args.debug:
+        global DEBUG_LEVEL
         DEBUG_LEVEL = args.debug
-        print(DEBUG_LEVEL)
+        print("Debug Level set to: " + str(DEBUG_LEVEL))
     if args.log:
         global LOG_FILENAME
         LOG_FILENAME = str(args.log[0])
-        print(LOG_FILENAME)
+    if args.console:
+        CONSOLE_OUTPUT = bool(args.console)
+    print("Console output = " + str(CONSOLE_OUTPUT))
 
 def type_parse_debug_level(string):
     v = int(string)
@@ -87,3 +96,15 @@ def type_parse_debug_level(string):
         msg = "Debug level argument %r is not between 1 and 5" % string
         raise argparse.ArgumentTypeError(msg)
     return v
+
+def str_to_bool(v):
+    global CONSOLE_OUTPUT
+    if isinstance(v, bool):
+        CONSOLE_OUTPUT = v
+        return
+    if v.lower() in ('yes', 'true', 't', 'y', '1'):
+        CONSOLE_OUTPUT = True
+    elif v.lower() in ('no', 'false', 'f', 'n', '0'):
+        CONSOLE_OUTPUT = False
+    else:
+        raise argparse.ArgumentTypeError('Boolean value expected')
