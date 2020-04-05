@@ -7,4 +7,6 @@
     []reinforcement training capabilities
 
 [] create dataset saving structures
-[]re-assess evaluation functions
+[] re-assess evaluation functions
+[] implement argparse
+[] refine logging

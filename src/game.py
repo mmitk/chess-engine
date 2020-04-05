@@ -8,19 +8,21 @@ import time
 from datetime import date
 import os.path
 import util
+
 if __name__ == '__main__':
+    util.parse_cmd_line()
     movehistory1 = []
     movehistory2 = []
     util.init_data_dirs()
     board = chess.Board()
 #chessboard = board.get_board()
     manager = Manager()
-    m = mcts.mcts_agent(manager,historic = True, filename = 'svm_eval.pkl')
+    m = mcts.mcts_agent(manager,historic = True, filename = util.MODELS_DIR / 'svm_eval.pkl')
 
 
     while not board.is_checkmate():
         move = search.selectmove(3,board,movehistory1)
-        print('Agent A plays: ' + str(move))
+        print('Agent A plays: {}'.format(str(move)))
         #move = search.make_move(board)
         #move = search.make_move(chessboard)
         board.push(move)
@@ -29,7 +31,7 @@ if __name__ == '__main__':
         move = m.make_move(board)
         #move = p.start()
         board.push(move)
-        print('Agent B plays: ' + str(move))
+        print('Agent B plays: {}'.format(str(move)))
 #        m.write_model(util.MODELS_DIR / 'svm_eval.pkl')
         m.write_data('history.json')
  

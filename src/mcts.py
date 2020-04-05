@@ -28,7 +28,7 @@ class mcts_agent(object):
         self.visits[board.fen()] =  self.visits.get(board.fen(), 0) + 1
         dataset = {'input': np.asarray(list(board.fen().encode('utf8'))), 'target': score}
         #self.data.append(dataset)
-        self.log('Visit Recorded', debug_level=2)
+        self.log('Visit Recorded', msg_type=2)
         return self.model.fit(dataset = self.data)
 
     def play_value(self, board, depth = 25):
@@ -87,7 +87,6 @@ class mcts_agent(object):
             v = max(actions, key=actions.get)
         else:
             v = min(actions, key=actions.get)
-        self.log("move made: " + str(v))
         return v
 
     def write_model(self, filename):
@@ -118,5 +117,5 @@ class mcts_agent(object):
         for row in dictlist:
             csvwriter.writerow(row)
         f.close()
-    def log(self, message, debug_level=5):
-        util.log(message, logger_str="mcts", debug_level=debug_level, write_to_console=False)
+    def log(self, message, msg_type=2):
+        util.log(message, logger_str="mcts", msg_type=msg_type, write_to_console=False)
