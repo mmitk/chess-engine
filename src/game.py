@@ -22,7 +22,7 @@ if __name__ == '__main__':
 
     while not board.is_checkmate():
         move = search.selectmove(3,board,movehistory1)
-        util.log('Agent A plays: ' + str(move), logger_str="main", msg_type=2)
+        print('Agent A plays: {}'.format(str(move)))
         #move = search.make_move(board)
         #move = search.make_move(chessboard)
         board.push(move)
@@ -31,7 +31,7 @@ if __name__ == '__main__':
         move = m.make_move(board)
         #move = p.start()
         board.push(move)
-        util.log('Agent B plays: ' + str(move), logger_str="main", msg_type=2)
+        print('Agent B plays: {}'.format(str(move)))
 #        m.write_model(util.MODELS_DIR / 'svm_eval.pkl')
         m.write_data('history.json')
  

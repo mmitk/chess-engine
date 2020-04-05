@@ -45,7 +45,7 @@ if we wanted to print fewer messages we could lower the debug level. Level would
 where 1 is of lowest importance, 5 is of highest. Ideally need to implement way to get debug level from user,
 and alter logging as a result 
 """
-def log(message, logger_str=None, msg_type=LogMessage.DEBUG, filename=None, path=None, write_to_console=None):
+def log(message, logger_str=None, msg_type=LogMessage.DEBUG, filename=None, path=None, write_to_console=False):
     global DEBUG_LEVEL
     if isinstance(msg_type, int):
         if msg_type > 5 or msg_type < 1:
@@ -91,7 +91,7 @@ def parse_cmd_line():
     p = argparse.ArgumentParser()
     p.add_argument("-d", "--debug", "--debug-level", nargs=1, type=int, choices=range(1,6), help='sets the debug level, values should range from 1-5')
     p.add_argument("-l", "--log", nargs=1, help='pass a filename that you would like to direct log output to')
-    p.add_argument("-c", "--console", nargs='?',type=str_to_bool, help='enables/disables console output, default=true')
+    p.add_argument("-c", "--console", nargs='?',type=str_to_bool, help='enables/disables console output, default=false')
     args = p.parse_args()
     global CONSOLE_OUTPUT
     
@@ -101,6 +101,9 @@ def parse_cmd_line():
     if args.log:
         global LOG_FILENAME
         LOG_FILENAME = str(args.log[0])
+    if args.console:
+        global CONSOLE_OUTPUT
+        CONSOLE_OUTPUT = True
 
 def str_to_bool(v):
     global CONSOLE_OUTPUT
