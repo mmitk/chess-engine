@@ -29,7 +29,8 @@ class mcts_agent(object):
         dataset = {'input': np.asarray(list(board.fen().encode('utf8'))), 'target': score}
         #self.data.append(dataset)
         self.log('Visit Recorded', msg_type=2)
-        return self.model.fit(dataset = self.data)
+        #return self.model.fit(dataset = self.data)
+        return eval.evaluate_board(board)
 
     def play_value(self, board, depth = 25):
         if board.is_checkmate() or depth == 0:
@@ -46,22 +47,23 @@ class mcts_agent(object):
         move = max(heuristic_vals, key = heuristic_vals.get)
         board.push(move)
         value = -self.play_value(board, depth=depth-1)
-        print("value" + str(value))
+        #print("value" + str(value))
         board.pop()
         self.record(board, value)
         #self.log('Playout Complete')
         return value
 
     def heuristic_value(self, board):
-        dataset = [{'input': board.fen(), 'target': None}]
+        #dataset = [{'input': board.fen(), 'target': None}]
         self.data.append({'input':board.fen().encode('utf8'),  'target':eval.evaluate_board(board)})
-        val = self.model.predict(dataset = board.fen(), formatted = False)
-        if val is None:
-            return
-        else:
-            v = np.mean(val)
-            self.log('val=' + str(val)+' VAL MEAN: '+str(v))
-            return v
+        return eval.evaluate_board(board)
+       # val = self.model.predict(dataset = board.fen(), formatted = False)
+        #if val is None:
+        #    return
+        #else:
+        #    v = np.mean(val)
+        #    self.log('val=' + str(val)+' VAL MEAN: '+str(v))
+        #    return v
 
     def monte_carlo_value(self, board, playouts = 15, N = 5):
         scores = []
