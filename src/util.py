@@ -125,6 +125,18 @@ def str_to_bool(v):
         raise argparse.ArgumentTypeError('Boolean value expected')
 
 
+
+def bin_to_int(numArray):
+    i = len(numArray) - 1
+    sum = 0
+    for num in numArray:
+        if num != 0:
+            sum += 2**i
+        i -= 1
+    return str(sum)
+            
+
+
 def serialize(board):
     import numpy as np
     assert board.is_valid()
@@ -165,6 +177,10 @@ def serialize(board):
 
     # 4th column is who's turn it is
     state[4] = (board.turn*1.0)
-
+    new_state = []
+    for s in state:
+        new_num = []
+        new_state.append(bin_to_int(s.flatten()))
+        #new_state.append(list_to_int(new_num))
     # 257 bits according to readme
-    return state
+    return new_state
