@@ -125,16 +125,15 @@ def str_to_bool(v):
         raise argparse.ArgumentTypeError('Boolean value expected')
 
 
-
-def bin_to_int(numArray):
-    i = len(numArray) - 1
-    sum = 0
-    for num in numArray:
-        if num != 0:
-            sum += 2**i
-        i -= 1
-    return str(sum)
-            
+def bin_matrix_to_decimal(matrix):
+    m = matrix.reshape(-1)
+    dec = 0
+    j = 0
+    for i in range(len(m)-1):
+        if m[i]:
+            dec += 2**j
+        j += 1
+    return float(dec)
 
 
 def serialize(board):
@@ -166,21 +165,14 @@ def serialize(board):
       bstate[self.board.ep_square] = 8
     bstate = bstate.reshape(8,8)
 
-    # binary state
-    state = np.zeros((5,8,8), np.uint8)
 
-    # 0-3 columns to binary
-    state[0] = (bstate>>3)&1
-    state[1] = (bstate>>2)&1
-    state[2] = (bstate>>1)&1
-    state[3] = (bstate>>0)&1
+    state = []
+   
+    state.append(bin_matrix_to_decimal((bstate>>3)&1))
+    state.append(bin_matrix_to_decimal((bstate>>2)&1))
+    state.append(bin_matrix_to_decimal((bstate>>1)&1))
+    state.append(bin_matrix_to_decimal((bstate>>0)&1))
 
-    # 4th column is who's turn it is
-    state[4] = (board.turn*1.0)
-    new_state = []
-    for s in state:
-        new_num = []
-        new_state.append(bin_to_int(s.flatten()))
-        #new_state.append(list_to_int(new_num))
-    # 257 bits according to readme
-    return new_state
+    state.append(board.turn*1.0)
+    
+    return state

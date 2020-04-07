@@ -33,7 +33,7 @@ if __name__ == '__main__':
         board.push(move)
         print('Agent B plays: {}'.format(str(move)))
 #        m.write_model(util.MODELS_DIR / 'svm_eval.pkl')
-        m.write_data('history.json')
+        m.write_data('history.csv')
  
         #d = date.today()
         #t = time.ctime(time.time())

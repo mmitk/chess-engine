@@ -26,7 +26,7 @@ class mcts_agent(object):
     def record(self, board, score):
         self.visits["total"] = self.visits.get("total",1) + 1
         self.visits[board.fen()] =  self.visits.get(board.fen(), 0) + 1
-        dataset = {'input': np.asarray(list(board.fen().encode('utf8'))), 'target': score}
+        #dataset = {'input': np.asarray(list(board.fen().encode('utf8'))), 'target': score}
         #self.data.append(dataset)
         self.log('Visit Recorded', msg_type=2)
         #return self.model.fit(dataset = self.data)
@@ -55,8 +55,9 @@ class mcts_agent(object):
 
     def heuristic_value(self, board, alpha = 1, beta = 0):
         #dataset = [{'input': board.fen(), 'target': None}]
-        self.data.append({'input':board.fen().encode('utf8'),  'target':eval.evaluate_board(board)})
-        return (alpha * eval.evaluate_board(board)) - (beta * self.model.predict_proba(board))
+       # self.data.append({'input':board.fen().encode('utf8'),  'target':eval.evaluate_board(board)})
+        #return (alpha * eval.evaluate_board(board)) + (beta * self.model.predict_proba(board))
+        return alpha * eval.evaluate_board(board)
        
 
     def monte_carlo_value(self, board, playouts = 15, N = 5):
@@ -83,6 +84,7 @@ class mcts_agent(object):
             v = max(actions, key=actions.get)
         else:
             v = min(actions, key=actions.get)
+        self.data.append({'state': board.fen(),'move':v})
         return v
 
     def write_model(self, filename):
