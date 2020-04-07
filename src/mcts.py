@@ -53,17 +53,11 @@ class mcts_agent(object):
         #self.log('Playout Complete')
         return value
 
-    def heuristic_value(self, board):
+    def heuristic_value(self, board, alpha = 1, beta = 0):
         #dataset = [{'input': board.fen(), 'target': None}]
         self.data.append({'input':board.fen().encode('utf8'),  'target':eval.evaluate_board(board)})
-        return eval.evaluate_board(board)
-       # val = self.model.predict(dataset = board.fen(), formatted = False)
-        #if val is None:
-        #    return
-        #else:
-        #    v = np.mean(val)
-        #    self.log('val=' + str(val)+' VAL MEAN: '+str(v))
-        #    return v
+        return (alpha * eval.evaluate_board(board)) - (beta * self.model.predict_proba(board))
+       
 
     def monte_carlo_value(self, board, playouts = 15, N = 5):
         scores = []
