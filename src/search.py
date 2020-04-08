@@ -14,7 +14,7 @@ import eval
 visits = {}
 differential = {}
 data = []
-model = md.svm_eval()
+#model = md.svm_eval()
 
 # record new states and scores
 # and retrain models based on these moves (states)

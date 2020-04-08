@@ -1,7 +1,7 @@
 import chess 
 import pandas as pd 
 import numpy as np 
-from models import model as md 
+from models import model as md
 import json
 import multiprocessing
 from multiprocessing import Pool, Manager
@@ -21,12 +21,12 @@ class mcts_agent(object):
         self.data = manager.list()
         #if historic == True and filename is not None:
             #self.model = md.svm_eval(filename = filename, historic )
-        self.model = md.svm_eval(filename = filename, historic = historic)
+        self.model = md.svm(filename = filename, historic = historic)
         
     def record(self, board, score):
         self.visits["total"] = self.visits.get("total",1) + 1
         self.visits[board.fen()] =  self.visits.get(board.fen(), 0) + 1
-        dataset = {'input': np.asarray(list(board.fen().encode('utf8'))), 'target': score}
+        #dataset = {'input': np.asarray(list(board.fen().encode('utf8'))), 'target': score}
         #self.data.append(dataset)
         self.log('Visit Recorded', msg_type=2)
         #return self.model.fit(dataset = self.data)
@@ -40,9 +40,9 @@ class mcts_agent(object):
         heuristic_vals = {}
         for move in board.legal_moves:
             board.push(move)
-            val = self.heuristic_value(board)
+            val = self.heuristic_value(board, move)
             if val is not None:
-                heuristic_vals[move] = val
+                heuristic_vals[move] = val[0]
             board.pop()
         move = max(heuristic_vals, key = heuristic_vals.get)
         board.push(move)
@@ -53,10 +53,16 @@ class mcts_agent(object):
         #self.log('Playout Complete')
         return value
 
-    def heuristic_value(self, board, alpha = 1, beta = 0):
+    def heuristic_value(self, board, move, alpha = 1, beta = 0):
         #dataset = [{'input': board.fen(), 'target': None}]
-        self.data.append({'input':board.fen().encode('utf8'),  'target':eval.evaluate_board(board)})
-        return (alpha * eval.evaluate_board(board)) - (beta * self.model.predict_proba(board))
+       # self.data.append({'input':board.fen().encode('utf8'),  'target':eval.evaluate_board(board)})
+        #return (alpha * eval.evaluate_board(board)) + (beta * self.model.predict_proba(board))
+        data = [{'state':board.fen(),'move':move}]
+        prec = md.preprocessor()
+        prec.fit(raw_data = data)
+        data = prec.transform()
+        theta = self.model.predict_proba(data)
+        return alpha * eval.evaluate_board(board), theta
        
 
     def monte_carlo_value(self, board, playouts = 15, N = 5):
@@ -74,34 +80,23 @@ class mcts_agent(object):
     def make_move(self, board, playouts = 50):
         actions = {}
         for move in board.legal_moves:
-            board.push(move)
-            actions[move] = -self.monte_carlo_value(board)
-            board.pop()
+            if self.heuristic_value(board,move)[1] >= 0.5:
+                board.push(move)
+                actions[move] = -self.monte_carlo_value(board)
+                board.pop()
         for k, v in actions.items():
             print(str(k) + " = " + str(v))
         if board.turn:
             v = max(actions, key=actions.get)
         else:
             v = min(actions, key=actions.get)
+        self.data.append({'state': board.fen(),'move':v})
         return v
 
     def write_model(self, filename):
         self.model.write_file(util.MODELS_DIR / filename)
 
     def write_data(self, filename):
-        #input_data = {}
-        #target_data = {}
-        #i = 0
-        #for row in list(self.data):
-            #input_data[i] = row['input']
-            #target_data[i] = row['target']
-            #i+=1
-        #input_df = pd.DataFrame.from_dict(input_data, orient='index')
-            #print(input_df.head())
-        #output_df = pd.DataFrame.from_dict(target_data, orient='index')
-            #print(output_df.head())
-        #df = pd.concat([input_df,output_df],axis = 1)
-        #df.to_json(filename)
         dictlist = list(self.data)
         p = Path(util.HISTORY_DIR / 'history.csv')
         f = open(p, 'w')
