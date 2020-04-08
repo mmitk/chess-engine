@@ -13,7 +13,7 @@ class svm():
     
     def __init__(self, filename = None, historic = False, gam = 1/8):
         if filename is None:
-                self._model = svm.SVM(kernel = 'rbf', gamma=gam)
+                self._model = svm.SVM(kernel = 'rbf', gamma=gam, probability = True)
 
 
         elif filename is not None and historic == True:
@@ -43,7 +43,7 @@ class svm():
 
     def predict_proba(self, dataset, formatted = True):
         try:
-            return self._model.predict_proba(dataset)
+             self._model.predict_proba(dataset)[self._model.classes_.index(1)]
         except Exception:
             return 1
     
@@ -63,14 +63,14 @@ class svm():
 
 
 
-class preproccessor(object):
+class preprocessor(object):
 
     def __init__(self):
-        super.__init__()
+        super().__init__
 
     def fit(self, filename = None, raw_data = None):
         if filename is not None:
-            self.raw_data = pd.read_csv()
+            self.raw_data = pd.read_csv(filename)
         elif raw_data is not None:
             self.raw_data = pd.DataFrame(raw_data)
         
@@ -85,12 +85,12 @@ class preproccessor(object):
         data['b3'] = data['b3'].apply(np.log)
         data['b4'] = data['b4'].apply(np.log)
         move = data.pop('move')
-        data = pd.concat([data,move.apply(listify).apply(pd.Series)], axis = 1)
+        data = pd.concat([data,move.apply(self.listify).apply(pd.Series)], axis = 1)
         data = data.rename(columns = {0:'m1',1:'m2',2:'m3',3:'m4',4:'m5'})
-        data['m1'] = data['m1'].apply(encode_move)
-        data['m2'] = data['m2'].apply(encode_move)
-        data['m3'] = data['m3'].apply(encode_move)
-        data['m4'] = data['m4'].apply(encode_move)
+        data['m1'] = data['m1'].apply(self.encode_move)
+        data['m2'] = data['m2'].apply(self.encode_move)
+        data['m3'] = data['m3'].apply(self.encode_move)
+        data['m4'] = data['m4'].apply(self.encode_move)
         return data
     
     def encode_move(self,m):
@@ -98,7 +98,7 @@ class preproccessor(object):
 
 
     def listify(self,string):
-        return list(string)
+        return list(str(string))
         
     def bin_matrix_to_decimal(self, matrix):
         m = matrix.reshape(-1)
@@ -142,10 +142,10 @@ class preproccessor(object):
 
         state = []
    
-        state.append(bin_matrix_to_decimal((bstate>>3)&1))
-        state.append(bin_matrix_to_decimal((bstate>>2)&1))
-        state.append(bin_matrix_to_decimal((bstate>>1)&1))
-        state.append(bin_matrix_to_decimal((bstate>>0)&1))
+        state.append(self.bin_matrix_to_decimal((bstate>>3)&1))
+        state.append(self.bin_matrix_to_decimal((bstate>>2)&1))
+        state.append(self.bin_matrix_to_decimal((bstate>>1)&1))
+        state.append(self.bin_matrix_to_decimal((bstate>>0)&1))
 
         state.append(((board.turn*1.0)+50))
     
