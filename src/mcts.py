@@ -79,18 +79,21 @@ class mcts_agent(object):
 
     def make_move(self, board, playouts = 50):
         actions = {}
+        predicted = {}
         for move in board.legal_moves:
-            if self.heuristic_value(board,move)[1] >= 0.5:
+            theta = self.heuristic_value(board,move)[1]
+            if theta >= 0.5:
                 board.push(move)
                 actions[move] = -self.monte_carlo_value(board)
+                predicted[move] = theta
                 board.pop()
-        for k, v in actions.items():
-            print(str(k) + " = " + str(v))
+        #for k, v in actions.items():
+            #print(str(k) + " = " + str(v))
         if board.turn:
             v = max(actions, key=actions.get)
         else:
             v = min(actions, key=actions.get)
-        self.data.append({'state': board.fen(),'move':v})
+        self.data.append({'state': board.fen(),'move':v, 'pred_prob':predicted[v]})
         return v
 
     def write_model(self, filename):
@@ -99,7 +102,7 @@ class mcts_agent(object):
     def write_data(self, filename):
         dictlist = list(self.data)
         p = Path(util.HISTORY_DIR / 'history.csv')
-        f = open(p, 'w')
+        f = open(p, 'a')
 
         fieldnames = dictlist[0].keys()
 
