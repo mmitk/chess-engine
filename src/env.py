@@ -83,5 +83,7 @@ class chessGame:
         elif self.winner == Winner.BLACK:
             self.agent1.write_data('moves_history.csv', 0)
             self.agent2.write_data('moves_history.csv', 1)
+    
+
 
     

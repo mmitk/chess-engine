@@ -32,7 +32,7 @@ class mcts_agent(object):
         #return self.model.fit(dataset = self.data)
         return eval.evaluate_board(board)
 
-    def play_value(self, board, depth = 25):
+    def play_value(self, board, depth = 5):
         if board.is_checkmate() or depth == 0:
             self.record(board, eval.evaluate_board(board))
             return eval.evaluate_board(board)
