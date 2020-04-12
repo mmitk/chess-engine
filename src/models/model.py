@@ -1,4 +1,4 @@
-from sklearn import svm
+from sklearn import svm as sv
 import pandas as pd
 import pickle
 import chess
@@ -13,7 +13,7 @@ class svm():
     
     def __init__(self, filename = None, historic = False, gam = 1/8):
         if filename is None:
-                self._model = svm.SVM(kernel = 'rbf', gamma=gam, probability = True)
+                self._model = sv.SVC(kernel = 'rbf', gamma=gam, probability = True)
 
 
         elif filename is not None and historic == True:
@@ -27,7 +27,7 @@ class svm():
                 
         # placeholder!!!
         else: 
-            self._model = svm.SVR(kernel = 'rbf', gamma=gam)
+            self._model = sv.SVC(kernel = 'rbf', gamma=gam)
       
     
     def fit(self, dataset, formatted = True):
