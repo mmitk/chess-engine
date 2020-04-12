@@ -17,7 +17,7 @@ if __name__ == '__main__':
     board = chess.Board()
 #chessboard = board.get_board()
     manager = Manager()
-    m = mcts.mcts_agent(manager,historic = True, filename = util.MODELS_DIR / 'svm_eval.pkl')
+    m = mcts.mcts_agent(manager)
 
 
     while not board.is_checkmate():
