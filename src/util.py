@@ -19,8 +19,8 @@ CONSOLE_OUTPUT = False
 
 ROOT_DIR = Path(os.path.dirname(os.path.abspath(__file__))).parent # get root of project
 DATA_DIR = Path(ROOT_DIR / "data")
-HISTORY_DIR = Path(DATA_DIR / "history")
 MODELS_DIR = Path(DATA_DIR / "models")
+HISTORY_DIR = Path(MODELS_DIR / "history")
 LOGS_DIR = Path(DATA_DIR / "logs")
 LOG_FILENAME = ""
 

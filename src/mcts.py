@@ -54,9 +54,6 @@ class mcts_agent(object):
         return value
 
     def heuristic_value(self, board, move, alpha = 1, beta = 0):
-        #dataset = [{'input': board.fen(), 'target': None}]
-       # self.data.append({'input':board.fen().encode('utf8'),  'target':eval.evaluate_board(board)})
-        #return (alpha * eval.evaluate_board(board)) + (beta * self.model.predict_proba(board))
         data = [{'state':board.fen(),'move':move}]
         prec = md.preprocessor()
         prec.fit(raw_data = data)
@@ -99,7 +96,10 @@ class mcts_agent(object):
     def write_model(self, filename):
         self.model.write_file(util.MODELS_DIR / filename)
 
-    def write_data(self, filename):
+    def write_data(self, filename, didWin = None):
+        if didWin is not None:
+            for row in data:
+                row['didWin'] = didWin
         dictlist = list(self.data)
         p = Path(util.HISTORY_DIR / 'history.csv')
         f = open(p, 'a')
