@@ -1,0 +1,6 @@
+state,move,pred_prob
+
+rnbqkbnr/pppppppp/8/8/8/5N2/PPPPPPPP/RNBQKB1R b KQkq - 1 1,g8h6,1 TEST
+
+state,move,pred_prob
+rnbqkbnr/pppppppp/8/8/8/5N2/PPPPPPPP/RNBQKB1R b KQkq - 1 1,g7g6,1
