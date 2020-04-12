@@ -42,11 +42,11 @@ class mcts_agent(object):
             board.push(move)
             val = self.heuristic_value(board, move)
             if val is not None:
-                heuristic_vals[move] = val
+                heuristic_vals[move] = val[0]
             board.pop()
         move = max(heuristic_vals, key = heuristic_vals.get)
         board.push(move)
-        value = -self.play_value(board, depth=depth-1)
+        value = self.play_value(board, depth=depth-1)
         #print("value" + str(value))
         board.pop()
         self.record(board, value)
@@ -59,7 +59,7 @@ class mcts_agent(object):
         prec.fit(raw_data = data)
         data = prec.transform()
         theta = self.model.predict_proba(data)
-        return theta * eval.evaluate_board(board)
+        return theta * eval.evaluate_board(board), theta
        
 
     def monte_carlo_value(self, board, playouts = 15, N = 5):
@@ -84,8 +84,8 @@ class mcts_agent(object):
                 actions[move] = -self.monte_carlo_value(board)
                 predicted[move] = theta
                 board.pop()
-        #for k, v in actions.items():
-            #print(str(k) + " = " + str(v))
+        for k, v in actions.items():
+            print(str(k) + " = " + str(v))
         if board.turn:
             v = max(actions, key=actions.get)
         else:
