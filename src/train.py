@@ -12,7 +12,7 @@ if __name__ == '__main__':
     a2 = ab.alphabeta_agent()
     board = chess.Board()
 
-    game = chessGame(a2, a1)
+    game = chessGame(a2, m)
 
     game.set_board(board)
     game.play_out()
