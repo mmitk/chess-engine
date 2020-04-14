@@ -86,7 +86,7 @@ class alphabeta_agent:
 
     def write_data(self, filename, did_win = None):
         if did_win is not None:
-            for row in self.__delattr__data:
+            for row in self.data:
                 row['didWin'] = did_win
         p = Path(util.HISTORY_DIR / 'history.csv')
         f = open(p, 'a')
