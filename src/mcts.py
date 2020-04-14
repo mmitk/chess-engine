@@ -74,22 +74,24 @@ class mcts_agent(object):
                 return(float('-inf'))
         return np.mean(scores)
 
-    def make_move(self, board, playouts = 50):
+    def make_move(self, board, depth = 50, player = 1):
         actions = {}
         predicted = {}
+        if board.is_checkmate():
+            return None
         for move in board.legal_moves:
             theta = self.heuristic_value(board,move)[1]
             if theta >= 0.5:
                 board.push(move)
-                actions[move] = -self.monte_carlo_value(board)
+                actions[move] = player * self.monte_carlo_value(board)
                 predicted[move] = theta
                 board.pop()
         for k, v in actions.items():
             print(str(k) + " = " + str(v))
-        if board.turn:
-            v = max(actions, key=actions.get)
-        else:
-            v = min(actions, key=actions.get)
+        
+        v = max(actions, key=actions.get)
+        #else:
+            #v = min(actions, key=actions.get)
         self.data.append({'state': board.fen(),'move':v, 'pred_prob':predicted[v]})
         return v
 
@@ -98,7 +100,7 @@ class mcts_agent(object):
 
     def write_data(self, filename, didWin = None):
         if didWin is not None:
-            for row in data:
+            for row in self.data:
                 row['didWin'] = didWin
         dictlist = list(self.data)
         p = Path(util.HISTORY_DIR / 'history.csv')

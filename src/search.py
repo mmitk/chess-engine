@@ -1,4 +1,4 @@
-import board
+#import board
 import chess.polyglot
 import random
 import numpy as np

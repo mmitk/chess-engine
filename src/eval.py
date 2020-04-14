@@ -1,4 +1,4 @@
-import board
+#import board
 import chess
 
 def evaluate_board(board):
