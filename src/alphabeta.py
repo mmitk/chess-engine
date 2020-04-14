@@ -24,7 +24,7 @@ class alphabeta_agent:
         if( depthleft == 0 ):
             return self.quiesce( alpha, beta, board )
         for move in board.legal_moves:
-            board.push(move)   
+            board.push(move)
             score = -self.alphabeta( -beta, -alpha, depthleft - 1, board)
             board.pop()
             if( score >= beta ):
@@ -57,6 +57,7 @@ class alphabeta_agent:
 
     def make_move(self, depth, board):
         if board.is_checkmate():
+            print("CHECKMATE")
             return None
         bestMove = chess.Move.null()
         bestValue = -99999
@@ -64,18 +65,20 @@ class alphabeta_agent:
         beta = 100000
         for move in board.legal_moves:
             theta = self.predict_probability(board, move)
-            if theta >= 0.3:
-                board.push(move)
+            if (theta >= 0.3):
+                eval.make_move(board, move)
                 boardValue = - self.alphabeta(-beta, -alpha, depth-1,board)
-                if boardValue > bestValue:
+                if (boardValue > bestValue):
                     bestValue = boardValue
                     bestMove = move
-                if boardValue > alpha:
+                if (boardValue > alpha):
                     alpha = boardValue
-                board.pop()
+                eval.unmake_move(board)
+            else:
+                print("theta skipped")
             self.data.append({'state': board.fen(),'move':bestMove})
-            print('.',end = '')
-            return bestMove
+        #    print('.',end = '')
+        return bestMove
 
     def predict_probability(self, board, move):
         data = [{'state':board.fen(),'move':move}]

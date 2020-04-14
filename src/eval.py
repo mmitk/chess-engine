@@ -1,7 +1,8 @@
 #import board
 import chess
-
+board_eval = 0
 def evaluate_board(board):
+    global board_eval
     if board.is_checkmate():
         if board.turn:
             return -9999
@@ -44,11 +45,11 @@ def evaluate_board(board):
     kingsq = kingsq + sum([-king_eval_table[chess.square_mirror(i)] 
                                     for i in board.pieces(chess.KING, chess.BLACK)])
     
-    eval = material + pawnsq + knightsq + bishopsq+ rooksq+ queensq + kingsq
+    board_eval = material + pawnsq + knightsq + bishopsq+ rooksq+ queensq + kingsq
     if board.turn:
-        return eval
+        return board_eval
     else:
-        return -eval
+        return -board_eval
 
 """
 Basic positional evaluations for each piece-type
@@ -112,3 +113,69 @@ king_eval_table = [
 -30,-40,-40,-50,-50,-40,-40,-30,
 -30,-40,-40,-50,-50,-40,-40,-30,
 -30,-40,-40,-50,-50,-40,-40,-30]
+
+piecetypes = [chess.PAWN, chess.KNIGHT, chess.BISHOP, chess.ROOK, chess.QUEEN, chess.KING ]
+tables = [pawn_eval_table, knight_eval_table, bishop_eval_table, rook_eval_table, queen_eval_table, king_eval_table]
+piecevalues = [100,320,330,500,900]
+
+def update_eval(board, mov):
+    global board_eval
+    side = board.turn
+    #update piecequares
+    movingpiece = board.piece_type_at(mov.from_square)
+    if side:
+        board_eval = board_eval - tables[movingpiece - 1][mov.from_square]
+        #update castling
+        if (mov.from_square == chess.E1) and (mov.to_square == chess.G1):
+            board_eval = board_eval - rook_eval_table[chess.H1]
+            board_eval = board_eval + rook_eval_table[chess.F1]
+        elif (mov.from_square == chess.E1) and (mov.to_square == chess.C1):
+            board_eval = board_eval - rook_eval_table[chess.A1]
+            board_eval = board_eval + rook_eval_table[chess.D1]
+    else:
+        board_eval = board_eval + tables[movingpiece - 1][mov.from_square]
+        #update castling
+        if (mov.from_square == chess.E8) and (mov.to_square == chess.G8):
+            board_eval = board_eval + rook_eval_table[chess.H8]
+            board_eval = board_eval - rook_eval_table[chess.F8]
+        elif (mov.from_square == chess.E8) and (mov.to_square == chess.C8):
+            board_eval = board_eval + rook_eval_table[chess.A8]
+            board_eval = board_eval - rook_eval_table[chess.D8]
+        
+    if side:
+        board_eval = board_eval + tables[movingpiece - 1][mov.to_square]
+    else:
+        board_eval = board_eval - tables[movingpiece - 1][mov.to_square]
+        
+     
+    #update material
+    if mov.drop != None:
+        if side:
+            board_eval = board_eval + piecevalues[mov.drop-1]
+        else:
+            board_eval = board_eval - piecevalues[mov.drop-1]
+            
+    #update promotion
+    if mov.promotion != None:
+        if side:
+            board_eval = board_eval + piecevalues[mov.promotion-1] - piecevalues[movingpiece-1]
+            board_eval = board_eval - tables[movingpiece - 1][mov.to_square] \
+                + tables[mov.promotion - 1][mov.to_square]
+        else:
+            board_eval = board_eval - piecevalues[mov.promotion-1] + piecevalues[movingpiece-1]
+            board_eval = board_eval + tables[movingpiece - 1][mov.to_square] \
+                - tables[mov.promotion - 1][mov.to_square]
+            
+            
+    return mov
+
+def make_move(board, mov):
+    update_eval(board, mov)
+    board.push(mov)
+    
+    return mov
+
+def unmake_move(board):
+    mov = board.pop()
+    update_eval(board, mov)
+    return mov

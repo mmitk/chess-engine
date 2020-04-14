@@ -1,6 +1,7 @@
-import chess 
+import chess
+import chess.pgn
 from enum import IntEnum
-
+from util import log
 
 class Winner(IntEnum):
     WHITE = 0
@@ -58,10 +59,13 @@ class chessGame:
             raise ValueError('ERROR agent1 and agent2 can not be None for chessGame.play_out()')
         i = 0
         move_count = 0
+        self.game = chess.pgn.Game()
         while not self.board.is_checkmate():
             move1 = self.agent1.make_move(depth = 3, board = self.board)
             if not move1 is None:
-                 self.board.push(move1)
+                self.board.push(move1)
+                log("Agent 1 Move Made: {0}".format(str(move1)), logger_str="env", write_to_console=True)
+                print(move1)
             else:
                 break
             
@@ -69,6 +73,8 @@ class chessGame:
             move2 = self.agent2.make_move(depth = 3, board = self.board)
             if not move2 is None:
                 self.board.push(move2)
+                log("Agent 2 Move Made: {0}".format(str(move2)), logger_str="env", write_to_console=True)
+                print(move2)
             else:
                 break
             i+=1
@@ -97,6 +103,8 @@ class chessGame:
             self.agent1.write_data('moves_history.csv', 0)
             self.agent2.write_data('moves_history.csv', 1)
     
-
+    def get_pgn(self):
+        export = chess.pgn.StringExporter()
+        return self.game.accept(export)
 
     
