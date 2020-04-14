@@ -1,7 +1,6 @@
 import chess.polyglot
 import random
 import numpy as np
-from models import model as md
 import pandas as pd
 import json
 from models import model as md
@@ -89,14 +88,25 @@ class alphabeta_agent:
             for row in self.data:
                 row['didWin'] = did_win
         p = Path(util.HISTORY_DIR / 'history.csv')
+
+        #df = pd.DataFrame()
         f = open(p, 'a')
 
         #fieldnames = dictlist[0].keys()
-
+        """
         csvwriter = csv.DictWriter(f, delimiter=',')
         #csvwriter.writerow(dict((fn, fn) for fn in fieldnames))
         for row in self.data:
             csvwriter.writerow(row)
         f.close()
+        """
+
+        for row in self.data:
+            for item in row:
+                f.write(item + ',')
+            f.write('\n')
+        f.close()
+
+        
 
   
