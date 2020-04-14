@@ -8,7 +8,7 @@ import time
 from datetime import date
 import os.path
 import util
-
+import alphabeta as ab
 if __name__ == '__main__':
     util.parse_cmd_line()
     movehistory1 = []
@@ -18,13 +18,14 @@ if __name__ == '__main__':
 #chessboard = board.get_board()
     manager = Manager()
     manager2 = Manager()
-    m1 = mcts.mcts_agent(manager)
+    m1 = ab.alphabeta_agent()
     m2 = mcts.mcts_agent(manager2)
 
-
+    
     while not board.is_checkmate():
         #move = m1.make_move(board)
-        move = search.selectmove(3,board,movehistory1)
+        #move = search.selectmove(3,board,movehistory1)
+        move = m1.selectmove(3,board)
         print('Agent A plays: {}'.format(str(move)))
         board.push(move)
 
@@ -33,7 +34,7 @@ if __name__ == '__main__':
         board.push(move)
         print('Agent B plays: {}'.format(str(move)))
 
-        #m.write_data('history.csv')
+        m1.write_data('history_alphabeta.csv')
  
 
 

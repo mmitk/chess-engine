@@ -73,7 +73,7 @@ class preprocessor(object):
             self.raw_data = pd.read_csv(filename)
         elif raw_data is not None:
             self.raw_data = pd.DataFrame(raw_data)
-        
+        return self.raw_data
 
     def transform(self):
         data = self.raw_data
@@ -87,14 +87,25 @@ class preprocessor(object):
         move = data.pop('move')
         data = pd.concat([data,move.apply(self.listify).apply(pd.Series)], axis = 1)
         data = data.rename(columns = {0:'m1',1:'m2',2:'m3',3:'m4',4:'m5'})
+        if not 'm5' in data.columns:
+            data['m5'] = 0
         data['m1'] = data['m1'].apply(self.encode_move)
         data['m2'] = data['m2'].apply(self.encode_move)
         data['m3'] = data['m3'].apply(self.encode_move)
         data['m4'] = data['m4'].apply(self.encode_move)
+        data['m5'] = data['m5'].apply(self.encode_move)
         return data
     
     def encode_move(self,m):
-        return ord(m)
+        try:
+            val = ord(m)
+            return val
+        except Exception:
+            if not isinstance(m, int):
+                raise TypeError('Encoded Move must be of type str or int')
+            else:
+                return int(m)
+
 
 
     def listify(self,string):

@@ -1,5 +1,5 @@
 import chess 
-import enum
+from enum import IntEnum
 
 
 class Winner(IntEnum):
@@ -25,12 +25,12 @@ class chessGame:
         """
         update the game with a new board state
         """
-        if isinstance(board, chess.Board()):
+        if not isinstance(board, str):
             self.board = board
-        elif isinstance(board, str):
-            self.board = chess.Board(board)
         else:
-            raise TypeError('parameter board in set_baord (env.py) must be of type str or chess.Board()')
+            self.board = chess.Board(board)
+        #else:
+            #raise TypeError('parameter board in set_baord (env.py) must be of type str or chess.Board()')
 
         if agent1 is not None:
             self.agent1 = agent1
@@ -56,14 +56,27 @@ class chessGame:
         """
         if self.agent1 is None or self.agent2 is None:
             raise ValueError('ERROR agent1 and agent2 can not be None for chessGame.play_out()')
-
+        i = 0
+        move_count = 0
         while not self.board.is_checkmate():
-            move1 = self.agent1.make_move(board)
-            self.board.push(move1)
+            move1 = self.agent1.make_move(depth = 3, board = self.board)
+            if not move1 is None:
+                 self.board.push(move1)
+            else:
+                break
             
             # Now agent 2 selects and makes their move
-            move2 = self.agent2.make_move(board)
-            self.board.push(move2)
+            move2 = self.agent2.make_move(depth = 3, board = self.board)
+            if not move2 is None:
+                self.board.push(move2)
+            else:
+                break
+            i+=1
+            move_count += 1
+            if (i >10):
+                i = 0
+                print('\n')
+            
         
 
         #set the Winner or if their is a draw
