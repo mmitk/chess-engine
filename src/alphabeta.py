@@ -92,20 +92,14 @@ class alphabeta_agent:
         #df = pd.DataFrame()
         f = open(p, 'a')
 
-        #fieldnames = dictlist[0].keys()
-        """
-        csvwriter = csv.DictWriter(f, delimiter=',')
+        fieldnames = self.data[0].keys()
+
+        csvwriter = csv.DictWriter(f, delimiter=',', fieldnames=fieldnames)
         #csvwriter.writerow(dict((fn, fn) for fn in fieldnames))
         for row in self.data:
             csvwriter.writerow(row)
         f.close()
-        """
-
-        for row in self.data:
-            for item in row:
-                f.write(item + ',')
-            f.write('\n')
-        f.close()
+     
 
         
 

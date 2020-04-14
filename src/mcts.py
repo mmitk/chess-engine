@@ -92,7 +92,7 @@ class mcts_agent(object):
         v = max(actions, key=actions.get)
         #else:
             #v = min(actions, key=actions.get)
-        self.data.append({'state': board.fen(),'move':v, 'pred_prob':predicted[v]})
+        self.data.append({'state': board.fen(),'move':v})
         return v
 
     def write_model(self, filename):
@@ -109,7 +109,7 @@ class mcts_agent(object):
         fieldnames = dictlist[0].keys()
 
         csvwriter = csv.DictWriter(f, delimiter=',', fieldnames=fieldnames)
-        csvwriter.writerow(dict((fn, fn) for fn in fieldnames))
+        #csvwriter.writerow(dict((fn, fn) for fn in fieldnames))
         for row in dictlist:
             csvwriter.writerow(row)
         f.close()
