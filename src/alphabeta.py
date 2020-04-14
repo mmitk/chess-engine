@@ -74,8 +74,8 @@ class alphabeta_agent:
                     alpha = boardValue
                 board.pop()
             self.data.append({'state': board.fen(),'move':bestMove})
-            print('.',end = '')
-            return bestMove
+        print('.',end = '')
+        return bestMove
 
     def predict_probability(self, board, move):
         data = [{'state':board.fen(),'move':move}]
