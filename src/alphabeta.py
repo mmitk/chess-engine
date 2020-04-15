@@ -12,9 +12,12 @@ import util
 
 class alphabeta_agent:
 
-    def __init__(self, historic = False, filename=None):
+    def __init__(self, historic = False, filename=None, model = None):
         self.data = list()
-        self.model = md.svm(filename = filename, historic = historic)
+        if not model is None:
+            self.model = model
+        else:
+            self.model = md.svm(filename = filename, historic = historic)
         self.data = list()
 
     

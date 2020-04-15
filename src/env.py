@@ -14,18 +14,20 @@ class chessGame:
     The environment in which a game is played between two agents 
     """
 
-    def __init__(self, agent1 = None, agent2 = None):
+    def __init__(self, agent1 = None, agent2 = None, model = None):
         self.board = chess.Board()
         self.winner = None 
         self.agent1 = agent1
         self.agent2 = agent2
         self.move_history = list()
+        self.model = model
 
 
     def set_board(self, board, agent1 = None, agent2 = None):
         """
         update the game with a new board state
         """
+        
         if not isinstance(board, str):
             self.board = board
         else:
@@ -97,13 +99,13 @@ class chessGame:
         if self.winner == Winner.WHITE:
             print('Agent 1 Won!')
             self.agent1.write_data('moves_history.csv', 1)
-            self.agent2.write_data('moves_history.csv', 0)
+            self.agent2.write_data('moves_history.csv', didWin = int(0))
         elif self.winner == Winner.BLACK:
             print('Agent 2 Won!')
-            self.agent1.write_data('moves_history.csv', 0)
+            self.agent1.write_data('moves_history.csv', didWin = int(0))
             self.agent2.write_data('moves_history.csv', 1)
 
-        for move in move_history:
+        for move in self.move_history:
             print(move)
     
 

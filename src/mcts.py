@@ -14,14 +14,18 @@ from pathlib import Path
 import eval
 import util
 class mcts_agent(object):
-    def __init__(self, manager, historic=False, filename = None):
+    def __init__(self, manager, historic=False, filename = None, model = None):
         super().__init__
         self.visits = manager.dict()
         self.differential = manager.dict()
         self.data = manager.list()
         #if historic == True and filename is not None:
             #self.model = md.svm_eval(filename = filename, historic )
-        self.model = md.svm(filename = filename, historic = historic)
+        if not model is None:
+            self.model = model
+        else:
+            self.model = md.svm(filename = filename, historic = historic)
+        
         
     def record(self, board, score):
         self.visits["total"] = self.visits.get("total",1) + 1
