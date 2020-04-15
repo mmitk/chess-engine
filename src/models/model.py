@@ -77,6 +77,7 @@ class preprocessor(object):
 
     def transform(self):
         data = self.raw_data
+        class_ = data.pop('class')
         data['state'] = data['state'].apply(self.serialize2)
         data = pd.concat([data['state'].apply(pd.Series), data['move']], axis = 1)
         data = data.rename(columns = {0:'b1',1:'b2',2:'b3',3:'b4',4:'b5'})
@@ -94,6 +95,7 @@ class preprocessor(object):
         data['m3'] = data['m3'].apply(self.encode_move)
         data['m4'] = data['m4'].apply(self.encode_move)
         data['m5'] = data['m5'].apply(self.encode_move)
+        data = pd.concat([data,class_], axis = 1)
         return data
     
     def encode_move(self,m):

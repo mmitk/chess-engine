@@ -1,5 +1,5 @@
 #import board
-import search
+#import search
 import chess 
 import chess.engine
 import mcts
@@ -16,6 +16,7 @@ if __name__ == '__main__':
     util.init_data_dirs()
     board = chess.Board()
 #chessboard = board.get_board()
+    """
     manager = Manager()
     manager2 = Manager()
     m1 = ab.alphabeta_agent()
@@ -39,5 +40,6 @@ if __name__ == '__main__':
 
 
     print('History of Agent 1 (MCTS): ',movehistory1)
+    """
 
 
