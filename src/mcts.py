@@ -86,8 +86,8 @@ class mcts_agent(object):
                 actions[move] = player * self.monte_carlo_value(board)
                 predicted[move] = theta
                 board.pop()
-        for k, v in actions.items():
-            print(str(k) + " = " + str(v))
+        #for k, v in actions.items():
+            #print(str(k) + " = " + str(v))
         
         v = max(actions, key=actions.get)
         #else:

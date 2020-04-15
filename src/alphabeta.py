@@ -72,7 +72,7 @@ class alphabeta_agent:
                 if boardValue > alpha:
                     alpha = boardValue
                 board.pop()
-            self.data.append({'state': board.fen(),'move':bestMove})
+        self.data.append({'state': board.fen(),'move':bestMove})
         print('.',end = '')
         return bestMove
 

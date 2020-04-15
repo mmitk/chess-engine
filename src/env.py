@@ -19,6 +19,7 @@ class chessGame:
         self.winner = None 
         self.agent1 = agent1
         self.agent2 = agent2
+        self.move_history = list()
 
 
     def set_board(self, board, agent1 = None, agent2 = None):
@@ -76,6 +77,9 @@ class chessGame:
             if (i >10):
                 i = 0
                 print('\n')
+            self.move_history.append({'state': board.fen(),'move1':move1})
+            self.move_history.append({'state': board.fen(),'move2':move2})
+
             
         
 
@@ -96,6 +100,8 @@ class chessGame:
         elif self.winner == Winner.BLACK:
             self.agent1.write_data('moves_history.csv', 0)
             self.agent2.write_data('moves_history.csv', 1)
+        for move in move_history:
+            print(move)
     
 
 
