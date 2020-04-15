@@ -18,17 +18,19 @@ if __name__ == '__main__':
     
     
 
-    game = chessGame(a2, m)
+    
 
     for i in range(3):
         
         # new game is initaited with new agents and manager for 
         # pools
-        
+
         manager = Manager()
         board = chess.Board()
         m = mcts.mcts_agent(manager = manager, model = model)
         a2 = ab.alphabeta_agent(model = model)
+
+        game = chessGame(a2, m)
         game.set_board(board)
 
         #game plays out
