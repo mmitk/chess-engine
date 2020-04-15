@@ -77,8 +77,8 @@ class chessGame:
             if (i >10):
                 i = 0
                 print('\n')
-            self.move_history.append({'state': board.fen(),'move1':move1})
-            self.move_history.append({'state': board.fen(),'move2':move2})
+            self.move_history.append({'state': self.board.fen(),'move1':move1})
+            self.move_history.append({'state': self.board.fen(),'move2':move2})
 
             
         
@@ -95,11 +95,14 @@ class chessGame:
 
         # Now add to historic dataset of moves made by each agent
         if self.winner == Winner.WHITE:
+            print('Agent 1 Won!')
             self.agent1.write_data('moves_history.csv', 1)
             self.agent2.write_data('moves_history.csv', 0)
         elif self.winner == Winner.BLACK:
+            print('Agent 2 Won!')
             self.agent1.write_data('moves_history.csv', 0)
             self.agent2.write_data('moves_history.csv', 1)
+
         for move in move_history:
             print(move)
     
