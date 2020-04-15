@@ -103,10 +103,12 @@ class mcts_agent(object):
         self.model.write_file(util.MODELS_DIR / filename)
 
     def write_data(self, filename, didWin = None):
-        if didWin is not None:
-            for row in self.data:
-                row['didWin'] = didWin
         dictlist = list(self.data)
+        for row in dictlist:
+            if didWin == 1:
+                row['didWin'] = didWin
+            else:
+                row['didWin'] = 0
         p = Path(util.HISTORY_DIR / 'history.csv')
         f = open(p, 'a')
 
