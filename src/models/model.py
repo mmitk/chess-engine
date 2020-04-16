@@ -151,8 +151,8 @@ class preprocessor(object):
             bstate[63] = 8+7
 
         if board.ep_square is not None:
-            assert bstate[self.board.ep_square] == 0
-            bstate[self.board.ep_square] = 8
+            assert bstate[board.ep_square] == 0
+            bstate[board.ep_square] = 8
         bstate = bstate.reshape(8,8)
 
 
