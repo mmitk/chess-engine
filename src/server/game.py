@@ -8,7 +8,7 @@ app = Flask(__name__)
 @app.route('/')
 def output():
 	# serve index template
-	return render_template('index.html', config='rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1')
+	return render_template('index.html', fen='rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1')
 
 @app.route('/receiver', methods = ['POST'])
 def worker():
