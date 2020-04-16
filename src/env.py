@@ -65,6 +65,7 @@ class chessGame:
             move1 = self.agent1.make_move(depth = 3, board = self.board)
             if not move1 is None:
                  self.board.push(move1)
+                 self.move_history.append({'state': self.board.fen(),'move1':move1})
             else:
                 break
             
@@ -72,6 +73,7 @@ class chessGame:
             move2 = self.agent2.make_move(depth = 3, board = self.board)
             if not move2 is None:
                 self.board.push(move2)
+                self.move_history.append({'state': self.board.fen(),'move2':move2})
             else:
                 break
             i+=1
@@ -79,8 +81,7 @@ class chessGame:
             if (i >10):
                 i = 0
                 print('\n')
-            self.move_history.append({'state': self.board.fen(),'move1':move1})
-            self.move_history.append({'state': self.board.fen(),'move2':move2})
+            
 
             
         

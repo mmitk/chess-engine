@@ -12,7 +12,14 @@ if __name__ == '__main__':
     try:
         model.load_file(Path(util.HISTORY_DIR / 'alph_mct_1_model.pkl'))
     except Exception:
-        print('oops')
+        try:
+             prec = md.preprocessor()
+             prec.fit(filename = Path(util.HISTORY_DIR / 'history.csv'))
+             data = prec.transform()
+             model.fit(data)
+             model.write_file(Path(util.HISTORY_DIR / 'alph_mct_1_model.pkl'))
+        except Exception as e:
+            print('oops: {}'.format(e))
     
     #a1 = ab.alphabeta_agent()
     
@@ -43,5 +50,5 @@ if __name__ == '__main__':
         prec.fit(filename = Path(util.HISTORY_DIR / 'history.csv'))
         data = prec.transform()
         model.fit(data)
-        model.write_model(Path(util.HISTORY_DIR / 'alph_mct_1_model.pkl'))
+        model.write_file(Path(util.HISTORY_DIR / 'alph_mct_1_model.pkl'))
        

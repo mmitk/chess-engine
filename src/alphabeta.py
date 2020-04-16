@@ -83,7 +83,7 @@ class alphabeta_agent:
         data = [{'state':board.fen(),'move':move}]
         prec = md.preprocessor()
         prec.fit(raw_data = data)
-        data = prec.transform()
+        data = prec.transform(predict = True)
         return self.model.predict_proba(data)
 
     def write_data(self, filename, did_win = None):

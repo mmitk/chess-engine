@@ -61,7 +61,7 @@ class mcts_agent(object):
         data = [{'state':board.fen(),'move':move}]
         prec = md.preprocessor()
         prec.fit(raw_data = data)
-        data = prec.transform()
+        data = prec.transform(predict = True)
         theta = self.model.predict_proba(data)
         return theta * eval.evaluate_board(board), theta
        
