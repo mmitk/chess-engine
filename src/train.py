@@ -32,12 +32,13 @@ if __name__ == '__main__':
         # new game is initaited with new agents and manager for 
         # pools
 
-        manager = Manager()
+        #manager = Manager()
         board = chess.Board()
-        m = mcts.mcts_agent(manager = manager, model = model)
+        a1 = ab.alphabeta_agent(model = model)
+        #m = mcts.mcts_agent(manager = manager, model = model)
         a2 = ab.alphabeta_agent(model = model)
 
-        game = chessGame(a2, m)
+        game = chessGame(a2, a1)
         game.set_board(board)
 
         #game plays out
