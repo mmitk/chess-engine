@@ -83,13 +83,15 @@ class alphabeta_agent:
         data = [{'state':board.fen(),'move':move}]
         prec = md.preprocessor()
         prec.fit(raw_data = data)
-        data = prec.transform()
+        data = prec.transform(predict = True)
         return self.model.predict_proba(data)
 
     def write_data(self, filename, did_win = None):
-        if did_win is not None:
-            for row in self.data:
+        for row in self.data:
+            if did_win == 1:
                 row['didWin'] = did_win
+            else:
+                row['didWin'] = 0
         p = Path(util.HISTORY_DIR / 'history.csv')
 
         #df = pd.DataFrame()

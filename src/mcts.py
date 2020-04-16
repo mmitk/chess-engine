@@ -61,7 +61,7 @@ class mcts_agent(object):
         data = [{'state':board.fen(),'move':move}]
         prec = md.preprocessor()
         prec.fit(raw_data = data)
-        data = prec.transform()
+        data = prec.transform(predict = True)
         theta = self.model.predict_proba(data)
         return theta * eval.evaluate_board(board), theta
        
@@ -103,10 +103,12 @@ class mcts_agent(object):
         self.model.write_file(util.MODELS_DIR / filename)
 
     def write_data(self, filename, didWin = None):
-        if didWin is not None:
-            for row in self.data:
-                row['didWin'] = didWin
         dictlist = list(self.data)
+        for row in dictlist:
+            if didWin == 1:
+                row['didWin'] = didWin
+            else:
+                row['didWin'] = 0
         p = Path(util.HISTORY_DIR / 'history.csv')
         f = open(p, 'a')
 

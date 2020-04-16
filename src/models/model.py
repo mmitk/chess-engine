@@ -36,14 +36,14 @@ class svm():
     
     def predict(self, dataset):
         try:
-            self.model.predict
+            return self.model.predict
         except Exception as e:
             return False
 
 
     def predict_proba(self, dataset, formatted = True):
         try:
-             self._model.predict_proba(dataset)[self._model.classes_.index(1)]
+             return self._model.predict_proba(dataset)[self._model.classes_.index(1)]
         except Exception:
             return 1
     
@@ -75,8 +75,10 @@ class preprocessor(object):
             self.raw_data = pd.DataFrame(raw_data)
         return self.raw_data
 
-    def transform(self):
+    def transform(self, predict = False):
         data = self.raw_data
+        if not predict:
+            class_ = data.pop('class')
         data['state'] = data['state'].apply(self.serialize2)
         data = pd.concat([data['state'].apply(pd.Series), data['move']], axis = 1)
         data = data.rename(columns = {0:'b1',1:'b2',2:'b3',3:'b4',4:'b5'})
@@ -94,6 +96,8 @@ class preprocessor(object):
         data['m3'] = data['m3'].apply(self.encode_move)
         data['m4'] = data['m4'].apply(self.encode_move)
         data['m5'] = data['m5'].apply(self.encode_move)
+        if not predict:
+            data = pd.concat([data,class_], axis = 1)
         return data
     
     def encode_move(self,m):

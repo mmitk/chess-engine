@@ -12,17 +12,43 @@ if __name__ == '__main__':
     try:
         model.load_file(Path(util.HISTORY_DIR / 'alph_mct_1_model.pkl'))
     except Exception:
-        print('oops')
-    manager = Manager()
-    a1 = ab.alphabeta_agent()
-    m = mcts.mcts_agent(manager = manager, model = model)
-    a2 = ab.alphabeta_agent(model = model)
-    board = chess.Board()
+        try:
+             prec = md.preprocessor()
+             prec.fit(filename = Path(util.HISTORY_DIR / 'history.csv'))
+             data = prec.transform()
+             model.fit(data)
+             model.write_file(Path(util.HISTORY_DIR / 'alph_mct_1_model.pkl'))
+        except Exception as e:
+            print('oops: {}'.format(e))
+    
+    #a1 = ab.alphabeta_agent()
+    
     
 
-    game = chessGame(a2, m)
+    
 
-    game.set_board(board)
-    game.play_out()
-    model.write_model(Path(util.HISTORY_DIR / 'alph_mct_1_model.pkl'))
+    for i in range(3):
+        
+        # new game is initaited with new agents and manager for 
+        # pools
 
+        manager = Manager()
+        board = chess.Board()
+        m = mcts.mcts_agent(manager = manager, model = model)
+        a2 = ab.alphabeta_agent(model = model)
+
+        game = chessGame(a2, m)
+        game.set_board(board)
+
+        #game plays out
+        game.play_out()
+
+    
+
+        # model updates from history.csv, what was updated by both agents during gameplay
+        prec = md.preprocessor()
+        prec.fit(filename = Path(util.HISTORY_DIR / 'history.csv'))
+        data = prec.transform()
+        model.fit(data)
+        model.write_file(Path(util.HISTORY_DIR / 'alph_mct_1_model.pkl'))
+       
