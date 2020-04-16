@@ -27,7 +27,7 @@ if __name__ == '__main__':
 
     
 
-    for i in range(3):
+    for i in range(10):
         
         # new game is initaited with new agents and manager for 
         # pools
@@ -51,4 +51,5 @@ if __name__ == '__main__':
         data = prec.transform()
         model.fit(data)
         model.write_file(Path(util.HISTORY_DIR / 'alph_mct_1_model.pkl'))
+        game.reset()
        

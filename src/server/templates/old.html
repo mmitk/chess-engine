@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/chessboard-1.0.0.min.css')}}"
+      />
+    <script src="{{ url_for('static', filename='js/chessboard-1.0.0.min.js')}}"></script>
+    </head>
+    <title>Chess</title>
+  <body>
+    <div id="board" style="width: 69%;"></div>
+    <script>
+      var board = Chessboard('board');
+    </script>
+  </body>
+</html>

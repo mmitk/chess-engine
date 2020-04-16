@@ -36,16 +36,17 @@ class svm():
     
     def predict(self, dataset):
         try:
-            return self.model.predict
+            return self._model.predict(dataset)
         except Exception as e:
+            print(e)
             return False
 
 
     def predict_proba(self, dataset, formatted = True):
         try:
-             return self._model.predict_proba(dataset)[self._model.classes_.index(1)]
-        except Exception:
-            return 1
+             return float(self._model.predict_proba(dataset)[:, np.where(self._model.classes_ == 1)].item(0))
+        except Exception as e:
+            return 0.5
     
     def write_file(self, filename):
         with open(filename, 'wb') as file:

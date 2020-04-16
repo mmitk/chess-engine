@@ -26,15 +26,17 @@ class alphabeta_agent:
         if( depthleft == 0 ):
             return self.quiesce( alpha, beta, board )
         for move in board.legal_moves:
-            board.push(move)   
-            score = -self.alphabeta( -beta, -alpha, depthleft - 1, board)
-            board.pop()
-            if( score >= beta ):
-                return score
-            if( score > bestscore ):
-                bestscore = score
-            if( score > alpha ):
-                alpha = score
+            theta = self.predict_probability(board, move)
+            if theta >= 0.3:
+                board.push(move)   
+                score = theta * float(-self.alphabeta( -beta, -alpha, depthleft - 1, board))
+                board.pop()
+                if( score >= beta ):
+                    return score
+                if( score > bestscore ):
+                    bestscore = score
+                if( score > alpha ):
+                    alpha = score
         return bestscore
 
     def quiesce( self, alpha, beta, board ):

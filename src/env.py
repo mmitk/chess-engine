@@ -1,5 +1,7 @@
 import chess 
 from enum import IntEnum
+from pathlib import Path
+import util
 
 
 class Winner(IntEnum):
@@ -50,6 +52,7 @@ class chessGame:
             self.agent1 = agent1
         if agent1 is not None:
             self.agent2 = agent2
+        self.move_history = list()
 
 
     def play_out(self):
@@ -98,16 +101,23 @@ class chessGame:
 
         # Now add to historic dataset of moves made by each agent
         if self.winner == Winner.WHITE:
+            winner = 1
             print('Agent 1 Won!')
             self.agent1.write_data('moves_history.csv', 1)
-            self.agent2.write_data('moves_history.csv', didWin = int(0))
+            self.agent2.write_data('moves_history.csv', did_win = int(0))
         elif self.winner == Winner.BLACK:
+            winner = 2
             print('Agent 2 Won!')
-            self.agent1.write_data('moves_history.csv', didWin = int(0))
+            self.agent1.write_data('moves_history.csv', did_win = int(0))
             self.agent2.write_data('moves_history.csv', 1)
 
+        p = Path(util.HISTORY_DIR / 'history.csv')
+        f = open(p,'a')
         for move in self.move_history:
-            print(move)
+            f.write(move)
+            f.write('\n')
+        f.write('END OF GAME, AGENT {} won'.format(winner))
+        
     
 
 
