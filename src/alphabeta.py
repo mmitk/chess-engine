@@ -27,16 +27,15 @@ class alphabeta_agent:
             return self.quiesce( alpha, beta, board )
         for move in board.legal_moves:
             theta = self.predict_probability(board, move)
-            if theta >= 0.3:
-                board.push(move)   
-                score = theta * float(-self.alphabeta( -beta, -alpha, depthleft - 1, board))
-                board.pop()
-                if( score >= beta ):
-                    return score
-                if( score > bestscore ):
-                    bestscore = score
-                if( score > alpha ):
-                    alpha = score
+            board.push(move)   
+            score = theta * float(-self.alphabeta( -beta, -alpha, depthleft - 1, board))
+            board.pop()
+            if( score >= beta ):
+                return score
+            if( score > bestscore ):
+                bestscore = score
+            if( score > alpha ):
+                alpha = score
         return bestscore
 
     def quiesce( self, alpha, beta, board ):
@@ -68,7 +67,7 @@ class alphabeta_agent:
         beta = 100000
         for move in board.legal_moves:
             theta = self.predict_probability(board, move)
-            if theta >= 0.3:
+            if theta:
                 board.push(move)
                 boardValue = - self.alphabeta(-beta, -alpha, depth-1,board)
                 if boardValue > bestValue:
@@ -83,6 +82,7 @@ class alphabeta_agent:
 
     def predict_probability(self, board, move):
         data = [{'state':board.fen(),'move':move}]
+        #print('predicting for move: ', move)
         prec = md.preprocessor()
         prec.fit(raw_data = data)
         data = prec.transform(predict = True)
