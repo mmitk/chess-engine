@@ -7,30 +7,9 @@ import chess.engine
 from multiprocessing import Pool, Manager, Process
 from models import model as md
 from pathlib import Path
-
-if __name__ == '__main__':
-    model = md.svm()
-    try:
-        model.load_file(Path(util.HISTORY_DIR / 'alph_mct_1_model.pkl'))
-    except Exception:
-        try:
-             prec = md.preprocessor()
-             prec.fit(filename = Path(util.HISTORY_DIR / 'history.csv'))
-             data = prec.transform()
-             model.fit(data)
-             model.write_file(Path(util.HISTORY_DIR / 'alph_mct_1_model.pkl'))
-        except Exception as e:
-            print('oops: {}'.format(e))
-    
-    #a1 = ab.alphabeta_agent()
-    session_1()
     
 
-
-
-    
-
-def session_0(game, model):
+def session_0(model):
     for i in range(10):
         
         # new game is initaited with new agents and manager for 
@@ -58,7 +37,7 @@ def session_0(game, model):
         game.reset()
 
 
-def session_1(game, model):
+def session_1(model):
     counter = 0
     for i in range(10):
         
@@ -99,12 +78,12 @@ def session_1(game, model):
 class stockfish_agent:
 
     def __init__(self):
-        self.engine = chess.engine.SimpleEngine.popen_uci("/usr/bin/stockfish")
+        self.engine = chess.engine.SimpleEngine.popen_uci("../stockfish-11-win/stockfish-11-win/Windows/stockfish_20011801_x64")
         self.data = list()
     
     def make_move(self, board, depth = None):
-        result = engine.play(board, chess.engine.Limit(time=0.2))
-        self.data.append({'state': board.fen(),'move':result.move}
+        result = self.engine.play(board, chess.engine.Limit(time=0.2))
+        self.data.append({'state': board.fen(),'move':result.move})
         return result.move
 
     def write_data(self, did_win = None):
@@ -125,3 +104,22 @@ class stockfish_agent:
          for row in self.data:
              csvwriter.writerow(row)
          f.close()
+
+
+if __name__ == '__main__':
+    model = md.svm()
+    try:
+        model.load_file(Path(util.HISTORY_DIR / 'alph_mct_1_model.pkl'))
+    except Exception:
+        try:
+             prec = md.preprocessor()
+             prec.fit(filename = Path(util.HISTORY_DIR / 'history.csv'))
+             data = prec.transform()
+             model.fit(data)
+             model.write_file(Path(util.HISTORY_DIR / 'alph_mct_1_model.pkl'))
+        except Exception as e:
+            print('oops: {}'.format(e))
+    
+    #a1 = ab.alphabeta_agent()
+    session_1(model)
+    
