@@ -66,6 +66,8 @@ def log(message, logger_str=None, msg_type=LogMessage.DEBUG, filename=None, path
             LOG_FILENAME = filename
     if not path:
         path = Path(LOGS_DIR / filename) # default location is /data/logs/filename
+    else:
+        path = Path(path / filename)
     if logger_str:
         logger_str = "[" + str(logger_str) +"]"
     output = str(time.strftime("%H:%M:%S:")) + msg_type.name + ":" + str(logger_str) + ":" + message +'\n'
