@@ -103,18 +103,18 @@ class chessGame:
         if self.winner == Winner.WHITE:
             winner = 1
             print('Agent 1 Won!')
-            self.agent1.write_data('history.csv', 1)
+            self.agent1.write_data('history.csv', did_win = 1)
             self.agent2.write_data('history.csv', did_win = int(0))
         elif self.winner == Winner.BLACK:
             winner = 2
             print('Agent 2 Won!')
             self.agent1.write_data('history.csv', did_win = int(0))
-            self.agent2.write_data('history.csv', 1)
+            self.agent2.write_data('history.csv', did_win = 1)
 
         p = Path(util.HISTORY_DIR / 'sim_history.txt')
         f = open(p,'a')
         for move in self.move_history:
-            f.write(move)
+            f.write(str(move))
             f.write('\n')
         f.write('END OF GAME, AGENT {} ({}) won'.format(winner, str(self.winner)))
         f.close()

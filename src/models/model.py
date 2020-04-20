@@ -31,6 +31,7 @@ class svm():
       
     
     def fit(self, dataset, formatted = True):
+        dataset = dataset.drop_duplicates()
         y = dataset.pop('class')
         self._model.fit(dataset,y)
     
@@ -92,24 +93,35 @@ class preprocessor(object):
         data = data.rename(columns = {0:'m1',1:'m2',2:'m3',3:'m4',4:'m5'})
         if not 'm5' in data.columns:
             data['m5'] = 0
+        try:
+            data['m5'] = data['m5'].apply(self.encode_move)
+        except Exception:
+            data['m5'] = 0
+
         data['m1'] = data['m1'].apply(self.encode_move)
         data['m2'] = data['m2'].apply(self.encode_move)
         data['m3'] = data['m3'].apply(self.encode_move)
         data['m4'] = data['m4'].apply(self.encode_move)
-        data['m5'] = data['m5'].apply(self.encode_move)
         if not predict:
             data = pd.concat([data,class_], axis = 1)
         return data
     
     def encode_move(self,m):
+        import math
+       
         try:
+            if isinstance(m,float):
+                m = int(m)
             val = ord(m)
             return val
         except Exception:
-            if not isinstance(m, int):
-                raise TypeError('Encoded Move must be of type str or int')
-            else:
-                return int(m)
+            if math.isnan(float(m)) or numpy.isnan(float(m)):
+                return 0
+            #if not isinstance(m, int):
+                #raise TypeError('Encoded Move must be of type str or int')
+            #else:
+                #return int(m)
+            return float(m)
 
 
 
