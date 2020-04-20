@@ -11,8 +11,9 @@ import util
 
 
 class alphabeta_agent:
-
+    
     def __init__(self, historic = False, filename=None, model = None):
+        self.type = 1
         self.data = list()
         if not model is None:
             self.model = model

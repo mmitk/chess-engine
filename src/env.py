@@ -2,6 +2,9 @@ import chess
 from enum import IntEnum
 from pathlib import Path
 import util
+import time
+import json
+import datetime
 
 
 class Winner(IntEnum):
@@ -64,6 +67,8 @@ class chessGame:
             raise ValueError('ERROR agent1 and agent2 can not be None for chessGame.play_out()')
         i = 0
         move_count = 0
+        self.log('Game Started: {} as white, {} as black'.format(self.agent1.type,self.agent2.type))
+        start = time.time()
         while not self.board.is_checkmate():
             move1 = self.agent1.make_move(depth = 3, board = self.board)
             if not move1 is None:
@@ -84,10 +89,10 @@ class chessGame:
             if (i >10):
                 i = 0
                 print('\n')
-            
 
+        end = time.time()
             
-        
+        exec_time = (end - start)
 
         #set the Winner or if their is a draw
         if self.winner is None:
@@ -101,25 +106,47 @@ class chessGame:
 
         # Now add to historic dataset of moves made by each agent
         if self.winner == Winner.WHITE:
-            winner = 1
+            winner = self.agent1.type
             print('Agent 1 Won!')
             self.agent1.write_data('history.csv', did_win = 1)
             self.agent2.write_data('history.csv', did_win = int(0))
         elif self.winner == Winner.BLACK:
-            winner = 2
+            winner = self.agent2.type
             print('Agent 2 Won!')
             self.agent1.write_data('history.csv', did_win = int(0))
             self.agent2.write_data('history.csv', did_win = 1)
 
-        p = Path(util.HISTORY_DIR / 'sim_history.txt')
+        sim_history = str(datetime.date.today()) + 'sim_history.log' 
+
+        p = Path(util.HISTORY_DIR / sim_history)
         f = open(p,'a')
         for move in self.move_history:
             f.write(str(move))
             f.write('\n')
-        f.write('END OF GAME, AGENT {} ({}) won'.format(winner, str(self.winner)))
+        f.write('END OF GAME, AGENT {} ({}) won\n'.format(winner, str(self.winner)))
         f.close()
         
+        message = 'GAME OVER: {} as white, {} as black, {} won\n EXECUTION: {} seconds'.format(self.agent1.type,self.agent2.type,winner, exec_time)
+        self.log(message = message)
+
     
+    
+    def log(self, message, msg_type=2):
+        util.log(message, logger_str="game_play", msg_type=msg_type, write_to_console=False, path = util.HISTORY_DIR, filename = 'game_logs.log')
 
+    
+    def update_total(self, time = None):
+        with open(Path(util.HISTORY_DIR / 'stats.json'), 'r') as f:
+            totals = json.load(f)
 
+        total_time = int(totals['Total Playing Time'])
+        total_games = int(totals['Total Games'])
+        total_games += 1
+        totals['Total Games'] = total_games
+        if not time is None:
+            total_time += time
+            totals['Total Playing Time'] = total_time
+
+        with open(Path(util.HISTORY_DIR / 'stats.json'), 'w') as f:
+            totals = json.dump(f)
     
