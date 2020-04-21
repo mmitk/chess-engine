@@ -11,7 +11,7 @@ import os
 import util
 class svm():
     
-    def __init__(self, filename = None, historic = False, gam = 1/8):
+    def __init__(self, filename = None, historic = False, gam = 1/69):
         if filename is None:
                 self._model = sv.SVC(kernel = 'rbf', gamma=gam, probability = True)
 
@@ -180,62 +180,6 @@ class preprocessor(object):
 
 
 
-    def listify(self,string):
-        return list(str(string))
-        
-    def bin_matrix_to_decimal(self, matrix):
-        m = matrix.reshape(-1)
-        dec = 0
-        j = len(m)-1
-        for i in range(len(m)-1):
-            if m[i]:
-                dec += 2**j
-            j -= 1
-        return float(dec)
-
-    def serialize(self,board):
-        import numpy as np
-        assert board.is_valid()
-
-        bstate = np.zeros(64, np.uint8)
-        for i in range(64):
-            pp = board.piece_at(i)
-            if pp is not None:
-                #print(i, pp.symbol())
-                bstate[i] = {"P": 1, "N": 2, "B": 3, "R": 4, "Q": 5, "K": 6, \
-                        "p": 9, "n":10, "b":11, "r":12, "q":13, "k": 14}[pp.symbol()]
-        if board.has_queenside_castling_rights(chess.WHITE):
-            assert bstate[0] == 4
-            bstate[0] = 7
-        if board.has_kingside_castling_rights(chess.WHITE):
-            assert bstate[7] == 4
-            bstate[7] = 7
-        if board.has_queenside_castling_rights(chess.BLACK):
-            assert bstate[56] == 8+4
-            bstate[56] = 8+7
-        if board.has_kingside_castling_rights(chess.BLACK):
-            assert bstate[63] == 8+4
-            bstate[63] = 8+7
-
-        if board.ep_square is not None:
-            assert bstate[board.ep_square] == 0
-            bstate[board.ep_square] = 8
-        bstate = bstate.reshape(8,8)
-
-
-        state = []
-   
-        state.append(self.bin_matrix_to_decimal((bstate>>3)&1))
-        state.append(self.bin_matrix_to_decimal((bstate>>2)&1))
-        state.append(self.bin_matrix_to_decimal((bstate>>1)&1))
-        state.append(self.bin_matrix_to_decimal((bstate>>0)&1))
-
-        state.append(((board.turn*1.0)+50))
-    
-        return state
-
-    def serialize2(self,board):
-        return self.serialize(chess.Board(str(board)))
 
 
     

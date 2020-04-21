@@ -7,3 +7,7 @@
 13:42:13:INFO:[game_play]:Game Started: 2 as white, 1 as black
 13:44:09:INFO:[train_sess]:STARTED: Session type 0 MonteCarlo and Alphabeta iterative Play
 13:44:10:INFO:[game_play]:Game Started: 2 as white, 1 as black
+14:55:39:INFO:[train_sess]:STARTED: Session type 0 MonteCarlo and Alphabeta iterative Play
+14:55:41:INFO:[game_play]:Game Started: 2 as white, 1 as black
+15:00:27:INFO:[train_sess]:STARTED: Session type 0 MonteCarlo and Alphabeta iterative Play
+15:00:28:INFO:[game_play]:Game Started: 2 as white, 1 as black
