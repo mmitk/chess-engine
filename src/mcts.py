@@ -21,9 +21,7 @@ class mcts_agent(object):
     def __init__(self, manager, historic=False, filename = None, model = None):
         super().__init__
         self.type = 2
-        self.visits = manager.dict()
-        self.differential = manager.dict()
-        self.data = manager.list()
+
         #if historic == True and filename is not None:
             #self.model = md.svm_eval(filename = filename, historic )
         if not model is None:

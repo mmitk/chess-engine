@@ -31,7 +31,7 @@ def update_total(time = None):
 
 def session_0(model):
     start = time.time()
-    util.log('Session type 1 started Stockfish and Alphabeta iterative Play', logger_str="game_play", msg_type=2, write_to_console=False, path = util.HISTORY_DIR, filename = 'game_logs.log')
+    util.log('Session type 0 started MonteCarlo and Alphabeta iterative Play', logger_str="game_play", msg_type=2, write_to_console=False, path = util.HISTORY_DIR, filename = 'game_logs.log')
     for i in range(10):
         
         # new game is initaited with new agents and manager for 
@@ -48,6 +48,12 @@ def session_0(model):
         #game plays out
         game.play_out()
 
+        if i%2 == 0:
+            white = a1
+            black = a2 
+        else:
+            white = a2
+            black = a1 
     
 
         # model updates from history.csv, what was updated by both agents during gameplay
@@ -68,7 +74,7 @@ def session_0(model):
 
 def session_1(model):
     util.log('Session type 1 started Stockfish and Alphabeta iterative Play', logger_str="game_play", msg_type=2, write_to_console=False, path = util.HISTORY_DIR, filename = 'game_logs.log')
-    counter = 0
+    
     start = time.time()
     for i in range(10):
         
@@ -79,7 +85,7 @@ def session_1(model):
         a1 = ab.alphabeta_agent(model = model)
         a2 = stockfish_agent()
 
-        if counter%2 == 0:
+        if i%2 == 0:
             white = a1
             black = a2 
         else:
@@ -92,7 +98,7 @@ def session_1(model):
 
         #game plays out
         game.play_out()
-        counter += 1
+        
 
     
 
@@ -165,5 +171,7 @@ if __name__ == '__main__':
     #a1 = ab.alphabeta_agent()
     
     session_1(model)
+    session_0(model)
+    
     
 
