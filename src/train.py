@@ -30,6 +30,8 @@ def update_total(time = None):
 
 
 def session_0(model):
+    start = time.time()
+    util.log('Session type 1 started Stockfish and Alphabeta iterative Play', logger_str="game_play", msg_type=2, write_to_console=False, path = util.HISTORY_DIR, filename = 'game_logs.log')
     for i in range(10):
         
         # new game is initaited with new agents and manager for 
@@ -55,6 +57,13 @@ def session_0(model):
         model.fit(data)
         model.write_file(Path(util.HISTORY_DIR / 'test_model_1.pkl'))
         game.reset()
+
+    end = time.time()
+            
+    exec_time = (end - start)
+    update_total(exec_time)
+    message = 'COMPLETED Session type 0 started MonteCarlo and Alphabeta iterative Play\nExecution Time: {} seconds\n********************************************************'.format(exec_time)
+    util.log(message, logger_str="game_play", msg_type=2, write_to_console=False, path = util.HISTORY_DIR, filename = 'game_logs.log')
 
 
 def session_1(model):

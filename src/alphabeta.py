@@ -108,7 +108,3 @@ class alphabeta_agent:
             csvwriter.writerow(row)
         f.close()
      
-
-        
-
-  

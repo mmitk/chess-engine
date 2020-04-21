@@ -9,6 +9,8 @@ import alphabeta as ab
 import util
 from models import model as md
 from pathlib import Path
+import multiprocessing
+from concurrent.futures import ProcessPoolExecutor
 
 CHESS_PATH = util.IMG_DIR  # path to the chess pieces
 
@@ -93,8 +95,11 @@ def draw_board(window, board):
             elem.Update(button_color=('white', color),
                         image_filename=img, )
 
+def agent_move(board, lock):
+    with lock:
+        return agent.make_move(depth = 2, board = board)
 
-def PlayGame(agent):
+def PlayGame(agent, lock):
     menu_def = [['&File', ['&Open PGN File', 'E&xit']],
                 ['&Help', '&About...'], ]
 
@@ -207,6 +212,7 @@ def PlayGame(agent):
                         if picked_move in [str(move) for move in board.legal_moves]:
                             print('WE GOT HERE')
                             board.push(chess.Move.from_uci(picked_move))
+                            
                         else:
                             print('Illegal move')
                             move_state = 0
@@ -222,7 +228,7 @@ def PlayGame(agent):
                         break
         else:
             print('BUT NOT HERE')
-            best_move = agent.make_move(depth = 2, board = board)
+            best_move = agent.make_move(depth = 4, board = board)
             move_str = str(best_move)
             window.FindElement('_movelist_').Update(move_str + '\n', append=True)
             board.push(best_move)
@@ -238,7 +244,11 @@ def PlayGame(agent):
 # info_handler = chess.uci.InfoHandler()
 # engine.info_handlers.append(info_handler)
 # level = 2
-model = md.svm()
-model.load_file(Path(util.HISTORY_DIR / 'test_model_1.pkl'))
-agent = ab.alphabeta_agent(model = model)
-PlayGame(agent = agent)
+if __name__ == "__main__":
+    pool = ProcessPoolExecutor()
+    m = multiprocessing.Manager()
+    lock = m.Lock()
+    model = md.svm()
+    model.load_file(Path(util.HISTORY_DIR / 'test_model_1.pkl'))
+    agent = ab.alphabeta_agent(model = model)
+    PlayGame(agent = agent, lock = lock)
