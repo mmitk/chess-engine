@@ -125,7 +125,7 @@ class chessGame:
             f.write('\n')
         f.write('END OF GAME, AGENT {} ({}) won\n'.format(winner, str(self.winner)))
         f.close()
-        
+        self.update_total(exec_time)
         message = 'GAME OVER: {} as white, {} as black, {} won\n EXECUTION: {} seconds'.format(self.agent1.type,self.agent2.type,winner, exec_time)
         self.log(message = message)
 
@@ -148,5 +148,5 @@ class chessGame:
             totals['Total Playing Time'] = total_time
 
         with open(Path(util.HISTORY_DIR / 'stats.json'), 'w') as f:
-            totals = json.dump(f)
+            json.dump(totals, f)
     

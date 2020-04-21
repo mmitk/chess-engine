@@ -25,7 +25,7 @@ def update_total(time = None):
         totals['Total Session Time'] = total_time
 
     with open(Path(util.HISTORY_DIR / 'stats.json'), 'w') as f:
-        totals = json.dump(f)
+        json.dump(totals, f)
     
 
 
@@ -53,7 +53,7 @@ def session_0(model):
         prec.fit(filename = Path(util.HISTORY_DIR / 'history.csv'))
         data = prec.transform()
         model.fit(data)
-        model.write_file(Path(util.HISTORY_DIR / 'alph_mct_1_model.pkl'))
+        model.write_file(Path(util.HISTORY_DIR / 'test_model_1.pkl'))
         game.reset()
 
 
@@ -92,7 +92,7 @@ def session_1(model):
         prec.fit(filename = Path(util.HISTORY_DIR / 'history.csv'))
         data = prec.transform()
         model.fit(data)
-        model.write_file(Path(util.HISTORY_DIR / 'alph_mct_1_model.pkl'))
+        model.write_file(Path(util.HISTORY_DIR / 'test_model_1.pkl'))
         game.reset()
 
     end = time.time()
@@ -142,7 +142,7 @@ class stockfish_agent:
 if __name__ == '__main__':
     model = md.svm()
     try:
-        model.load_file(Path(util.HISTORY_DIR / 'alph_mct_1_model.pkl'))
+        model.load_file(Path(util.HISTORY_DIR / 'test_model_1.pkl'))
     except Exception:
         try:
              prec = md.preprocessor()
