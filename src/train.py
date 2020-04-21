@@ -31,7 +31,7 @@ def update_total(time = None):
 
 def session_0(model):
     start = time.time()
-    util.log('Session type 1 started Stockfish and Alphabeta iterative Play', logger_str="game_play", msg_type=2, write_to_console=False, path = util.HISTORY_DIR, filename = 'game_logs.log')
+    util.log('STARTED: Session type 0 MonteCarlo and Alphabeta iterative Play', logger_str="train_sess", msg_type=2, write_to_console=False, path = util.HISTORY_DIR, filename = 'game_logs.log')
     for i in range(10):
         
         # new game is initaited with new agents and manager for 
@@ -42,7 +42,14 @@ def session_0(model):
         m = mcts.mcts_agent(manager = manager, model = model)
         a2 = ab.alphabeta_agent(model = model)
 
-        game = chessGame(a2, m)
+        if i%2 == 0:
+            white = m
+            black = a2 
+        else:
+            white = a2
+            black = m 
+
+        game = chessGame(white, black)
         game.set_board(board)
 
         #game plays out
@@ -62,13 +69,12 @@ def session_0(model):
             
     exec_time = (end - start)
     update_total(exec_time)
-    message = 'COMPLETED Session type 0 started MonteCarlo and Alphabeta iterative Play\nExecution Time: {} seconds\n********************************************************'.format(exec_time)
-    util.log(message, logger_str="game_play", msg_type=2, write_to_console=False, path = util.HISTORY_DIR, filename = 'game_logs.log')
+    message = 'COMPLETED: Session type 0 MonteCarlo and Alphabeta iterative Play\nExecution Time: {} seconds\n********************************************************'.format(exec_time)
+    util.log(message, logger_str="train_sess", msg_type=2, write_to_console=False, path = util.HISTORY_DIR, filename = 'game_logs.log')
 
 
 def session_1(model):
-    util.log('Session type 1 started Stockfish and Alphabeta iterative Play', logger_str="game_play", msg_type=2, write_to_console=False, path = util.HISTORY_DIR, filename = 'game_logs.log')
-    counter = 0
+    util.log('Session type 1 started Stockfish and Alphabeta iterative Play', logger_str="train_sess", msg_type=2, write_to_console=False, path = util.HISTORY_DIR, filename = 'game_logs.log')
     start = time.time()
     for i in range(10):
         
@@ -79,7 +85,7 @@ def session_1(model):
         a1 = ab.alphabeta_agent(model = model)
         a2 = stockfish_agent()
 
-        if counter%2 == 0:
+        if i%2 == 0:
             white = a1
             black = a2 
         else:
@@ -92,7 +98,6 @@ def session_1(model):
 
         #game plays out
         game.play_out()
-        counter += 1
 
     
 
@@ -109,7 +114,7 @@ def session_1(model):
     exec_time = (end - start)
     update_total(exec_time)
     message = 'COMPLETED Session type 1 started Stockfish and Alphabeta iterative Play\nExecution Time: {} seconds\n********************************************************'.format(exec_time)
-    util.log(message, logger_str="game_play", msg_type=2, write_to_console=False, path = util.HISTORY_DIR, filename = 'game_logs.log')
+    util.log(message, logger_str="train_sess", msg_type=2, write_to_console=False, path = util.HISTORY_DIR, filename = 'game_logs.log')
 
 
 class stockfish_agent:
@@ -164,6 +169,7 @@ if __name__ == '__main__':
     
     #a1 = ab.alphabeta_agent()
     
+    session_0(model)
     session_1(model)
     
 

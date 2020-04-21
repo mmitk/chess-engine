@@ -83,45 +83,100 @@ class preprocessor(object):
             class_ = data.pop('class')
         data['state'] = data['state'].apply(self.serialize2)
         data = pd.concat([data['state'].apply(pd.Series), data['move']], axis = 1)
-        data = data.rename(columns = {0:'b1',1:'b2',2:'b3',3:'b4',4:'b5'})
-        data['b1'] = data['b1'].apply(np.log)
-        data['b2'] = data['b2'].apply(np.log)
-        data['b3'] = data['b3'].apply(np.log)
-        data['b4'] = data['b4'].apply(np.log)
         move = data.pop('move')
-        data = pd.concat([data,move.apply(self.listify).apply(pd.Series)], axis = 1)
-        data = data.rename(columns = {0:'m1',1:'m2',2:'m3',3:'m4',4:'m5'})
-        if not 'm5' in data.columns:
-            data['m5'] = 0
-        try:
-            data['m5'] = data['m5'].apply(self.encode_move)
-        except Exception:
-            data['m5'] = 0
+        move = move.apply(self.listify).apply(pd.Series)
 
-        data['m1'] = data['m1'].apply(self.encode_move)
-        data['m2'] = data['m2'].apply(self.encode_move)
-        data['m3'] = data['m3'].apply(self.encode_move)
-        data['m4'] = data['m4'].apply(self.encode_move)
+        #data = pd.concat([data,move.apply(self.listify).apply(pd.Series)], axis = 1)
+        move = pd.DataFrame(move).rename(columns = {0:'m1',1:'m2',2:'m3',3:'m4',4:'m5'})
+
+        try:
+            move['m5'] = move['m5'].apply(self.encode_move)
+        except Exception:
+            move['m5'] = 0
+
+        move['m1'] = move['m1'].apply(self.encode_move)
+        move['m2'] = move['m2'].apply(self.encode_move)
+        move['m3'] = move['m3'].apply(self.encode_move)
+        move['m4'] = move['m4'].apply(self.encode_move)
+
+        
+        data = pd.concat([data,move], axis = 1)
         if not predict:
             data = pd.concat([data,class_], axis = 1)
         return data
     
     def encode_move(self,m):
-        import math
-       
         try:
-            if isinstance(m,float):
-                m = int(m)
             val = ord(m)
             return val
         except Exception:
-            if math.isnan(float(m)) or numpy.isnan(float(m)):
-                return 0
-            #if not isinstance(m, int):
-                #raise TypeError('Encoded Move must be of type str or int')
-            #else:
-                #return int(m)
-            return float(m)
+            return 0
+
+
+
+    def listify(self,string):
+        return list(str(string))
+        
+    def bin_matrix_to_decimal(self, state):
+        new_state = list()
+        ret_state = list()
+        for i in range(0,8):
+            for j in range(0,8):
+                new_state.append((np.array([state[0][i][j],state[1][i][j],state[2][i][j],state[3][i][j]])))
+        for i in range(64):
+            ret_state.append(int(np.packbits(new_state[i])))
+        return ret_state
+            
+
+    def serialize(self,board):
+        import numpy as np
+        assert board.is_valid()
+
+        bstate = np.zeros(64, np.uint8)
+        for i in range(64):
+            pp = board.piece_at(i)
+            if pp is not None:
+                #print(i, pp.symbol())
+                bstate[i] = {"P": 1, "N": 2, "B": 3, "R": 4, "Q": 5, "K": 6, \
+                        "p": 9, "n":10, "b":11, "r":12, "q":13, "k": 14}[pp.symbol()]
+        if board.has_queenside_castling_rights(chess.WHITE):
+            assert bstate[0] == 4
+            bstate[0] = 7
+        if board.has_kingside_castling_rights(chess.WHITE):
+            assert bstate[7] == 4
+            bstate[7] = 7
+        if board.has_queenside_castling_rights(chess.BLACK):
+            assert bstate[56] == 8+4
+            bstate[56] = 8+7
+        if board.has_kingside_castling_rights(chess.BLACK):
+            assert bstate[63] == 8+4
+            bstate[63] = 8+7
+
+        if board.ep_square is not None:
+            assert bstate[board.ep_square] == 0
+            bstate[board.ep_square] = 8
+        bstate = bstate.reshape(8,8)
+
+        state = np.zeros((4,8,8), np.uint8)
+        
+        state[0] = (bstate>>3)&1
+        state[1] = (bstate>>2)&1
+        state[2] = (bstate>>1)&1
+        state[3] = (bstate>>0)&1
+        """
+        state.append(self.bin_matrix_to_decimal((bstate>>3)&1))
+        state.append(self.bin_matrix_to_decimal((bstate>>2)&1))
+        state.append(self.bin_matrix_to_decimal((bstate>>1)&1))
+        state.append(self.bin_matrix_to_decimal((bstate>>0)&1))
+        """
+
+        new_state = self.bin_matrix_to_decimal(state)
+        new_state.append(board.turn*1.0)
+    
+        return new_state
+
+    def serialize2(self,board):
+        return self.serialize(chess.Board(str(board)))
 
 
 

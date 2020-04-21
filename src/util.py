@@ -67,6 +67,7 @@ def log(message, logger_str=None, msg_type=LogMessage.DEBUG, filename=None, path
     if not path:
         path = Path(LOGS_DIR / filename) # default location is /data/logs/filename
     else:
+        filename = str(datetime.date.today()) + filename
         path = Path(path / filename)
     if logger_str:
         logger_str = "[" + str(logger_str) +"]"

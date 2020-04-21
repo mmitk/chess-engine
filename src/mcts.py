@@ -18,11 +18,9 @@ class mcts_agent(object):
 
     
 
-    def __init__(self, manager, historic=False, filename = None, model = None):
+    def __init__(self, manager, historic=False, filename = None, model = None):  
         super().__init__
         self.type = 2
-        self.visits = manager.dict()
-        self.differential = manager.dict()
         self.data = manager.list()
         #if historic == True and filename is not None:
             #self.model = md.svm_eval(filename = filename, historic )
@@ -39,10 +37,10 @@ class mcts_agent(object):
         if board.is_checkmate() or depth == 0:
             return -eval.evaluate_board(board)
     
-        move = random.choice(board.legal_moves)
+        move = random.choice([m for m in board.legal_moves])
         theta = self.predict_probability(board, move)
         board.push(move)
-        val = theta*(- self.play_value(board))
+        val = theta*(- self.play_value(board, depth - 1))
         board.pop()
 
         return val
@@ -53,8 +51,10 @@ class mcts_agent(object):
      #   return theta * eval.evaluate_board(board), theta
        
 
-    def monte_carlo_value(self, board, N = 5):
-        scores = [self.play_value(board) for i in range(0, N)]
+    def monte_carlo_value(self, board, N = 15):
+        scores = []
+        with Pool() as p:
+            scores = p.map(self.play_value,[board.mirror() for i in range(0, N)])
         return np.mean(scores)
 
     def make_move(self, board, depth = 50, player = 1):
