@@ -228,7 +228,7 @@ def PlayGame(agent, lock):
                         break
         else:
             print('BUT NOT HERE')
-            best_move = agent.make_move(depth = 4, board = board)
+            best_move = agent.make_move(depth = 2, board = board)
             move_str = str(best_move)
             window.FindElement('_movelist_').Update(move_str + '\n', append=True)
             board.push(best_move)
