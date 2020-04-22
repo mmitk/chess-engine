@@ -113,8 +113,83 @@ def session_1(model):
             
     exec_time = (end - start)
     update_total(exec_time)
-    message = 'COMPLETED Session type 1 started Stockfish and Alphabeta iterative Play\nExecution Time: {} seconds\n********************************************************'.format(exec_time)
+    message = 'COMPLETED Session type 1 Stockfish and Alphabeta iterative Play\nExecution Time: {} seconds\n********************************************************'.format(exec_time)
     util.log(message, logger_str="train_sess", msg_type=2, write_to_console=False, path = util.HISTORY_DIR, filename = 'game_logs.log')
+
+
+def session_2(model):
+    util.log('Session type 2 started Stockfish and Stockfish iterative Play', logger_str="train_sess", msg_type=2, write_to_console=False, path = util.HISTORY_DIR, filename = 'game_logs.log')
+    start = time.time()
+    for i in range(20):
+        
+        # new game is initaited with new agents and manager for 
+        # pools
+
+        board = chess.Board()
+        a1 = stockfish_agent()
+        a2 = stockfish_agent()
+
+         
+        game = chessGame(a1, a2)
+        game.set_board(board)
+
+        #game plays out
+        game.play_out()
+
+    
+
+        # model updates from history.csv, what was updated by both agents during gameplay
+        prec = md.preprocessor()
+        prec.fit(filename = Path(util.HISTORY_DIR / 'history.csv'))
+        data = prec.transform()
+        model.fit(data)
+        model.write_file(Path(util.HISTORY_DIR / 'test_model_1.pkl'))
+        game.reset()
+
+    end = time.time()
+            
+    exec_time = (end - start)
+    update_total(exec_time)
+    message = 'COMPLETED Session 2 Stockfish and Stockfish iterative Play\nExecution Time: {} seconds\n********************************************************'.format(exec_time)
+    util.log(message, logger_str="train_sess", msg_type=2, write_to_console=False, path = util.HISTORY_DIR, filename = 'game_logs.log')
+
+
+def session_3(model):
+    start = time.time()
+    util.log('STARTED: Session type 3 MonteCarlo and MonteCarlo iterative Play', logger_str="train_sess", msg_type=2, write_to_console=False, path = util.HISTORY_DIR, filename = 'game_logs.log')
+    for i in range(10):
+        
+        # new game is initaited with new agents and manager for 
+        # pools
+
+        manager = Manager()
+        board = chess.Board()
+        m = mcts.mcts_agent(manager = manager, model = model)
+        m2 = mcts.mcts_agent(manager = manager, model = model)
+
+        game = chessGame(m, m2)
+        game.set_board(board)
+
+        #game plays out
+        game.play_out()
+
+    
+
+        # model updates from history.csv, what was updated by both agents during gameplay
+        prec = md.preprocessor()
+        prec.fit(filename = Path(util.HISTORY_DIR / 'history.csv'))
+        data = prec.transform()
+        model.fit(data)
+        model.write_file(Path(util.HISTORY_DIR / 'test_model_1.pkl'))
+        game.reset()
+
+    end = time.time()
+            
+    exec_time = (end - start)
+    update_total(exec_time)
+    message = 'COMPLETED: Session type 0 MonteCarlo and Alphabeta iterative Play\nExecution Time: {} seconds\n********************************************************'.format(exec_time)
+    util.log(message, logger_str="train_sess", msg_type=2, write_to_console=False, path = util.HISTORY_DIR, filename = 'game_logs.log')
+
 
 
 class stockfish_agent:
@@ -160,7 +235,7 @@ if __name__ == '__main__':
         prec.fit(filename = Path(util.HISTORY_DIR / 'history.csv'))
         data = prec.transform()
         model.fit(data)
-        model.write_file(Path(util.HISTORY_DIR / 'alph_mct_1_model.pkl'))
+        model.write_file(Path(util.HISTORY_DIR / 'test_model_1.pkl'))
     except Exception:
         try:
             model.load_file(Path(util.HISTORY_DIR / 'test_model_1.pkl'))
@@ -169,6 +244,7 @@ if __name__ == '__main__':
     
     #a1 = ab.alphabeta_agent()
     
+    session_2(model)
     session_1(model)
     session_1(model)
     session_0(model)
