@@ -69,6 +69,7 @@ class chessGame:
         move_count = 0
         self.log('Game Started: {} as white, {} as black'.format(self.agent1.type,self.agent2.type))
         start = time.time()
+
         while not self.board.is_checkmate():
             move1 = self.agent1.make_move(depth = 3, board = self.board)
             if not move1 is None:
@@ -86,6 +87,8 @@ class chessGame:
                 break
             i+=1
             move_count += 1
+            #if move_count >= 40:
+                #break
             if (i >10):
                 i = 0
                 print('\n')
@@ -115,6 +118,11 @@ class chessGame:
             print('Agent 2 Won!')
             self.agent1.write_data('history.csv', did_win = int(0))
             self.agent2.write_data('history.csv', did_win = 1)
+        else:
+            winner = -1
+            print('Draw!')
+            self.agent1.write_data('history.csv', did_win = int(0))
+            self.agent2.write_data('history.csv', did_win = int(0))
 
         sim_history = str(datetime.date.today()) + 'sim_history.log' 
 

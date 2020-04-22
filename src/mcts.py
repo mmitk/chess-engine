@@ -63,9 +63,9 @@ class mcts_agent(object):
             return None
         for move in board.legal_moves:
             theta = self.predict_probability(board, move)
-            if theta >= 0.5:
+            if theta >= 0.2:
                 board.push(move)
-                actions[move] = theta *  (-self.monte_carlo_value(board))
+                actions[move] = theta *  (-self.monte_carlo_value(board, N = 100))
                 board.pop()
 
         

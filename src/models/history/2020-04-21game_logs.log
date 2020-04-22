@@ -11,3 +11,32 @@
 14:55:41:INFO:[game_play]:Game Started: 2 as white, 1 as black
 15:00:27:INFO:[train_sess]:STARTED: Session type 0 MonteCarlo and Alphabeta iterative Play
 15:00:28:INFO:[game_play]:Game Started: 2 as white, 1 as black
+15:07:44:INFO:[train_sess]:STARTED: Session type 0 MonteCarlo and Alphabeta iterative Play
+15:07:44:INFO:[game_play]:Game Started: 2 as white, 1 as black
+16:12:52:INFO:[train_sess]:STARTED: Session type 0 MonteCarlo and Alphabeta iterative Play
+16:12:52:INFO:[game_play]:Game Started: 2 as white, 1 as black
+20:15:51:INFO:[game_play]:GAME OVER: 2 as white, 1 as black, 1 won
+ EXECUTION: 14579.297966003418 seconds
+20:15:53:INFO:[game_play]:Game Started: 1 as white, 2 as black
+21:08:52:INFO:[train_sess]:STARTED: Session type 0 MonteCarlo and Alphabeta iterative Play
+21:08:52:INFO:[game_play]:Game Started: 2 as white, 1 as black
+21:09:26:INFO:[train_sess]:STARTED: Session type 0 MonteCarlo and Alphabeta iterative Play
+21:09:26:INFO:[game_play]:Game Started: 2 as white, 1 as black
+21:25:52:INFO:[train_sess]:STARTED: Session type 0 MonteCarlo and Alphabeta iterative Play
+21:25:52:INFO:[game_play]:Game Started: 2 as white, 1 as black
+21:26:08:INFO:[train_sess]:STARTED: Session type 0 MonteCarlo and Alphabeta iterative Play
+21:26:08:INFO:[game_play]:Game Started: 2 as white, 1 as black
+21:47:12:INFO:[train_sess]:STARTED: Session type 0 MonteCarlo and Alphabeta iterative Play
+21:47:12:INFO:[game_play]:Game Started: 2 as white, 1 as black
+22:21:30:INFO:[game_play]:GAME OVER: 2 as white, 1 as black, 1 won
+ EXECUTION: 2058.1667470932007 seconds
+22:21:31:INFO:[game_play]:Game Started: 1 as white, 2 as black
+22:48:43:INFO:[game_play]:GAME OVER: 1 as white, 2 as black, 1 won
+ EXECUTION: 1631.422038078308 seconds
+22:48:44:INFO:[game_play]:Game Started: 2 as white, 1 as black
+23:30:13:INFO:[game_play]:GAME OVER: 2 as white, 1 as black, -1 won
+ EXECUTION: 2489.3814475536346 seconds
+23:30:15:INFO:[game_play]:Game Started: 1 as white, 2 as black
+23:53:28:INFO:[game_play]:GAME OVER: 1 as white, 2 as black, 1 won
+ EXECUTION: 1393.4722545146942 seconds
+23:53:30:INFO:[game_play]:Game Started: 2 as white, 1 as black
