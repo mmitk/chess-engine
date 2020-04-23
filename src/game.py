@@ -11,7 +11,8 @@ from models import model as md
 from pathlib import Path
 import multiprocessing
 from concurrent.futures import ProcessPoolExecutor
-
+import argparse
+from mishsearch import mishagent
 CHESS_PATH = util.IMG_DIR  # path to the chess pieces
 
 BLANK = 0  # piece names
@@ -95,11 +96,9 @@ def draw_board(window, board):
             elem.Update(button_color=('white', color),
                         image_filename=img, )
 
-def agent_move(board, lock):
-    with lock:
-        return agent.make_move(depth = 2, board = board)
 
-def PlayGame(agent, lock):
+
+def PlayGame(agent):
     menu_def = [['&File', ['&Open PGN File', 'E&xit']],
                 ['&Help', '&About...'], ]
 
@@ -245,10 +244,21 @@ def PlayGame(agent, lock):
 # engine.info_handlers.append(info_handler)
 # level = 2
 if __name__ == "__main__":
-    pool = ProcessPoolExecutor()
-    m = multiprocessing.Manager()
-    lock = m.Lock()
     model = md.svm()
     model.load_file(Path(util.HISTORY_DIR / 'test_model_1.pkl'))
-    agent = ab.alphabeta_agent(model = model)
-    PlayGame(agent = agent, lock = lock)
+
+    p = argparse.ArgumentParser()
+    p.add_argument("-m", "--mishsearch", nargs='?', help='changes agent to mishsearch agent, default=alphabeta (depth of 1)')
+    args = p.parse_args()
+    
+    if args.mishsearch:
+        agent = mishagent(model = model)
+    else:
+        agent = ab.alphabeta_agent(model = model)
+    #pool = ProcessPoolExecutor()
+    #m = multiprocessing.Manager()
+    #lock = m.Lock()
+
+    
+ 
+    PlayGame(agent = agent)
