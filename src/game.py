@@ -98,7 +98,7 @@ def draw_board(window, board):
 
 
 
-def PlayGame(agent):
+def PlayGame(agent , depth = 1):
     menu_def = [['&File', ['&Open PGN File', 'E&xit']],
                 ['&Help', '&About...'], ]
 
