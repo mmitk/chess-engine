@@ -37,25 +37,26 @@ class mcts_agent(object):
         if board.is_checkmate() or depth == 0:
             return -eval.evaluate_board(board)
     
-        move = random.choice([m for m in board.legal_moves])
-        theta = self.predict_probability(board, move)
-        board.push(move)
-        val = theta*(- self.play_value(board, depth - 1))
-        board.pop()
+        try:
+            move = random.choice([m for m in board.legal_moves])
+            theta = self.predict_probability(board, move)
+            board.push(move)
+            val = theta*(- self.play_value(board, depth - 1))
+            board.pop()
 
-        return val
-       
-
-    #def heuristic_value(self, board, move):
-     #   theta = self.predict_probability(board, move)
-     #   return theta * eval.evaluate_board(board), theta
-       
+            return val
+        except Exception:
+            return None
+                 
 
     def monte_carlo_value(self, board, N = 15):
-        scores = []
-        with Pool() as p:
-            scores = p.map(self.play_value,[board.mirror() for i in range(0, N)])
-        return np.mean(scores)
+        try:
+            scores = []
+            with Pool() as p:
+                scores = p.map(self.play_value,[board.mirror() for i in range(0, N)])
+            return np.mean(scores)
+        except Exception:
+            raise util.MCTSException('ERROR WITH MCTS')
 
     def make_move(self, board, depth = 50, player = 1):
         actions = {}
@@ -63,10 +64,12 @@ class mcts_agent(object):
             return None
         for move in board.legal_moves:
             theta = self.predict_probability(board, move)
-            if theta >= 0.2:
-                board.push(move)
-                actions[move] = theta *  (-self.monte_carlo_value(board, N = 100))
-                board.pop()
+            board.push(move)
+            val = self.monte_carlo_value(board, N = 100)
+            if val is None:
+                return None
+            actions[move] = theta *  (-val)
+            board.pop()
 
         
         v = max(actions, key=actions.get)

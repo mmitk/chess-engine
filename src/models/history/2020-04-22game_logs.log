@@ -51,3 +51,26 @@
 16:07:37:INFO:[game_play]:GAME OVER: 1 as white, 3 as black, 3 won
  EXECUTION: 362.2215738296509 seconds
 16:07:39:INFO:[game_play]:Game Started: 3 as white, 1 as black
+21:00:05:INFO:[train_sess]:STARTED: Session type 3 MonteCarlo and MonteCarlo iterative Play
+21:00:05:INFO:[game_play]:Game Started: 2 as white, 2 as black
+21:35:09:INFO:[game_play]:GAME OVER: 2 as white, 2 as black, 2 won
+ EXECUTION: 2104.034411907196 seconds
+21:35:12:INFO:[game_play]:Game Started: 2 as white, 2 as black
+21:49:38:INFO:[game_play]:GAME OVER: 2 as white, 2 as black, 2 won
+ EXECUTION: 865.8152375221252 seconds
+21:49:40:INFO:[game_play]:Game Started: 2 as white, 2 as black
+22:02:22:INFO:[game_play]:GAME OVER: 2 as white, 2 as black, 2 won
+ EXECUTION: 761.7966644763947 seconds
+22:02:25:INFO:[game_play]:Game Started: 2 as white, 2 as black
+22:08:51:INFO:[game_play]:GAME OVER: 2 as white, 2 as black, 2 won
+ EXECUTION: 385.5796000957489 seconds
+22:08:53:INFO:[game_play]:Game Started: 2 as white, 2 as black
+22:35:12:INFO:[game_play]:GAME OVER: 2 as white, 2 as black, 2 won
+ EXECUTION: 1578.8450508117676 seconds
+22:35:15:INFO:[game_play]:Game Started: 2 as white, 2 as black
+22:58:10:INFO:[game_play]:GAME OVER: 2 as white, 2 as black, 2 won
+ EXECUTION: 1374.235672712326 seconds
+22:58:13:INFO:[game_play]:Game Started: 2 as white, 2 as black
+23:43:46:INFO:[game_play]:GAME OVER: 2 as white, 2 as black, 2 won
+ EXECUTION: 2732.498125553131 seconds
+23:43:49:INFO:[game_play]:Game Started: 2 as white, 2 as black

@@ -71,7 +71,11 @@ class chessGame:
         start = time.time()
 
         while not self.board.is_checkmate():
-            move1 = self.agent1.make_move(depth = 3, board = self.board)
+            try:
+                move1 = self.agent1.make_move(depth = 3, board = self.board)
+            except util.MCTSException as e:
+                self.log(str(e))
+                break
             if not move1 is None:
                  self.board.push(move1)
                  self.move_history.append({'state': self.board.fen(),'move1':move1})
@@ -79,7 +83,11 @@ class chessGame:
                 break
             
             # Now agent 2 selects and makes their move
-            move2 = self.agent2.make_move(depth = 3, board = self.board)
+            try:
+                move2 = self.agent2.make_move(depth = 3, board = self.board)
+            except util.MCTSException as e:
+                self.log(str(e))
+                break
             if not move2 is None:
                 self.board.push(move2)
                 self.move_history.append({'state': self.board.fen(),'move2':move2})
@@ -121,8 +129,8 @@ class chessGame:
         else:
             winner = -1
             print('Draw!')
-            self.agent1.write_data('history.csv', did_win = int(0))
-            self.agent2.write_data('history.csv', did_win = int(0))
+            #self.agent1.write_data('history.csv', did_win = int(0))
+            #self.agent2.write_data('history.csv', did_win = int(0))
 
         sim_history = str(datetime.date.today()) + 'sim_history.log' 
 

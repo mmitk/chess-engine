@@ -76,7 +76,7 @@ def session_0(model):
 def session_1(model):
     util.log('Session type 1 started Stockfish and Alphabeta iterative Play', logger_str="train_sess", msg_type=2, write_to_console=False, path = util.HISTORY_DIR, filename = 'game_logs.log')
     start = time.time()
-    for i in range(10):
+    for i in range(20):
         
         # new game is initaited with new agents and manager for 
         # pools
@@ -157,7 +157,7 @@ def session_2(model):
 def session_3(model):
     start = time.time()
     util.log('STARTED: Session type 3 MonteCarlo and MonteCarlo iterative Play', logger_str="train_sess", msg_type=2, write_to_console=False, path = util.HISTORY_DIR, filename = 'game_logs.log')
-    for i in range(10):
+    for i in range(20):
         
         # new game is initaited with new agents and manager for 
         # pools
@@ -187,7 +187,7 @@ def session_3(model):
             
     exec_time = (end - start)
     update_total(exec_time)
-    message = 'COMPLETED: Session type 0 MonteCarlo and Alphabeta iterative Play\nExecution Time: {} seconds\n********************************************************'.format(exec_time)
+    message = 'COMPLETED: Session type 0 MonteCarlo and MonteCarlo iterative Play\nExecution Time: {} seconds\n********************************************************'.format(exec_time)
     util.log(message, logger_str="train_sess", msg_type=2, write_to_console=False, path = util.HISTORY_DIR, filename = 'game_logs.log')
 
 
@@ -244,8 +244,8 @@ if __name__ == '__main__':
     
     #a1 = ab.alphabeta_agent()
     
-    session_2(model)
+    
     session_1(model)
-    session_1(model)
-    session_0(model)
+    session_3(model)
+ 
 

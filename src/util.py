@@ -6,6 +6,8 @@ import time
 import os
 import argparse
 
+class MCTSException(Exception):
+    pass
 class LogMessage(IntEnum):
     DEBUG = 1
     INFO = 2
