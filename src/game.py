@@ -1,5 +1,6 @@
 import PySimpleGUI as sg
 import os
+from multiprocessing import Manager
 import sys
 import chess
 import chess.pgn
@@ -13,6 +14,8 @@ import multiprocessing
 from concurrent.futures import ProcessPoolExecutor
 import argparse
 from mishsearch import mishagent
+import mcts
+
 CHESS_PATH = util.IMG_DIR  # path to the chess pieces
 
 BLANK = 0  # piece names
@@ -246,15 +249,23 @@ def PlayGame(agent , depth = 1):
 if __name__ == "__main__":
     model = md.svm()
     model.load_file(Path(util.HISTORY_DIR / 'test_model_1.pkl'))
-
+    manager = Manager()
     p = argparse.ArgumentParser()
-    p.add_argument("-m", "--mishsearch", nargs='?', help='changes agent to mishsearch agent, default=alphabeta (depth of 1)')
+    p.add_argument("-m", "--mishsearch", action='store_true', help='changes agent to mishsearch agent, default=alphabeta (depth of 1)')
+    p.add_argument("-c", "--montecarlo", action = 'store_true')
     args = p.parse_args()
     
     if args.mishsearch:
+        print('**********************************************************************')
         agent = mishagent(model = model)
+    elif args.montecarlo:
+        print('######################################################################')
+        agent = mcts.mcts_agent(manager = manager, model = model)
     else:
+        #print('**********************************************************************')
         agent = ab.alphabeta_agent(model = model)
+    
+    #agent = mishagent(model = model)
     #pool = ProcessPoolExecutor()
     #m = multiprocessing.Manager()
     #lock = m.Lock()

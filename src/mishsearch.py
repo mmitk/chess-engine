@@ -7,6 +7,7 @@ from models import model as md
 import csv
 from pathlib import Path
 import util
+import eval
 
 
 class mishagent:
@@ -26,15 +27,35 @@ class mishagent:
             return None
         actions = {}
         for move in board.legal_moves:
-            theta = self.predict_probability(board, move)
+            theta = self.predict_probability(board, move) 
             board.push(move)
-            actions[move] = theta 
+            actions[move] = theta * self.quiesce(-100000, 100000, board)
             board.pop()
 
         best_move = max(actions, key=actions.get)
         self.data.append({'state': board.fen(),'move':best_move})
         print('.',end = '')
         return best_move
+    
+    def quiesce( self, alpha, beta, board ):
+    # need to import evaluate.py
+        stand_pat = eval.evaluate_board(board)
+        if( stand_pat >= beta ):
+            return beta
+        if( alpha < stand_pat ):
+            alpha = stand_pat
+
+        for move in board.legal_moves:
+            if board.is_capture(move):
+                board.push(move)
+                score = -self.quiesce( -beta, -alpha, board)
+                board.pop()
+
+                if( score >= beta ):
+                    return beta
+                if( score > alpha ):
+                    alpha = score  
+        return alpha
 
     def predict_probability(self, board, move):
         data = [{'state':board.fen(),'move':move}]

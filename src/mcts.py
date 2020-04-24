@@ -33,15 +33,15 @@ class mcts_agent(object):
 
 
 
-    def play_value(self, board, depth = 5):
+    def play_value(self, board, depth = 15):
         if board.is_checkmate() or depth == 0:
             return -eval.evaluate_board(board)
     
         try:
             move = random.choice([m for m in board.legal_moves])
-            theta = self.predict_probability(board, move)
+            #theta = self.predict_probability(board, move)
             board.push(move)
-            val = theta*(- self.play_value(board, depth - 1))
+            val = (- self.play_value(board, depth - 1))
             board.pop()
 
             return val
@@ -58,14 +58,14 @@ class mcts_agent(object):
         except Exception:
             raise util.MCTSException('ERROR WITH MCTS')
 
-    def make_move(self, board, depth = 50, player = 1):
+    def make_move(self, board, player = 1):
         actions = {}
         if board.is_checkmate():
             return None
         for move in board.legal_moves:
             theta = self.predict_probability(board, move)
             board.push(move)
-            val = self.monte_carlo_value(board, N = 100)
+            val = theta*-self.monte_carlo_value(board, N = 100)
             if val is None:
                 return None
             actions[move] = theta *  (-val)
