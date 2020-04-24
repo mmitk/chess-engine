@@ -1,0 +1,73 @@
+00:25:42:INFO:[game_play]:GAME OVER: 1 as white, 3 as black, 3 won
+ EXECUTION: 2572.2793414592743 seconds
+00:25:50:INFO:[game_play]:Game Started: 3 as white, 1 as black
+00:25:56:INFO:[game_play]:GAME OVER: 3 as white, 1 as black, 3 won
+ EXECUTION: 6.124784469604492 seconds
+00:26:05:INFO:[game_play]:Game Started: 1 as white, 3 as black
+01:36:15:INFO:[game_play]:GAME OVER: 1 as white, 3 as black, 3 won
+ EXECUTION: 4210.019330501556 seconds
+01:36:23:INFO:[game_play]:Game Started: 3 as white, 1 as black
+01:36:28:INFO:[game_play]:GAME OVER: 3 as white, 1 as black, 3 won
+ EXECUTION: 4.34070348739624 seconds
+01:36:36:INFO:[game_play]:Game Started: 1 as white, 3 as black
+01:45:43:INFO:[game_play]:GAME OVER: 1 as white, 3 as black, 3 won
+ EXECUTION: 546.8998484611511 seconds
+01:45:52:INFO:[game_play]:Game Started: 3 as white, 1 as black
+01:46:43:INFO:[game_play]:GAME OVER: 3 as white, 1 as black, 3 won
+ EXECUTION: 51.74743175506592 seconds
+01:46:52:INFO:[game_play]:Game Started: 1 as white, 3 as black
+01:58:11:INFO:[game_play]:GAME OVER: 1 as white, 3 as black, 3 won
+ EXECUTION: 679.4143052101135 seconds
+01:58:20:INFO:[game_play]:Game Started: 3 as white, 1 as black
+01:58:25:INFO:[game_play]:GAME OVER: 3 as white, 1 as black, 3 won
+ EXECUTION: 4.437336683273315 seconds
+01:58:33:INFO:[train_sess]:COMPLETED Session type 1 Stockfish and Alphabeta iterative Play
+Execution Time: 12120.677082061768 seconds
+********************************************************
+01:58:33:INFO:[train_sess]:STARTED: Session type 3 MonteCarlo and MonteCarlo iterative Play
+01:58:33:INFO:[game_play]:Game Started: 2 as white, 2 as black
+03:11:34:INFO:[game_play]:GAME OVER: 2 as white, 2 as black, 2 won
+ EXECUTION: 4380.323601961136 seconds
+03:11:43:INFO:[game_play]:Game Started: 2 as white, 2 as black
+04:07:38:INFO:[game_play]:ERROR WITH MCTS
+04:07:38:INFO:[game_play]:GAME OVER: 2 as white, 2 as black, -1 won
+ EXECUTION: 3355.199295759201 seconds
+04:07:48:INFO:[game_play]:Game Started: 2 as white, 2 as black
+04:29:34:INFO:[game_play]:GAME OVER: 2 as white, 2 as black, 2 won
+ EXECUTION: 1306.111679315567 seconds
+04:29:44:INFO:[game_play]:Game Started: 2 as white, 2 as black
+04:33:45:INFO:[game_play]:GAME OVER: 2 as white, 2 as black, 2 won
+ EXECUTION: 240.9497630596161 seconds
+04:33:55:INFO:[game_play]:Game Started: 2 as white, 2 as black
+04:55:38:INFO:[game_play]:GAME OVER: 2 as white, 2 as black, 2 won
+ EXECUTION: 1303.8616967201233 seconds
+04:55:48:INFO:[game_play]:Game Started: 2 as white, 2 as black
+05:05:38:INFO:[game_play]:GAME OVER: 2 as white, 2 as black, 2 won
+ EXECUTION: 589.356439113617 seconds
+05:05:48:INFO:[game_play]:Game Started: 2 as white, 2 as black
+05:52:05:INFO:[game_play]:GAME OVER: 2 as white, 2 as black, 2 won
+ EXECUTION: 2777.2114646434784 seconds
+05:52:16:INFO:[game_play]:Game Started: 2 as white, 2 as black
+06:01:26:INFO:[game_play]:GAME OVER: 2 as white, 2 as black, 2 won
+ EXECUTION: 550.3235712051392 seconds
+06:01:37:INFO:[game_play]:Game Started: 2 as white, 2 as black
+06:50:13:INFO:[game_play]:GAME OVER: 2 as white, 2 as black, 2 won
+ EXECUTION: 2915.7661185264587 seconds
+06:50:24:INFO:[game_play]:Game Started: 2 as white, 2 as black
+07:45:34:INFO:[game_play]:ERROR WITH MCTS
+07:45:34:INFO:[game_play]:GAME OVER: 2 as white, 2 as black, -1 won
+ EXECUTION: 3309.2052114009857 seconds
+07:45:45:INFO:[game_play]:Game Started: 2 as white, 2 as black
+08:35:54:INFO:[game_play]:GAME OVER: 2 as white, 2 as black, 2 won
+ EXECUTION: 3008.470266342163 seconds
+08:36:06:INFO:[game_play]:Game Started: 2 as white, 2 as black
+09:15:09:INFO:[game_play]:ERROR WITH MCTS
+09:15:09:INFO:[game_play]:GAME OVER: 2 as white, 2 as black, -1 won
+ EXECUTION: 2343.308233976364 seconds
+09:15:21:INFO:[game_play]:Game Started: 2 as white, 2 as black
+09:53:51:INFO:[game_play]:GAME OVER: 2 as white, 2 as black, 2 won
+ EXECUTION: 2309.6551015377045 seconds
+09:54:03:INFO:[game_play]:Game Started: 2 as white, 2 as black
+10:59:59:INFO:[game_play]:GAME OVER: 2 as white, 2 as black, 2 won
+ EXECUTION: 3955.5922746658325 seconds
+11:00:12:INFO:[game_play]:Game Started: 2 as white, 2 as black
