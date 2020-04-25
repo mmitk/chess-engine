@@ -581,3 +581,278 @@ Execution Time: 604.4751245975494 seconds
 21:01:25:INFO:[train_sess]:COMPLETED Session type 1 Stockfish and Alphabeta iterative Play
 Execution Time: 2602.499785423279 seconds
 ********************************************************
+21:24:01:INFO:[train_sess]:STARTED: Session type 0 MonteCarlo and Alphabeta iterative Play
+21:24:01:INFO:[game_play]:Game Started: 2 as white, 1 as black
+21:25:19:INFO:[train_sess]:STARTED: Session type 0 MonteCarlo and Alphabeta iterative Play
+21:25:19:INFO:[game_play]:Game Started: 2 as white, 1 as black
+21:26:32:INFO:[game_play]:GAME OVER: 2 as white, 1 as black, 1 won
+ EXECUTION: 72.22830581665039 seconds
+21:26:54:INFO:[game_play]:Game Started: 1 as white, 2 as black
+21:28:37:INFO:[game_play]:ERROR WITH MCTS
+21:28:37:INFO:[game_play]:GAME OVER: 1 as white, 2 as black, -1 won
+ EXECUTION: 103.68656396865845 seconds
+21:28:59:INFO:[game_play]:Game Started: 2 as white, 1 as black
+21:29:29:INFO:[game_play]:GAME OVER: 2 as white, 1 as black, 1 won
+ EXECUTION: 29.321183919906616 seconds
+21:29:51:INFO:[game_play]:Game Started: 1 as white, 2 as black
+21:32:11:INFO:[game_play]:ERROR WITH MCTS
+21:32:11:INFO:[game_play]:GAME OVER: 1 as white, 2 as black, -1 won
+ EXECUTION: 140.5330684185028 seconds
+21:32:33:INFO:[game_play]:Game Started: 2 as white, 1 as black
+21:33:19:INFO:[game_play]:GAME OVER: 2 as white, 1 as black, 1 won
+ EXECUTION: 45.253594160079956 seconds
+21:33:41:INFO:[game_play]:Game Started: 1 as white, 2 as black
+21:35:07:INFO:[game_play]:ERROR WITH MCTS
+21:35:07:INFO:[game_play]:GAME OVER: 1 as white, 2 as black, -1 won
+ EXECUTION: 85.52068567276001 seconds
+21:35:29:INFO:[game_play]:Game Started: 2 as white, 1 as black
+21:36:02:INFO:[game_play]:GAME OVER: 2 as white, 1 as black, 1 won
+ EXECUTION: 33.80436730384827 seconds
+21:36:25:INFO:[game_play]:Game Started: 1 as white, 2 as black
+21:37:51:INFO:[game_play]:ERROR WITH MCTS
+21:37:51:INFO:[game_play]:GAME OVER: 1 as white, 2 as black, -1 won
+ EXECUTION: 85.88658046722412 seconds
+21:38:13:INFO:[game_play]:Game Started: 2 as white, 1 as black
+21:39:30:INFO:[game_play]:GAME OVER: 2 as white, 1 as black, 1 won
+ EXECUTION: 77.42319107055664 seconds
+21:39:53:INFO:[game_play]:Game Started: 1 as white, 2 as black
+21:41:48:INFO:[game_play]:ERROR WITH MCTS
+21:41:48:INFO:[game_play]:GAME OVER: 1 as white, 2 as black, -1 won
+ EXECUTION: 115.81516695022583 seconds
+21:42:11:INFO:[game_play]:Game Started: 2 as white, 1 as black
+21:42:58:INFO:[game_play]:GAME OVER: 2 as white, 1 as black, 1 won
+ EXECUTION: 47.763155937194824 seconds
+21:43:21:INFO:[game_play]:Game Started: 1 as white, 2 as black
+21:45:26:INFO:[game_play]:ERROR WITH MCTS
+21:45:26:INFO:[game_play]:GAME OVER: 1 as white, 2 as black, -1 won
+ EXECUTION: 124.88819527626038 seconds
+21:45:48:INFO:[game_play]:Game Started: 2 as white, 1 as black
+21:46:51:INFO:[game_play]:GAME OVER: 2 as white, 1 as black, 1 won
+ EXECUTION: 62.84074258804321 seconds
+21:47:13:INFO:[game_play]:Game Started: 1 as white, 2 as black
+21:50:14:INFO:[game_play]:ERROR WITH MCTS
+21:50:14:INFO:[game_play]:GAME OVER: 1 as white, 2 as black, -1 won
+ EXECUTION: 180.92394304275513 seconds
+21:50:37:INFO:[game_play]:Game Started: 2 as white, 1 as black
+21:51:54:INFO:[game_play]:GAME OVER: 2 as white, 1 as black, 1 won
+ EXECUTION: 77.04448175430298 seconds
+21:52:17:INFO:[game_play]:Game Started: 1 as white, 2 as black
+21:54:12:INFO:[game_play]:ERROR WITH MCTS
+21:54:12:INFO:[game_play]:GAME OVER: 1 as white, 2 as black, -1 won
+ EXECUTION: 115.70196795463562 seconds
+21:54:35:INFO:[game_play]:Game Started: 2 as white, 1 as black
+21:55:15:INFO:[game_play]:GAME OVER: 2 as white, 1 as black, 1 won
+ EXECUTION: 40.390716791152954 seconds
+21:55:38:INFO:[game_play]:Game Started: 1 as white, 2 as black
+21:57:15:INFO:[game_play]:ERROR WITH MCTS
+21:57:15:INFO:[game_play]:GAME OVER: 1 as white, 2 as black, -1 won
+ EXECUTION: 97.3759970664978 seconds
+21:57:38:INFO:[game_play]:Game Started: 2 as white, 1 as black
+21:59:00:INFO:[game_play]:GAME OVER: 2 as white, 1 as black, 1 won
+ EXECUTION: 82.00365853309631 seconds
+21:59:23:INFO:[game_play]:Game Started: 1 as white, 2 as black
+22:01:26:INFO:[game_play]:ERROR WITH MCTS
+22:01:26:INFO:[game_play]:GAME OVER: 1 as white, 2 as black, -1 won
+ EXECUTION: 123.3305983543396 seconds
+22:01:49:INFO:[game_play]:Game Started: 2 as white, 1 as black
+22:02:55:INFO:[game_play]:GAME OVER: 2 as white, 1 as black, 1 won
+ EXECUTION: 65.57447934150696 seconds
+22:03:18:INFO:[game_play]:Game Started: 1 as white, 2 as black
+22:06:03:INFO:[game_play]:ERROR WITH MCTS
+22:06:03:INFO:[game_play]:GAME OVER: 1 as white, 2 as black, -1 won
+ EXECUTION: 164.7426106929779 seconds
+22:06:26:INFO:[game_play]:Game Started: 2 as white, 1 as black
+22:07:35:INFO:[game_play]:GAME OVER: 2 as white, 1 as black, 1 won
+ EXECUTION: 68.95348286628723 seconds
+22:07:58:INFO:[game_play]:Game Started: 1 as white, 2 as black
+22:09:35:INFO:[game_play]:ERROR WITH MCTS
+22:09:35:INFO:[game_play]:GAME OVER: 1 as white, 2 as black, -1 won
+ EXECUTION: 96.90597867965698 seconds
+22:09:58:INFO:[game_play]:Game Started: 2 as white, 1 as black
+22:10:44:INFO:[game_play]:GAME OVER: 2 as white, 1 as black, 1 won
+ EXECUTION: 45.6521520614624 seconds
+22:11:07:INFO:[game_play]:Game Started: 1 as white, 2 as black
+22:12:39:INFO:[game_play]:ERROR WITH MCTS
+22:12:39:INFO:[game_play]:GAME OVER: 1 as white, 2 as black, -1 won
+ EXECUTION: 92.19053745269775 seconds
+22:13:02:INFO:[game_play]:Game Started: 2 as white, 1 as black
+22:14:32:INFO:[game_play]:GAME OVER: 2 as white, 1 as black, 1 won
+ EXECUTION: 90.10988283157349 seconds
+22:14:55:INFO:[game_play]:Game Started: 1 as white, 2 as black
+22:16:52:INFO:[game_play]:ERROR WITH MCTS
+22:16:52:INFO:[game_play]:GAME OVER: 1 as white, 2 as black, -1 won
+ EXECUTION: 116.63639831542969 seconds
+22:17:15:INFO:[game_play]:Game Started: 2 as white, 1 as black
+22:19:14:INFO:[game_play]:ERROR WITH MCTS
+22:19:14:INFO:[game_play]:GAME OVER: 2 as white, 1 as black, -1 won
+ EXECUTION: 118.92353105545044 seconds
+22:19:37:INFO:[game_play]:Game Started: 1 as white, 2 as black
+22:21:11:INFO:[game_play]:ERROR WITH MCTS
+22:21:11:INFO:[game_play]:GAME OVER: 1 as white, 2 as black, -1 won
+ EXECUTION: 93.48132038116455 seconds
+22:21:34:INFO:[game_play]:Game Started: 2 as white, 1 as black
+22:22:23:INFO:[game_play]:GAME OVER: 2 as white, 1 as black, 1 won
+ EXECUTION: 48.589728116989136 seconds
+22:22:46:INFO:[game_play]:Game Started: 1 as white, 2 as black
+22:24:35:INFO:[game_play]:ERROR WITH MCTS
+22:24:35:INFO:[game_play]:GAME OVER: 1 as white, 2 as black, -1 won
+ EXECUTION: 108.92385911941528 seconds
+22:24:58:INFO:[game_play]:Game Started: 2 as white, 1 as black
+22:25:28:INFO:[game_play]:GAME OVER: 2 as white, 1 as black, 1 won
+ EXECUTION: 29.231759548187256 seconds
+22:25:51:INFO:[game_play]:Game Started: 1 as white, 2 as black
+22:27:22:INFO:[game_play]:ERROR WITH MCTS
+22:27:22:INFO:[game_play]:GAME OVER: 1 as white, 2 as black, -1 won
+ EXECUTION: 90.86249351501465 seconds
+22:27:46:INFO:[game_play]:Game Started: 2 as white, 1 as black
+22:29:39:INFO:[game_play]:GAME OVER: 2 as white, 1 as black, 1 won
+ EXECUTION: 113.73122692108154 seconds
+22:30:03:INFO:[game_play]:Game Started: 1 as white, 2 as black
+22:31:28:INFO:[game_play]:ERROR WITH MCTS
+22:31:28:INFO:[game_play]:GAME OVER: 1 as white, 2 as black, -1 won
+ EXECUTION: 84.92469716072083 seconds
+22:31:52:INFO:[game_play]:Game Started: 2 as white, 1 as black
+22:32:38:INFO:[game_play]:GAME OVER: 2 as white, 1 as black, 1 won
+ EXECUTION: 45.861825704574585 seconds
+22:33:02:INFO:[game_play]:Game Started: 1 as white, 2 as black
+22:34:40:INFO:[game_play]:ERROR WITH MCTS
+22:34:40:INFO:[game_play]:GAME OVER: 1 as white, 2 as black, -1 won
+ EXECUTION: 98.56540441513062 seconds
+22:35:04:INFO:[game_play]:Game Started: 2 as white, 1 as black
+22:36:20:INFO:[game_play]:GAME OVER: 2 as white, 1 as black, 1 won
+ EXECUTION: 76.01479864120483 seconds
+22:36:43:INFO:[game_play]:Game Started: 1 as white, 2 as black
+22:38:22:INFO:[game_play]:ERROR WITH MCTS
+22:38:22:INFO:[game_play]:GAME OVER: 1 as white, 2 as black, -1 won
+ EXECUTION: 98.91231179237366 seconds
+22:38:46:INFO:[game_play]:Game Started: 2 as white, 1 as black
+22:40:09:INFO:[game_play]:GAME OVER: 2 as white, 1 as black, 1 won
+ EXECUTION: 83.07950901985168 seconds
+22:40:33:INFO:[game_play]:Game Started: 1 as white, 2 as black
+22:42:06:INFO:[game_play]:ERROR WITH MCTS
+22:42:06:INFO:[game_play]:GAME OVER: 1 as white, 2 as black, -1 won
+ EXECUTION: 93.08254814147949 seconds
+22:42:30:INFO:[game_play]:Game Started: 2 as white, 1 as black
+22:43:22:INFO:[game_play]:GAME OVER: 2 as white, 1 as black, 1 won
+ EXECUTION: 51.807931423187256 seconds
+22:43:46:INFO:[game_play]:Game Started: 1 as white, 2 as black
+22:46:04:INFO:[game_play]:ERROR WITH MCTS
+22:46:04:INFO:[game_play]:GAME OVER: 1 as white, 2 as black, -1 won
+ EXECUTION: 137.97360563278198 seconds
+22:46:28:INFO:[game_play]:Game Started: 2 as white, 1 as black
+22:47:11:INFO:[game_play]:GAME OVER: 2 as white, 1 as black, 1 won
+ EXECUTION: 43.149773359298706 seconds
+22:47:36:INFO:[game_play]:Game Started: 1 as white, 2 as black
+22:49:33:INFO:[game_play]:ERROR WITH MCTS
+22:49:33:INFO:[game_play]:GAME OVER: 1 as white, 2 as black, -1 won
+ EXECUTION: 117.36524486541748 seconds
+22:49:57:INFO:[game_play]:Game Started: 2 as white, 1 as black
+22:50:33:INFO:[game_play]:GAME OVER: 2 as white, 1 as black, 1 won
+ EXECUTION: 35.7674458026886 seconds
+22:50:57:INFO:[game_play]:Game Started: 1 as white, 2 as black
+22:52:45:INFO:[game_play]:ERROR WITH MCTS
+22:52:45:INFO:[game_play]:GAME OVER: 1 as white, 2 as black, -1 won
+ EXECUTION: 107.88130950927734 seconds
+22:53:09:INFO:[game_play]:Game Started: 2 as white, 1 as black
+22:54:59:INFO:[game_play]:GAME OVER: 2 as white, 1 as black, 1 won
+ EXECUTION: 110.11103963851929 seconds
+22:55:23:INFO:[game_play]:Game Started: 1 as white, 2 as black
+22:57:21:INFO:[game_play]:ERROR WITH MCTS
+22:57:21:INFO:[game_play]:GAME OVER: 1 as white, 2 as black, -1 won
+ EXECUTION: 117.54486441612244 seconds
+22:57:46:INFO:[game_play]:Game Started: 2 as white, 1 as black
+22:58:41:INFO:[game_play]:GAME OVER: 2 as white, 1 as black, 1 won
+ EXECUTION: 55.65451717376709 seconds
+22:59:06:INFO:[game_play]:Game Started: 1 as white, 2 as black
+23:01:19:INFO:[game_play]:ERROR WITH MCTS
+23:01:19:INFO:[game_play]:GAME OVER: 1 as white, 2 as black, -1 won
+ EXECUTION: 133.07940340042114 seconds
+23:01:43:INFO:[game_play]:Game Started: 2 as white, 1 as black
+23:02:48:INFO:[game_play]:GAME OVER: 2 as white, 1 as black, 1 won
+ EXECUTION: 65.02587628364563 seconds
+23:03:13:INFO:[game_play]:Game Started: 1 as white, 2 as black
+23:05:02:INFO:[game_play]:ERROR WITH MCTS
+23:05:02:INFO:[game_play]:GAME OVER: 1 as white, 2 as black, -1 won
+ EXECUTION: 109.0065929889679 seconds
+23:05:26:INFO:[game_play]:Game Started: 2 as white, 1 as black
+23:05:54:INFO:[game_play]:GAME OVER: 2 as white, 1 as black, 1 won
+ EXECUTION: 27.828543186187744 seconds
+23:06:19:INFO:[game_play]:Game Started: 1 as white, 2 as black
+23:10:17:INFO:[game_play]:ERROR WITH MCTS
+23:10:17:INFO:[game_play]:GAME OVER: 1 as white, 2 as black, -1 won
+ EXECUTION: 238.32713651657104 seconds
+23:10:42:INFO:[game_play]:Game Started: 2 as white, 1 as black
+23:11:57:INFO:[game_play]:GAME OVER: 2 as white, 1 as black, 1 won
+ EXECUTION: 74.9911253452301 seconds
+23:12:22:INFO:[game_play]:Game Started: 1 as white, 2 as black
+23:13:50:INFO:[game_play]:ERROR WITH MCTS
+23:13:50:INFO:[game_play]:GAME OVER: 1 as white, 2 as black, -1 won
+ EXECUTION: 88.70609450340271 seconds
+23:14:15:INFO:[game_play]:Game Started: 2 as white, 1 as black
+23:15:55:INFO:[game_play]:GAME OVER: 2 as white, 1 as black, 1 won
+ EXECUTION: 100.1917142868042 seconds
+23:16:20:INFO:[game_play]:Game Started: 1 as white, 2 as black
+23:18:49:INFO:[game_play]:ERROR WITH MCTS
+23:18:49:INFO:[game_play]:GAME OVER: 1 as white, 2 as black, -1 won
+ EXECUTION: 148.55267071723938 seconds
+23:19:14:INFO:[game_play]:Game Started: 2 as white, 1 as black
+23:20:43:INFO:[game_play]:GAME OVER: 2 as white, 1 as black, 1 won
+ EXECUTION: 88.88472032546997 seconds
+23:21:08:INFO:[game_play]:Game Started: 1 as white, 2 as black
+23:23:03:INFO:[game_play]:ERROR WITH MCTS
+23:23:03:INFO:[game_play]:GAME OVER: 1 as white, 2 as black, -1 won
+ EXECUTION: 115.0423424243927 seconds
+23:23:28:INFO:[game_play]:Game Started: 2 as white, 1 as black
+23:24:43:INFO:[game_play]:GAME OVER: 2 as white, 1 as black, 1 won
+ EXECUTION: 75.23578834533691 seconds
+23:25:08:INFO:[game_play]:Game Started: 1 as white, 2 as black
+23:26:57:INFO:[game_play]:ERROR WITH MCTS
+23:26:57:INFO:[game_play]:GAME OVER: 1 as white, 2 as black, -1 won
+ EXECUTION: 109.11473822593689 seconds
+23:27:22:INFO:[game_play]:Game Started: 2 as white, 1 as black
+23:29:05:INFO:[game_play]:GAME OVER: 2 as white, 1 as black, 1 won
+ EXECUTION: 102.78922772407532 seconds
+23:29:31:INFO:[game_play]:Game Started: 1 as white, 2 as black
+23:31:31:INFO:[game_play]:ERROR WITH MCTS
+23:31:31:INFO:[game_play]:GAME OVER: 1 as white, 2 as black, -1 won
+ EXECUTION: 120.29899287223816 seconds
+23:31:57:INFO:[game_play]:Game Started: 2 as white, 1 as black
+23:32:38:INFO:[game_play]:GAME OVER: 2 as white, 1 as black, 1 won
+ EXECUTION: 40.96289539337158 seconds
+23:33:03:INFO:[game_play]:Game Started: 1 as white, 2 as black
+23:36:04:INFO:[game_play]:ERROR WITH MCTS
+23:36:04:INFO:[game_play]:GAME OVER: 1 as white, 2 as black, -1 won
+ EXECUTION: 180.9257893562317 seconds
+23:36:29:INFO:[game_play]:Game Started: 2 as white, 1 as black
+23:38:11:INFO:[game_play]:ERROR WITH MCTS
+23:38:11:INFO:[game_play]:GAME OVER: 2 as white, 1 as black, -1 won
+ EXECUTION: 101.86520338058472 seconds
+23:38:37:INFO:[game_play]:Game Started: 1 as white, 2 as black
+23:43:57:INFO:[game_play]:ERROR WITH MCTS
+23:43:57:INFO:[game_play]:GAME OVER: 1 as white, 2 as black, -1 won
+ EXECUTION: 320.31213641166687 seconds
+23:44:23:INFO:[game_play]:Game Started: 2 as white, 1 as black
+23:45:57:INFO:[game_play]:GAME OVER: 2 as white, 1 as black, 1 won
+ EXECUTION: 94.35226202011108 seconds
+23:46:23:INFO:[game_play]:Game Started: 1 as white, 2 as black
+23:47:50:INFO:[game_play]:ERROR WITH MCTS
+23:47:50:INFO:[game_play]:GAME OVER: 1 as white, 2 as black, -1 won
+ EXECUTION: 87.79652190208435 seconds
+23:48:16:INFO:[game_play]:Game Started: 2 as white, 1 as black
+23:49:12:INFO:[game_play]:GAME OVER: 2 as white, 1 as black, 1 won
+ EXECUTION: 56.259647846221924 seconds
+23:49:39:INFO:[game_play]:Game Started: 1 as white, 2 as black
+23:51:11:INFO:[game_play]:ERROR WITH MCTS
+23:51:11:INFO:[game_play]:GAME OVER: 1 as white, 2 as black, -1 won
+ EXECUTION: 92.14644718170166 seconds
+23:51:37:INFO:[game_play]:Game Started: 2 as white, 1 as black
+23:53:04:INFO:[game_play]:GAME OVER: 2 as white, 1 as black, 1 won
+ EXECUTION: 86.86111998558044 seconds
+23:53:30:INFO:[game_play]:Game Started: 1 as white, 2 as black
+23:55:04:INFO:[game_play]:ERROR WITH MCTS
+23:55:04:INFO:[game_play]:GAME OVER: 1 as white, 2 as black, -1 won
+ EXECUTION: 93.78421902656555 seconds
+23:55:30:INFO:[game_play]:Game Started: 2 as white, 1 as black
+23:59:41:INFO:[game_play]:ERROR WITH MCTS
+23:59:41:INFO:[game_play]:GAME OVER: 2 as white, 1 as black, -1 won
+ EXECUTION: 251.01972913742065 seconds

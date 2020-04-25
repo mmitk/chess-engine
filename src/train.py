@@ -29,10 +29,10 @@ def update_total(time = None):
     
 
 
-def session_0(model):
+def session_0(model, num_iter = 30):
     start = time.time()
     util.log('STARTED: Session type 0 MonteCarlo and Alphabeta iterative Play', logger_str="train_sess", msg_type=2, write_to_console=False, path = util.HISTORY_DIR, filename = 'game_logs.log')
-    for i in range(10):
+    for i in range(num_iter):
         
         # new game is initaited with new agents and manager for 
         # pools
@@ -245,8 +245,8 @@ if __name__ == '__main__':
     #a1 = ab.alphabeta_agent()
     
     
-    #session_3(model, 23)
-    session_1(model, 100)
+    session_0(model, 200)
+    session_1(model, 200)
     
  
 
