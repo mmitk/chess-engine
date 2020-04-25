@@ -190,6 +190,42 @@ def session_3(model, num_iter = 20):
     message = 'COMPLETED: Session type 0 MonteCarlo and MonteCarlo iterative Play\nExecution Time: {} seconds\n********************************************************'.format(exec_time)
     util.log(message, logger_str="train_sess", msg_type=2, write_to_console=False, path = util.HISTORY_DIR, filename = 'game_logs.log')
 
+def session_4(model, num_iter = 50):
+    start = time.time()
+    util.log('STARTED: Session type 4 Stockfish and Stockfish iterative Play', logger_str="train_sess", msg_type=2, write_to_console=False, path = util.HISTORY_DIR, filename = 'game_logs.log')
+    for i in range(num_iter):
+        
+        # new game is initaited with new agents and manager for 
+        # pools
+
+        manager = Manager()
+        board = chess.Board()
+        s = stockfish_agent()
+        s2 = stockfish_agent()
+
+        game = chessGame(s, s2)
+        game.set_board(board)
+
+        #game plays out
+        game.play_out()
+
+    
+
+        # model updates from history.csv, what was updated by both agents during gameplay
+        prec = md.preprocessor()
+        prec.fit(filename = Path(util.HISTORY_DIR / 'history.csv'))
+        data = prec.transform()
+        model.fit(data)
+        model.write_file(Path(util.HISTORY_DIR / 'test_model_1.pkl'))
+        game.reset()
+
+    end = time.time()
+            
+    exec_time = (end - start)
+    update_total(exec_time)
+    message = 'COMPLETED: Session type 4 Stockfish and Stockfish iterative Play\nExecution Time: {} seconds\n********************************************************'.format(exec_time)
+    util.log(message, logger_str="train_sess", msg_type=2, write_to_console=False, path = util.HISTORY_DIR, filename = 'game_logs.log')
+
 
 
 class stockfish_agent:
@@ -204,7 +240,7 @@ class stockfish_agent:
         self.data = list()
     
     def make_move(self, board, depth = None):
-        result = self.engine.play(board, chess.engine.Limit(time=0.2))
+        result = self.engine.play(board, chess.engine.Limit(time=0.3))
         self.data.append({'state': board.fen(),'move':result.move})
         return result.move
 
