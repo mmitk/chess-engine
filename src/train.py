@@ -281,8 +281,8 @@ if __name__ == '__main__':
     #a1 = ab.alphabeta_agent()
     
     
-    session_0(model, 200)
-    session_1(model, 200)
+    session_4(model, 500)
+    #session_1(model, 200)
     
  
 
