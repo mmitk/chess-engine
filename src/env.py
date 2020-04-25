@@ -72,7 +72,7 @@ class chessGame:
 
         while not self.board.is_checkmate():
             try:
-                move1 = self.agent1.make_move(depth = 3, board = self.board)
+                move1 = self.agent1.make_move(depth = 1, board = self.board)
             except util.MCTSException as e:
                 self.log(str(e))
                 break
@@ -84,7 +84,7 @@ class chessGame:
             
             # Now agent 2 selects and makes their move
             try:
-                move2 = self.agent2.make_move(depth = 3, board = self.board)
+                move2 = self.agent2.make_move(depth = 1, board = self.board)
             except util.MCTSException as e:
                 self.log(str(e))
                 break

@@ -58,7 +58,7 @@ class mcts_agent(object):
         except Exception:
             raise util.MCTSException('ERROR WITH MCTS')
 
-    def make_move(self, board, player = 1):
+    def make_move(self, board, player = 1, depth =None):
         actions = {}
         if board.is_checkmate():
             return None
