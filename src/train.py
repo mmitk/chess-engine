@@ -200,10 +200,18 @@ def session_4(model, num_iter = 50):
 
         manager = Manager()
         board = chess.Board()
-        s = stockfish_agent()
+        s = stockfish_agent(limit = 0.7)
         s2 = stockfish_agent()
 
-        game = chessGame(s, s2)
+        if i%2 == 0:
+            white = s
+            black = s2
+        else:
+            white = s2
+            black = s
+
+
+        game = chessGame(white, black)
         game.set_board(board)
 
         #game plays out
@@ -232,15 +240,17 @@ class stockfish_agent:
 
     
 
-    def __init__(self):
+    def __init__(self, limit = 0.1):
         self.type = 3
         ROOT_DIR = Path(os.path.dirname(os.path.abspath(__file__))).parent
         path = Path(ROOT_DIR / 'stockfish-11-linux')
         self.engine = chess.engine.SimpleEngine.popen_uci("stockfish-11-linux/Linux/stockfish_20011801_x64")
+        self.limit = limit
         self.data = list()
     
     def make_move(self, board, depth = None):
-        result = self.engine.play(board, chess.engine.Limit(time=0.3))
+        result = self.engine.play(board, chess.engine.Limit(time=self.limit))
+        print('.',end='')
         self.data.append({'state': board.fen(),'move':result.move})
         return result.move
 

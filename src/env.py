@@ -95,8 +95,8 @@ class chessGame:
                 break
             i+=1
             move_count += 1
-            #if move_count >= 40:
-                #break
+            if move_count >= 200:
+                break
             if (i >10):
                 i = 0
                 print('\n')
