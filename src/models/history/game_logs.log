@@ -1,0 +1,35 @@
+19:52:13:INFO:[game_play]:Session type 1 started Stockfish and Alphabeta iterative Play
+19:52:13:INFO:[game_play]:Game Started: 1 as white, 3 as black
+20:04:21:INFO:[game_play]:GAME OVER: 1 as white, 3 as black, 3 won
+ EXECUTION: 728.2563095092773 seconds
+20:04:22:INFO:[game_play]:Game Started: 3 as white, 1 as black
+20:12:06:INFO:[game_play]:GAME OVER: 3 as white, 1 as black, 3 won
+ EXECUTION: 464.13092160224915 seconds
+20:12:07:INFO:[game_play]:Game Started: 1 as white, 3 as black
+20:26:10:INFO:[game_play]:GAME OVER: 1 as white, 3 as black, 3 won
+ EXECUTION: 842.9571878910065 seconds
+20:26:10:INFO:[game_play]:Game Started: 3 as white, 1 as black
+20:30:48:INFO:[game_play]:GAME OVER: 3 as white, 1 as black, 3 won
+ EXECUTION: 277.26954460144043 seconds
+20:30:48:INFO:[game_play]:Game Started: 1 as white, 3 as black
+20:40:37:INFO:[game_play]:GAME OVER: 1 as white, 3 as black, 3 won
+ EXECUTION: 588.7176895141602 seconds
+20:40:38:INFO:[game_play]:Game Started: 3 as white, 1 as black
+20:43:26:INFO:[game_play]:GAME OVER: 3 as white, 1 as black, 3 won
+ EXECUTION: 167.91114139556885 seconds
+20:43:26:INFO:[game_play]:Game Started: 1 as white, 3 as black
+20:54:06:INFO:[game_play]:GAME OVER: 1 as white, 3 as black, 3 won
+ EXECUTION: 638.9740028381348 seconds
+20:54:06:INFO:[game_play]:Game Started: 3 as white, 1 as black
+20:57:56:INFO:[game_play]:GAME OVER: 3 as white, 1 as black, 3 won
+ EXECUTION: 229.83498883247375 seconds
+20:57:57:INFO:[game_play]:Game Started: 1 as white, 3 as black
+21:05:30:INFO:[game_play]:GAME OVER: 1 as white, 3 as black, 3 won
+ EXECUTION: 452.8033974170685 seconds
+21:05:31:INFO:[game_play]:Game Started: 3 as white, 1 as black
+21:12:57:INFO:[game_play]:GAME OVER: 3 as white, 1 as black, 3 won
+ EXECUTION: 446.36698293685913 seconds
+21:12:58:INFO:[game_play]:COMPLETED Session type 1 started Stockfish and Alphabeta iterative Play
+Execution Time: 4845.018100738525 seconds
+********************************************************
+

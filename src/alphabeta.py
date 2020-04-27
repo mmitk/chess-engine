@@ -11,8 +11,9 @@ import util
 
 
 class alphabeta_agent:
-
+    
     def __init__(self, historic = False, filename=None, model = None):
+        self.type = 1
         self.data = list()
         if not model is None:
             self.model = model
@@ -26,8 +27,9 @@ class alphabeta_agent:
         if( depthleft == 0 ):
             return self.quiesce( alpha, beta, board )
         for move in board.legal_moves:
+            #theta = self.predict_probability(board, move)
             board.push(move)   
-            score = -self.alphabeta( -beta, -alpha, depthleft - 1, board)
+            score = float(-self.alphabeta( -beta, -alpha, depthleft - 1, board))
             board.pop()
             if( score >= beta ):
                 return score
@@ -66,21 +68,21 @@ class alphabeta_agent:
         beta = 100000
         for move in board.legal_moves:
             theta = self.predict_probability(board, move)
-            if theta >= 0.3:
-                board.push(move)
-                boardValue = - self.alphabeta(-beta, -alpha, depth-1,board)
-                if boardValue > bestValue:
-                    bestValue = boardValue
-                    bestMove = move
-                if boardValue > alpha:
-                    alpha = boardValue
-                board.pop()
+            board.push(move)
+            boardValue = theta*(- self.alphabeta(-beta, -alpha, depth-1,board))
+            if boardValue > bestValue:
+                bestValue = boardValue
+                bestMove = move
+            if boardValue > alpha:
+                alpha = boardValue
+            board.pop()
         self.data.append({'state': board.fen(),'move':bestMove})
         print('.',end = '')
         return bestMove
 
     def predict_probability(self, board, move):
         data = [{'state':board.fen(),'move':move}]
+        #print('predicting for move: ', move)
         prec = md.preprocessor()
         prec.fit(raw_data = data)
         data = prec.transform(predict = True)
@@ -105,7 +107,3 @@ class alphabeta_agent:
             csvwriter.writerow(row)
         f.close()
      
-
-        
-
-  

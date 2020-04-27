@@ -6,6 +6,8 @@ import time
 import os
 import argparse
 
+class MCTSException(Exception):
+    pass
 class LogMessage(IntEnum):
     DEBUG = 1
     INFO = 2
@@ -19,6 +21,7 @@ CONSOLE_OUTPUT = False
 
 ROOT_DIR = Path(os.path.dirname(os.path.abspath(__file__))).parent # get root of project
 DATA_DIR = Path(ROOT_DIR / "data")
+IMG_DIR = Path(ROOT_DIR / "img" )
 MODELS_DIR = Path(ROOT_DIR / "src" / "models")
 HISTORY_DIR = Path(MODELS_DIR / "history")
 LOGS_DIR = Path(DATA_DIR / "logs")
@@ -65,6 +68,9 @@ def log(message, logger_str=None, msg_type=LogMessage.DEBUG, filename=None, path
             LOG_FILENAME = filename
     if not path:
         path = Path(LOGS_DIR / filename) # default location is /data/logs/filename
+    else:
+        filename = str(datetime.date.today()) + filename
+        path = Path(path / filename)
     if logger_str:
         logger_str = "[" + str(logger_str) +"]"
     output = str(time.strftime("%H:%M:%S:")) + msg_type.name + ":" + str(logger_str) + ":" + message +'\n'

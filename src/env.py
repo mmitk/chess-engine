@@ -1,5 +1,10 @@
 import chess 
 from enum import IntEnum
+from pathlib import Path
+import util
+import time
+import json
+import datetime
 
 
 class Winner(IntEnum):
@@ -50,6 +55,7 @@ class chessGame:
             self.agent1 = agent1
         if agent1 is not None:
             self.agent2 = agent2
+        self.move_history = list()
 
 
     def play_out(self):
@@ -61,8 +67,15 @@ class chessGame:
             raise ValueError('ERROR agent1 and agent2 can not be None for chessGame.play_out()')
         i = 0
         move_count = 0
+        self.log('Game Started: {} as white, {} as black'.format(self.agent1.type,self.agent2.type))
+        start = time.time()
+
         while not self.board.is_checkmate():
-            move1 = self.agent1.make_move(depth = 3, board = self.board)
+            try:
+                move1 = self.agent1.make_move(depth = 1, board = self.board)
+            except util.MCTSException as e:
+                self.log(str(e))
+                break
             if not move1 is None:
                  self.board.push(move1)
                  self.move_history.append({'state': self.board.fen(),'move1':move1})
@@ -70,7 +83,11 @@ class chessGame:
                 break
             
             # Now agent 2 selects and makes their move
-            move2 = self.agent2.make_move(depth = 3, board = self.board)
+            try:
+                move2 = self.agent2.make_move(depth = 1, board = self.board)
+            except util.MCTSException as e:
+                self.log(str(e))
+                break
             if not move2 is None:
                 self.board.push(move2)
                 self.move_history.append({'state': self.board.fen(),'move2':move2})
@@ -78,13 +95,15 @@ class chessGame:
                 break
             i+=1
             move_count += 1
+            if move_count >= 200:
+                break
             if (i >10):
                 i = 0
                 print('\n')
-            
 
+        end = time.time()
             
-        
+        exec_time = (end - start)
 
         #set the Winner or if their is a draw
         if self.winner is None:
@@ -98,17 +117,52 @@ class chessGame:
 
         # Now add to historic dataset of moves made by each agent
         if self.winner == Winner.WHITE:
+            winner = self.agent1.type
             print('Agent 1 Won!')
-            self.agent1.write_data('moves_history.csv', 1)
-            self.agent2.write_data('moves_history.csv', didWin = int(0))
+            self.agent1.write_data('history.csv', did_win = 1)
+            self.agent2.write_data('history.csv', did_win = int(0))
         elif self.winner == Winner.BLACK:
+            winner = self.agent2.type
             print('Agent 2 Won!')
-            self.agent1.write_data('moves_history.csv', didWin = int(0))
-            self.agent2.write_data('moves_history.csv', 1)
+            self.agent1.write_data('history.csv', did_win = int(0))
+            self.agent2.write_data('history.csv', did_win = 1)
+        else:
+            winner = -1
+            print('Draw!')
+            #self.agent1.write_data('history.csv', did_win = int(0))
+            #self.agent2.write_data('history.csv', did_win = int(0))
 
+        sim_history = str(datetime.date.today()) + 'sim_history.log' 
+
+        p = Path(util.HISTORY_DIR / sim_history)
+        f = open(p,'a')
         for move in self.move_history:
-            print(move)
+            f.write(str(move))
+            f.write('\n')
+        f.write('END OF GAME, AGENT {} ({}) won\n'.format(winner, str(self.winner)))
+        f.close()
+        self.update_total(exec_time)
+        message = 'GAME OVER: {} as white, {} as black, {} won\n EXECUTION: {} seconds'.format(self.agent1.type,self.agent2.type,winner, exec_time)
+        self.log(message = message)
+
     
+    
+    def log(self, message, msg_type=2):
+        util.log(message, logger_str="game_play", msg_type=msg_type, write_to_console=False, path = util.HISTORY_DIR, filename = 'game_logs.log')
 
+    
+    def update_total(self, time = None):
+        with open(Path(util.HISTORY_DIR / 'stats.json'), 'r') as f:
+            totals = json.load(f)
 
+        total_time = int(totals['Total Playing Time'])
+        total_games = int(totals['Total Games'])
+        total_games += 1
+        totals['Total Games'] = total_games
+        if not time is None:
+            total_time += time
+            totals['Total Playing Time'] = total_time
+
+        with open(Path(util.HISTORY_DIR / 'stats.json'), 'w') as f:
+            json.dump(totals, f)
     
