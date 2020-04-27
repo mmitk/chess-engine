@@ -572,3 +572,166 @@
 13:08:04:INFO:[game_play]:Game Started: 3 as white, 3 as black
 13:08:37:INFO:[game_play]:GAME OVER: 3 as white, 3 as black, 3 won
  EXECUTION: 33.36093330383301 seconds
+13:13:58:INFO:[train_sess]:STARTED: Session type 4 Stockfish and Stockfish iterative Play
+13:13:58:INFO:[game_play]:Game Started: 3 as white, 3 as black
+13:15:04:INFO:[game_play]:GAME OVER: 3 as white, 3 as black, 3 won
+ EXECUTION: 65.51139235496521 seconds
+13:16:36:INFO:[game_play]:Game Started: 3 as white, 3 as black
+13:19:00:INFO:[game_play]:GAME OVER: 3 as white, 3 as black, 3 won
+ EXECUTION: 143.55157732963562 seconds
+13:20:41:INFO:[game_play]:Game Started: 3 as white, 3 as black
+13:21:14:INFO:[game_play]:GAME OVER: 3 as white, 3 as black, 3 won
+ EXECUTION: 32.91009736061096 seconds
+13:23:01:INFO:[game_play]:Game Started: 3 as white, 3 as black
+13:23:47:INFO:[game_play]:GAME OVER: 3 as white, 3 as black, 3 won
+ EXECUTION: 46.59452033042908 seconds
+13:25:37:INFO:[game_play]:Game Started: 3 as white, 3 as black
+13:27:04:INFO:[game_play]:GAME OVER: 3 as white, 3 as black, 3 won
+ EXECUTION: 87.06130313873291 seconds
+13:29:00:INFO:[game_play]:Game Started: 3 as white, 3 as black
+13:30:22:INFO:[game_play]:GAME OVER: 3 as white, 3 as black, 3 won
+ EXECUTION: 81.78389859199524 seconds
+13:32:31:INFO:[game_play]:Game Started: 3 as white, 3 as black
+13:33:11:INFO:[game_play]:GAME OVER: 3 as white, 3 as black, 3 won
+ EXECUTION: 40.08706760406494 seconds
+13:35:17:INFO:[game_play]:Game Started: 3 as white, 3 as black
+13:36:09:INFO:[game_play]:GAME OVER: 3 as white, 3 as black, 3 won
+ EXECUTION: 51.42542600631714 seconds
+13:38:14:INFO:[game_play]:Game Started: 3 as white, 3 as black
+13:39:06:INFO:[game_play]:GAME OVER: 3 as white, 3 as black, 3 won
+ EXECUTION: 52.571946144104004 seconds
+13:41:17:INFO:[game_play]:Game Started: 3 as white, 3 as black
+13:42:25:INFO:[game_play]:GAME OVER: 3 as white, 3 as black, 3 won
+ EXECUTION: 68.29215359687805 seconds
+13:44:41:INFO:[game_play]:Game Started: 3 as white, 3 as black
+13:45:12:INFO:[game_play]:GAME OVER: 3 as white, 3 as black, 3 won
+ EXECUTION: 31.292890071868896 seconds
+13:47:38:INFO:[game_play]:Game Started: 3 as white, 3 as black
+13:48:48:INFO:[game_play]:GAME OVER: 3 as white, 3 as black, 3 won
+ EXECUTION: 69.96038126945496 seconds
+13:51:19:INFO:[game_play]:Game Started: 3 as white, 3 as black
+13:52:02:INFO:[game_play]:GAME OVER: 3 as white, 3 as black, 3 won
+ EXECUTION: 42.62332010269165 seconds
+13:54:33:INFO:[game_play]:Game Started: 3 as white, 3 as black
+13:55:39:INFO:[game_play]:GAME OVER: 3 as white, 3 as black, 3 won
+ EXECUTION: 65.88457489013672 seconds
+13:58:08:INFO:[game_play]:Game Started: 3 as white, 3 as black
+13:59:01:INFO:[game_play]:GAME OVER: 3 as white, 3 as black, 3 won
+ EXECUTION: 52.939016580581665 seconds
+14:01:40:INFO:[game_play]:Game Started: 3 as white, 3 as black
+14:03:20:INFO:[game_play]:GAME OVER: 3 as white, 3 as black, 3 won
+ EXECUTION: 100.3033835887909 seconds
+14:06:03:INFO:[game_play]:Game Started: 3 as white, 3 as black
+14:07:54:INFO:[game_play]:GAME OVER: 3 as white, 3 as black, -1 won
+ EXECUTION: 110.28517365455627 seconds
+14:10:27:INFO:[game_play]:Game Started: 3 as white, 3 as black
+14:12:09:INFO:[game_play]:GAME OVER: 3 as white, 3 as black, 3 won
+ EXECUTION: 101.70580244064331 seconds
+14:15:04:INFO:[game_play]:Game Started: 3 as white, 3 as black
+14:17:14:INFO:[game_play]:GAME OVER: 3 as white, 3 as black, 3 won
+ EXECUTION: 129.8630609512329 seconds
+14:20:01:INFO:[game_play]:Game Started: 3 as white, 3 as black
+14:21:53:INFO:[game_play]:GAME OVER: 3 as white, 3 as black, -1 won
+ EXECUTION: 111.96573233604431 seconds
+14:24:46:INFO:[game_play]:Game Started: 3 as white, 3 as black
+14:25:35:INFO:[game_play]:GAME OVER: 3 as white, 3 as black, 3 won
+ EXECUTION: 49.268704652786255 seconds
+14:28:36:INFO:[game_play]:Game Started: 3 as white, 3 as black
+14:29:24:INFO:[game_play]:GAME OVER: 3 as white, 3 as black, 3 won
+ EXECUTION: 48.12096953392029 seconds
+14:32:23:INFO:[game_play]:Game Started: 3 as white, 3 as black
+14:33:28:INFO:[game_play]:GAME OVER: 3 as white, 3 as black, 3 won
+ EXECUTION: 64.90283870697021 seconds
+14:36:40:INFO:[game_play]:Game Started: 3 as white, 3 as black
+14:37:32:INFO:[game_play]:GAME OVER: 3 as white, 3 as black, 3 won
+ EXECUTION: 51.56343722343445 seconds
+14:41:01:INFO:[game_play]:Game Started: 3 as white, 3 as black
+14:41:52:INFO:[game_play]:GAME OVER: 3 as white, 3 as black, 3 won
+ EXECUTION: 50.63627076148987 seconds
+14:45:16:INFO:[game_play]:Game Started: 3 as white, 3 as black
+14:46:04:INFO:[game_play]:GAME OVER: 3 as white, 3 as black, 3 won
+ EXECUTION: 48.336791038513184 seconds
+14:49:40:INFO:[game_play]:Game Started: 3 as white, 3 as black
+14:50:26:INFO:[game_play]:GAME OVER: 3 as white, 3 as black, 3 won
+ EXECUTION: 45.96381855010986 seconds
+14:53:57:INFO:[game_play]:Game Started: 3 as white, 3 as black
+14:54:41:INFO:[game_play]:GAME OVER: 3 as white, 3 as black, 3 won
+ EXECUTION: 44.165568828582764 seconds
+14:58:17:INFO:[game_play]:Game Started: 3 as white, 3 as black
+14:59:05:INFO:[game_play]:GAME OVER: 3 as white, 3 as black, 3 won
+ EXECUTION: 48.195008516311646 seconds
+15:02:47:INFO:[game_play]:Game Started: 3 as white, 3 as black
+15:04:21:INFO:[game_play]:GAME OVER: 3 as white, 3 as black, 3 won
+ EXECUTION: 93.51655340194702 seconds
+15:08:11:INFO:[game_play]:Game Started: 3 as white, 3 as black
+15:08:56:INFO:[game_play]:GAME OVER: 3 as white, 3 as black, 3 won
+ EXECUTION: 44.56600069999695 seconds
+15:12:48:INFO:[game_play]:Game Started: 3 as white, 3 as black
+15:13:42:INFO:[game_play]:GAME OVER: 3 as white, 3 as black, 3 won
+ EXECUTION: 53.2258939743042 seconds
+15:17:38:INFO:[game_play]:Game Started: 3 as white, 3 as black
+15:18:17:INFO:[game_play]:GAME OVER: 3 as white, 3 as black, 3 won
+ EXECUTION: 38.66713857650757 seconds
+15:22:21:INFO:[game_play]:Game Started: 3 as white, 3 as black
+15:23:12:INFO:[game_play]:GAME OVER: 3 as white, 3 as black, 3 won
+ EXECUTION: 50.879900217056274 seconds
+15:27:21:INFO:[game_play]:Game Started: 3 as white, 3 as black
+15:27:54:INFO:[game_play]:GAME OVER: 3 as white, 3 as black, 3 won
+ EXECUTION: 32.905362129211426 seconds
+15:31:41:INFO:[game_play]:Game Started: 3 as white, 3 as black
+15:32:36:INFO:[game_play]:GAME OVER: 3 as white, 3 as black, 3 won
+ EXECUTION: 54.75846457481384 seconds
+15:36:56:INFO:[game_play]:Game Started: 3 as white, 3 as black
+15:37:55:INFO:[game_play]:GAME OVER: 3 as white, 3 as black, 3 won
+ EXECUTION: 58.829750537872314 seconds
+15:42:01:INFO:[game_play]:Game Started: 3 as white, 3 as black
+15:43:02:INFO:[game_play]:GAME OVER: 3 as white, 3 as black, 3 won
+ EXECUTION: 61.12398886680603 seconds
+15:47:29:INFO:[game_play]:Game Started: 3 as white, 3 as black
+15:49:11:INFO:[game_play]:GAME OVER: 3 as white, 3 as black, -1 won
+ EXECUTION: 101.48683476448059 seconds
+15:53:38:INFO:[game_play]:Game Started: 3 as white, 3 as black
+15:55:16:INFO:[game_play]:GAME OVER: 3 as white, 3 as black, -1 won
+ EXECUTION: 97.97341895103455 seconds
+15:59:41:INFO:[game_play]:Game Started: 3 as white, 3 as black
+16:00:27:INFO:[game_play]:GAME OVER: 3 as white, 3 as black, 3 won
+ EXECUTION: 46.609140396118164 seconds
+16:04:57:INFO:[game_play]:Game Started: 3 as white, 3 as black
+16:05:39:INFO:[game_play]:GAME OVER: 3 as white, 3 as black, 3 won
+ EXECUTION: 41.564717054367065 seconds
+16:10:19:INFO:[game_play]:Game Started: 3 as white, 3 as black
+16:11:03:INFO:[game_play]:GAME OVER: 3 as white, 3 as black, 3 won
+ EXECUTION: 43.529080390930176 seconds
+16:15:24:INFO:[game_play]:Game Started: 3 as white, 3 as black
+16:16:31:INFO:[game_play]:GAME OVER: 3 as white, 3 as black, 3 won
+ EXECUTION: 67.12882328033447 seconds
+16:21:28:INFO:[game_play]:Game Started: 3 as white, 3 as black
+16:22:29:INFO:[game_play]:GAME OVER: 3 as white, 3 as black, 3 won
+ EXECUTION: 60.85181641578674 seconds
+16:27:05:INFO:[game_play]:Game Started: 3 as white, 3 as black
+16:27:53:INFO:[game_play]:GAME OVER: 3 as white, 3 as black, 3 won
+ EXECUTION: 47.662973403930664 seconds
+16:32:54:INFO:[game_play]:Game Started: 3 as white, 3 as black
+16:33:49:INFO:[game_play]:GAME OVER: 3 as white, 3 as black, 3 won
+ EXECUTION: 54.568965673446655 seconds
+16:39:07:INFO:[game_play]:Game Started: 3 as white, 3 as black
+16:40:04:INFO:[game_play]:GAME OVER: 3 as white, 3 as black, 3 won
+ EXECUTION: 57.63198399543762 seconds
+16:45:27:INFO:[game_play]:Game Started: 3 as white, 3 as black
+16:46:18:INFO:[game_play]:GAME OVER: 3 as white, 3 as black, 3 won
+ EXECUTION: 51.323447704315186 seconds
+16:51:44:INFO:[game_play]:Game Started: 3 as white, 3 as black
+16:52:25:INFO:[game_play]:GAME OVER: 3 as white, 3 as black, 3 won
+ EXECUTION: 40.94961476325989 seconds
+16:57:29:INFO:[game_play]:Game Started: 3 as white, 3 as black
+16:58:35:INFO:[game_play]:GAME OVER: 3 as white, 3 as black, 3 won
+ EXECUTION: 65.97948479652405 seconds
+17:04:18:INFO:[game_play]:Game Started: 3 as white, 3 as black
+17:05:16:INFO:[game_play]:GAME OVER: 3 as white, 3 as black, 3 won
+ EXECUTION: 57.82939863204956 seconds
+17:10:59:INFO:[game_play]:Game Started: 3 as white, 3 as black
+17:11:42:INFO:[game_play]:GAME OVER: 3 as white, 3 as black, 3 won
+ EXECUTION: 42.53897309303284 seconds
+17:17:04:INFO:[game_play]:Game Started: 3 as white, 3 as black
+17:19:42:INFO:[game_play]:GAME OVER: 3 as white, 3 as black, -1 won
+ EXECUTION: 158.04052209854126 seconds
