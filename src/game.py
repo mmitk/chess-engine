@@ -248,7 +248,14 @@ def PlayGame(agent , depth = 1):
 # level = 2
 if __name__ == "__main__":
     model = md.svm()
-    model.load_file(Path(util.HISTORY_DIR / 'test_model_2.pkl'))
+    try:
+        prec = md.preprocessor()
+        prec.fit(filename = Path(util.HISTORY_DIR / 'history2.csv'))
+        data = prec.transform()
+        model.fit(data)
+        model.write_file(Path(util.HISTORY_DIR / 'test_model_2.pkl'))
+    except Exception:
+        model.load_file(Path(util.HISTORY_DIR / 'test_model_2.pkl'))
     manager = Manager()
     p = argparse.ArgumentParser()
     p.add_argument("-m", "--mishsearch", action='store_true', help='changes agent to mishsearch agent, default=alphabeta (depth of 1)')

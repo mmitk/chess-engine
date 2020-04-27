@@ -260,7 +260,7 @@ class stockfish_agent:
                 row['didWin'] = did_win
             else:
                 row['didWin'] = 0
-         p = Path(util.HISTORY_DIR / 'history.csv')
+         p = Path(util.HISTORY_DIR / 'history2.csv')
 
         #df = pd.DataFrame()
          f = open(p, 'a')
