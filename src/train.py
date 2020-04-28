@@ -221,10 +221,10 @@ def session_4(model, num_iter = 50):
 
         # model updates from history.csv, what was updated by both agents during gameplay
         prec = md.preprocessor()
-        prec.fit(filename = Path(util.HISTORY_DIR / 'history2.csv'))
+        prec.fit(filename = Path(util.HISTORY_DIR / 'history3.csv'))
         data = prec.transform()
         model.fit(data)
-        model.write_file(Path(util.HISTORY_DIR / 'test_model_2.pkl'))
+        model.write_file(Path(util.HISTORY_DIR / 'test_model_3.pkl'))
         game.reset()
 
     end = time.time()
@@ -260,7 +260,7 @@ class stockfish_agent:
                 row['didWin'] = did_win
             else:
                 row['didWin'] = 0
-         p = Path(util.HISTORY_DIR / 'history2.csv')
+         p = Path(util.HISTORY_DIR / 'history3.csv')
 
         #df = pd.DataFrame()
          f = open(p, 'a')
@@ -277,14 +277,14 @@ class stockfish_agent:
 if __name__ == '__main__':
     model = md.svm()
     try:
-        prec = md.preprocessor()
-        prec.fit(filename = Path(util.HISTORY_DIR / 'history2.csv'))
-        data = prec.transform()
-        model.fit(data)
-        model.write_file(Path(util.HISTORY_DIR / 'test_model_2.pkl'))
+        model.load_file(Path(util.HISTORY_DIR / 'test_model_3.pkl'))
     except Exception:
         try:
-            model.load_file(Path(util.HISTORY_DIR / 'test_model_2.pkl'))
+            prec = md.preprocessor()
+            prec.fit(filename = Path(util.HISTORY_DIR / 'history3.csv'))
+            data = prec.transform()
+            model.fit(data)
+            model.write_file(Path(util.HISTORY_DIR / 'test_model_3.pkl'))
         except Exception as e:
             print('oops: {}'.format(e))
     
