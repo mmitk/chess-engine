@@ -10,10 +10,9 @@ import util
 import eval
 
 
-class mishagent:
-    
+class markovagent:
     def __init__(self, historic = False, filename=None, model = None):
-        self.type = 1
+        self.type = 4
         self.data = list()
         if not model is None:
             self.model = model
@@ -21,22 +20,24 @@ class mishagent:
             self.model = md.svm(filename = filename, historic = historic)
         self.data = list()
 
-
-    def make_move(self, depth, board):
-        if board.is_checkmate():
-            return None
-        actions = {}
-        for move in board.legal_moves:
-            theta = self.predict_probability(board, move) 
-            board.push(move)
-            actions[move] = theta * self.quiesce(-100000, 100000, board)
-            board.pop()
-
-        best_move = max(actions, key=actions.get)
-        self.data.append({'state': board.fen(),'move':best_move})
-        print('.',end = '')
-        return best_move
     
+    def alphabeta( self, alpha, beta, depthleft, board ):
+        bestscore = -9999
+        if( depthleft == 0 ):
+            return self.quiesce( alpha, beta, board )
+        for move in board.legal_moves:
+            #theta = self.predict_probability(board, move)
+            board.push(move)   
+            score = float(-self.alphabeta( -beta, -alpha, depthleft - 1, board))
+            board.pop()
+            if( score >= beta ):
+                return score
+            if( score > bestscore ):
+                bestscore = score
+            if( score > alpha ):
+                alpha = score
+        return bestscore
+
     def quiesce( self, alpha, beta, board ):
     # need to import evaluate.py
         stand_pat = eval.evaluate_board(board)
@@ -57,6 +58,27 @@ class mishagent:
                     alpha = score  
         return alpha
 
+    def make_move(self, board, depth = 1):
+        if board.is_checkmate():
+            return None
+        bestMove = chess.Move.null()
+        bestValue = -99999
+        alpha = -100000
+        beta = 100000
+        for move in board.legal_moves:
+            theta = self.predict_probability(board, move)
+            board.push(move)
+            boardValue = theta*(- self.alphabeta(-beta, -alpha, depth-1,board))
+            if boardValue > bestValue:
+                bestValue = boardValue
+                bestMove = move
+            if boardValue > alpha:
+                alpha = boardValue
+            board.pop()
+        self.data.append({'state': board.fen(),'move':bestMove})
+        print('.',end = '')
+        return bestMove
+
     def predict_probability(self, board, move):
         data = [{'state':board.fen(),'move':move}]
         #print('predicting for move: ', move)
@@ -71,7 +93,7 @@ class mishagent:
                 row['didWin'] = did_win
             else:
                 row['didWin'] = 0
-        p = Path(util.HISTORY_DIR / 'history.csv')
+        p = Path(util.HISTORY_DIR / filename)
 
         #df = pd.DataFrame()
         f = open(p, 'a')

@@ -67,9 +67,10 @@ class alphabeta_agent:
         alpha = -100000
         beta = 100000
         for move in board.legal_moves:
-            theta = self.predict_probability(board, move)
+            #theta = self.predict_probability(board, move)
             board.push(move)
-            boardValue = theta*(- self.alphabeta(-beta, -alpha, depth-1,board))
+            #boardValue = theta*(- self.alphabeta(-beta, -alpha, depth-1,board))
+            boardValue = (- self.alphabeta(-beta, -alpha, depth-1,board))
             if boardValue > bestValue:
                 bestValue = boardValue
                 bestMove = move
@@ -88,13 +89,13 @@ class alphabeta_agent:
         data = prec.transform(predict = True)
         return self.model.predict_proba(data)
 
-    def write_data(self, filename, did_win = None):
+    def write_data(self, filename = 'history.csv', did_win = None):
         for row in self.data:
             if did_win == 1:
                 row['didWin'] = did_win
             else:
                 row['didWin'] = 0
-        p = Path(util.HISTORY_DIR / 'history.csv')
+        p = Path(util.HISTORY_DIR / filename)
 
         #df = pd.DataFrame()
         f = open(p, 'a')

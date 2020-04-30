@@ -13,7 +13,7 @@ from pathlib import Path
 import multiprocessing
 from concurrent.futures import ProcessPoolExecutor
 import argparse
-from mishsearch import mishagent
+import markovsearch as mk
 import mcts
 
 CHESS_PATH = util.IMG_DIR  # path to the chess pieces
@@ -249,28 +249,28 @@ def PlayGame(agent , depth = 1):
 if __name__ == "__main__":
     model = md.svm()
     try:
-        model.load_file(Path(util.HISTORY_DIR / 'test_model_2.pkl'))
+        model.load_file(Path(util.HISTORY_DIR / 'test_model_3.pkl'))
     except Exception:
         prec = md.preprocessor()
-        prec.fit(filename = Path(util.HISTORY_DIR / 'history2.csv'))
+        prec.fit(filename = Path(util.HISTORY_DIR / 'history3.csv'))
         data = prec.transform()
         model.fit(data)
-        model.write_file(Path(util.HISTORY_DIR / 'test_model_2.pkl'))
+        model.write_file(Path(util.HISTORY_DIR / 'test_model_3.pkl'))
     manager = Manager()
     p = argparse.ArgumentParser()
-    p.add_argument("-m", "--mishsearch", action='store_true', help='changes agent to mishsearch agent, default=alphabeta (depth of 1)')
+    p.add_argument("-a", "--alphabeta", action='store_true', help='changes agent to mishsearch agent, default=alphabeta (depth of 1)')
     p.add_argument("-c", "--montecarlo", action = 'store_true')
     args = p.parse_args()
     
-    if args.mishsearch:
+    if args.alphabeta:
         print('**********************************************************************')
-        agent = mishagent(model = model)
+        agent = ab.alphabeta_agent(model = model)
     elif args.montecarlo:
         print('######################################################################')
         agent = mcts.mcts_agent(manager = manager, model = model)
     else:
         #print('**********************************************************************')
-        agent = ab.alphabeta_agent(model = model)
+        agent = mk.markovagent(model = model)
     
     #agent = mishagent(model = model)
     #pool = ProcessPoolExecutor()
