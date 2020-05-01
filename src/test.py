@@ -56,5 +56,5 @@ if __name__ == "__main__":
     model.fit(data)
     model.write_file(Path(util.HISTORY_DIR / 'model_3.pkl'))
 
-    depth_1_test(model, 1)
+    depth_1_test(model, 10)
 

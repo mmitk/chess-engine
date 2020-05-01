@@ -169,9 +169,9 @@ class chessGame:
             json.dump(totals, f)
     
     def get_winner(self):
-        if self.Winner == Winner.WHITE:
+        if self.winner == Winner.WHITE:
             return 0
-        elif self.Winner == Winner.BLACK:
+        elif self.winner == Winner.BLACK:
             return 1
         else:
             return -1
