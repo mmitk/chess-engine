@@ -1,4 +1,5 @@
 import chess.polyglot
+import chess
 import random
 import numpy as np
 import pandas as pd
@@ -11,7 +12,7 @@ import eval
 
 
 class markovagent:
-    def __init__(self, historic = False, filename=None, model = None):
+    def __init__(self, historic = False, filename=None, model = None, utilities_file = None):
         self.type = 4
         self.data = list()
         if not model is None:
@@ -19,6 +20,11 @@ class markovagent:
         else:
             self.model = md.svm(filename = filename, historic = historic)
         self.data = list()
+        if utilities_file == None:
+            self.utilities = dict()
+        else:
+            with open(utilities_file, 'r') as f:
+                self.utilities = json.load(f)
 
     
     def alphabeta( self, alpha, beta, depthleft, board ):
@@ -88,6 +94,78 @@ class markovagent:
         data = prec.transform(predict = True)
         return self.model.predict_proba(data)
 
+
+    def value_iteration(self,history_file, gamma = 0.7, num_iter = 100):
+        history = pd.read_csv(history_file)
+        history = history.drop_duplicates()
+        history_dict = history.to_dict('records')
+
+        U = dict()
+        U_prime = dict()
+        rewards = dict()
+        states = list()
+        # get reward for each given state and action
+        # initialize u prime
+        # each row in history_ is a row from the historic data 
+        for row in history_dict:
+            state = row['state']
+            action = row['move']
+            reward = float(row['class'])
+            if reward == float(0.0):
+                reward = float(-1)
+            states.append(state)
+            U[state] = eval.evaluate_board(chess.Board(state))/10
+            #U_prime[state] = evaluate_board(chess.Board(state))
+            if (state, action) in rewards.keys():
+                count = rewards[(state, action)][1]
+                curr_mean= rewards[(state, action)][0] 
+                new_mean = ((count*curr_mean)+reward)/(count+1)
+                rewards[(state, action)][0] = new_mean
+                rewards[(state, action)][1] += 1
+            else:
+                rewards[(state, action)] = [0.0,0.0]
+                rewards[(state, action)][0] = reward
+                rewards[(state, action)][1] = 1
+        
+            
+        for i in range(num_iter):
+            for s in states:
+                #Q = dict()
+                max_Q = float("-inf")
+                board = chess.Board(s)
+                for a in board.legal_moves:
+                    board.push(a)
+                    if (s,a) in rewards.keys():
+                        R = rewards[(s,a)][0]
+                    else:
+                        R = 0.0
+
+                    s_prime = board.fen()
+                    if s_prime in states:
+                        V = U[s_prime]
+                    else:
+                        V = eval.evaluate_board(board)/10
+                    Q = R + (gamma*V)
+                    if Q > max_Q:
+                        max_Q = Q
+
+                    board.pop()
+
+            if max_Q == float("-inf"):
+                max_Q = eval.evaluate_board(chess.Board(s))/10
+            U[s] = max_Q
+            print('.',end='')
+        #U_prime = pd.Series(U, name = 'utility')
+        #U_prime.index.name='state'
+        #U_p = pd.DataFrame(U_prime)
+        #return U_prime,U
+        self.utilities = U
+        with open(Path(util.HISTORY_DIR / 'updated_utility.json'), 'w') as f:
+            json.dump(U, f)
+
+
+
+            
     def write_data(self, filename, did_win = None):
         for row in self.data:
             if did_win == 1:

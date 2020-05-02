@@ -9,6 +9,7 @@ import chess.engine
 from multiprocessing import Pool, Manager, Process
 from models import model as md
 from pathlib import Path
+import markovsearch as mk
 import csv
 import json
 
@@ -235,6 +236,15 @@ def session_4(model, num_iter = 50):
     util.log(message, logger_str="train_sess", msg_type=2, write_to_console=False, path = util.HISTORY_DIR, filename = 'game_logs.log')
 
 
+def val_session(history_file, num_iter):
+    start = time.time()
+    util.log('STARTED: Q-Value Iteration', logger_str="val_iter", msg_type=2, write_to_console=False, path = util.HISTORY_DIR, filename = 'train_logs.log')
+    end = time.time()
+    agent = mk.markovagent()
+    agent.value_iteration(history_file = history_file  ,num_iter = num_iter)
+    exec_time = (end - start)
+    message = 'COMPLETED: Q-Value Iteration {} iterations\nExecution Time: {} seconds\n********************************************************'.format(num_iter, exec_time)
+    util.log(message, logger_str="val_iter", msg_type=2, write_to_console=False, path = util.HISTORY_DIR, filename = 'game_logs.log')
 
 class stockfish_agent:
 
@@ -291,8 +301,8 @@ if __name__ == '__main__':
     #a1 = ab.alphabeta_agent()
     
     
-    session_4(model, 500)
+    #session_4(model, 500)
     #session_1(model, 200)
-    
+    val_session(history_file = 'models/history/history3.csv', num_iter = 100)
  
 
