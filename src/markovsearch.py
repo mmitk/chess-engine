@@ -46,7 +46,11 @@ class markovagent:
 
     def quiesce( self, alpha, beta, board ):
     # need to import evaluate.py
-        stand_pat = eval.evaluate_board(board)
+        #stand_pat = eval.evaluate_board(board)
+        try:
+            stand_pat = self.utilities[board.fen()]
+        except Exception:
+            stand_pat = eval.evaluate_board(board)
         if( stand_pat >= beta ):
             return beta
         if( alpha < stand_pat ):
