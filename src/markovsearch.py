@@ -155,6 +155,9 @@ class markovagent:
                 max_Q = eval.evaluate_board(chess.Board(s))/10
             U[s] = max_Q
             print('.',end='')
+            self.utilities = U
+            with open(Path(util.HISTORY_DIR / 'updated_utility.json'), 'w') as f:
+                json.dump(U, f)
         #U_prime = pd.Series(U, name = 'utility')
         #U_prime.index.name='state'
         #U_p = pd.DataFrame(U_prime)
