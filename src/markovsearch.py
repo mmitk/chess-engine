@@ -20,8 +20,9 @@ class markovagent:
         else:
             self.model = md.svm(filename = filename, historic = historic)
         self.data = list()
-        if utilities_file == None:
+        if utilities_file is None:
             self.utilities = dict()
+            print('no utility file')
         else:
             with open(utilities_file, 'r') as f:
                 self.utilities = json.load(f)
@@ -50,6 +51,7 @@ class markovagent:
         try:
             stand_pat = self.utilities[board.fen()]
         except Exception:
+            print('@',end='')
             stand_pat = eval.evaluate_board(board)
         if( stand_pat >= beta ):
             return beta
@@ -68,7 +70,7 @@ class markovagent:
                     alpha = score  
         return alpha
 
-    def make_move(self, board):
+    def make_move(self, board, depth = None):
         if board.is_checkmate():
             print('.',end = '')
             return None
