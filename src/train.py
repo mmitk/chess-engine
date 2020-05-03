@@ -303,6 +303,6 @@ if __name__ == '__main__':
     
     #session_4(model, 500)
     #session_1(model, 200)
-    val_session(history_file = 'models/history/history3.csv', num_iter = 100)
+    val_session(history_file = 'models/history/historyTotal.csv', num_iter = 200)
  
 
