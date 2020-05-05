@@ -25,7 +25,8 @@ class alphabeta_agent:
     def alphabeta( self, alpha, beta, depthleft, board ):
         bestscore = -9999
         if( depthleft == 0 ):
-            return self.quiesce( alpha, beta, board )
+            #return self.quiesce( alpha, beta, board )
+            return eval.evaluate_board(board)
         for move in board.legal_moves:
             #theta = self.predict_probability(board, move)
             board.push(move)   

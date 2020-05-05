@@ -12,7 +12,7 @@ import eval
 
 
 class markovagent:
-    def __init__(self, historic = False, filename=None, model = None, utilities_file = None):
+    def __init__(self, historic = False, filename=None, model = None, utilities_file = None, depth = 1):
         self.type = 4
         self.data = list()
         if not model is None:
@@ -26,6 +26,7 @@ class markovagent:
         else:
             with open(utilities_file, 'r') as f:
                 self.utilities = json.load(f)
+        self.depth = depth
 
     
     def alphabeta( self, alpha, beta, depthleft, board ):
@@ -81,7 +82,7 @@ class markovagent:
         for move in board.legal_moves:
             theta = self.predict_probability(board, move)
             board.push(move)
-            boardValue = theta*(- self.alphabeta(-beta, -alpha, 0,board))
+            boardValue = theta*(- self.alphabeta(-beta, -alpha, self.depth-1,board))
             if boardValue > bestValue:
                 bestValue = boardValue
                 bestMove = move

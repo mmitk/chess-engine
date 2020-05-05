@@ -170,8 +170,8 @@ class chessGame:
     
     def get_winner(self):
         if self.winner == Winner.WHITE:
-            return 0
+            return self.agent1.type
         elif self.winner == Winner.BLACK:
-            return 1
+            return self.agent1.type
         else:
-            return -1
+            return -7
