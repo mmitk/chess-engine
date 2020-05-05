@@ -150,6 +150,7 @@ class markovagent:
                     if s_prime in states:
                         V = U[s_prime]
                     else:
+                        states.append(s_prime)
                         V = eval.evaluate_board(board)/10
                     Q = R + (gamma*V)
                     if Q > max_Q:

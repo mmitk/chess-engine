@@ -58,7 +58,7 @@ class chessGame:
         self.move_history = list()
 
 
-    def play_out(self, depth = 1, stats_file = 'stats.json', history_file = 'history.csv', train = True):
+    def play_out(self, depth = 1, stats_file = 'stats.json', history_file = 'historyTotal.csv', train = True):
         """
         Playout the actual game between the two agents if they exist, otherwise raise an error
         Game loop iterates until a checkmate occurs
