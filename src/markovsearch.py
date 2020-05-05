@@ -52,7 +52,7 @@ class markovagent:
         try:
             stand_pat = self.utilities[board.fen()]
         except Exception:
-            print('@',end='')
+            #print('@',end='')
             stand_pat = eval.evaluate_board(board)
         if( stand_pat >= beta ):
             return beta
@@ -142,10 +142,7 @@ class markovagent:
                 board = chess.Board(s)
                 for a in board.legal_moves:
                     board.push(a)
-                    if (s,a) in rewards.keys():
-                        R = rewards[(s,a)][0]
-                    else:
-                        R = 0.0
+                    R = self.predict_probability(board.fen(), a)
 
                     s_prime = board.fen()
                     if s_prime in states:

@@ -12,7 +12,7 @@ import util
 
 class alphabeta_agent:
     
-    def __init__(self, historic = False, filename=None, model = None):
+    def __init__(self, historic = False, filename=None, model = None,utilities_file = None):
         self.type = 1
         self.data = list()
         if not model is None:
@@ -25,9 +25,12 @@ class alphabeta_agent:
     def alphabeta( self, alpha, beta, depthleft, board ):
         bestscore = -9999
         if( depthleft == 0 ):
-            #return self.quiesce( alpha, beta, board )
-            return eval.evaluate_board(board)
-        for move in board.legal_moves:
+            try:
+                val = self.utilities[board.fen()]
+                return val
+            except Exception:
+                return eval.evaluate_board(board)
+        for move in board.psuedo_legal_moves:
             #theta = self.predict_probability(board, move)
             board.push(move)   
             score = float(-self.alphabeta( -beta, -alpha, depthleft - 1, board))

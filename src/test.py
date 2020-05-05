@@ -127,7 +127,7 @@ def depth_3_test(model, num_iter = 10):
 def depth_4_test(model, num_iter = 10):
     util.log('Testing depth 4 started', logger_str="train_sess", msg_type=2, write_to_console=False, path = util.HISTORY_DIR, filename = 'game_logs.log')
     ab_agent = ab.alphabeta_agent()
-    markov_agent = mk.markovagent(model = model,utilities_file = Path(util.HISTORY_DIR / 'updated_utility.json') )
+    markov_agent = mk.markovagent(model = model,utilities_file = Path(util.HISTORY_DIR / 'updated_utility.json'), depth = 4 )
     games_won = {'Markov Agent': 0, 'Alphabeta Agent':0, 'Draw':0}
 
     for i in range(num_iter):
