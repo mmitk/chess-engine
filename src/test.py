@@ -5,6 +5,7 @@ import chess
 from models import model as md
 import util
 from env import chessGame
+import pandas as pd
 import json
 
 def update_vals(depth, num_wins, num_losses):
@@ -165,7 +166,9 @@ if __name__ == "__main__":
     data = prec.transform()
     model.fit(data)
     model.write_file(Path(util.HISTORY_DIR / 'model_3.pkl'))
-    eval_model = md.svm(filename = Path(util.HISTORY_DIR / 'eval_model1.pkl'), historic = True)
+    eval_model = md.svm(eval = True)
+    data = pd.read_csv('models/history/raw_data.csv')
+    eval_model.fit(data)
     depth_1_test(model,eval_model = eval_model,num_iter = 10)
     depth_2_test(model,eval_model = eval_model,num_iter = 10)
     depth_3_test(model,eval_model = eval_model,num_iter = 10)

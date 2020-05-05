@@ -11,7 +11,7 @@ import os
 import util
 class svm():
     
-    def __init__(self, filename = None, historic = False, gam = 1/69):
+    def __init__(self, filename = None, historic = False, gam = 1/69, eval = False):
         if eval is True:
             #gam = 1/64
             self._model = sv.SVR(kernel = 'rbf')
