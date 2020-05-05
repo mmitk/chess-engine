@@ -172,6 +172,6 @@ class chessGame:
         if self.winner == Winner.WHITE:
             return self.agent1.type
         elif self.winner == Winner.BLACK:
-            return self.agent1.type
+            return self.agent2.type
         else:
             return -7
