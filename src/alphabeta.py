@@ -29,7 +29,7 @@ class alphabeta_agent:
                 val = self.utilities[board.fen()]
                 return val
             except Exception:
-                return eval.evaluate_board(board)
+                return 0
         for move in board.psuedo_legal_moves:
             #theta = self.predict_probability(board, move)
             board.push(move)   

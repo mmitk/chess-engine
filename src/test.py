@@ -22,10 +22,10 @@ def update_vals(depth, num_wins, num_losses):
     with open(Path(util.HISTORY_DIR / 'test_stats.json'), 'w') as f:
         json.dump(totals, f)
 
-def depth_1_test(model, num_iter = 10):
+def depth_1_test(model, eval_model, num_iter = 10):
     util.log('Testing depth 1 started', logger_str="train_sess", msg_type=2, write_to_console=False, path = util.HISTORY_DIR, filename = 'game_logs.log')
     ab_agent = ab.alphabeta_agent()
-    markov_agent = mk.markovagent(model = model,utilities_file = Path(util.HISTORY_DIR / 'updated_utility.json') )
+    markov_agent = mk.markovagent(model = model,utilities_file = Path(util.HISTORY_DIR / 'updated_utility.json') ,eval_model = eval_model)
     games_won = {'Markov Agent': 0, 'Alphabeta Agent':0, 'Draw':0}
 
     for i in range(num_iter):
@@ -56,10 +56,10 @@ def depth_1_test(model, num_iter = 10):
     util.log('COMPLETED: Testing depth 1', logger_str="train_sess", msg_type=2, write_to_console=False, path = util.HISTORY_DIR, filename = 'game_logs.log')
 
 
-def depth_2_test(model, num_iter = 10):
+def depth_2_test(model, eval_model,num_iter = 10):
     util.log('Testing depth 2 started', logger_str="train_sess", msg_type=2, write_to_console=False, path = util.HISTORY_DIR, filename = 'game_logs.log')
     ab_agent = ab.alphabeta_agent()
-    markov_agent = mk.markovagent(model = model,utilities_file = Path(util.HISTORY_DIR / 'updated_utility.json'), depth = 2 )
+    markov_agent = mk.markovagent(model = model,utilities_file = Path(util.HISTORY_DIR / 'updated_utility.json'), depth = 2,eval_model = eval_model )
     games_won = {'Markov Agent': 0, 'Alphabeta Agent':0, 'Draw':0}
 
     for i in range(num_iter):
@@ -90,10 +90,10 @@ def depth_2_test(model, num_iter = 10):
     util.log('COMPLETED: Testing depth 2', logger_str="train_sess", msg_type=2, write_to_console=False, path = util.HISTORY_DIR, filename = 'game_logs.log')
 
 
-def depth_3_test(model, num_iter = 10):
+def depth_3_test(model, eval_model,num_iter = 10):
     util.log('Testing depth 3 started', logger_str="train_sess", msg_type=2, write_to_console=False, path = util.HISTORY_DIR, filename = 'game_logs.log')
     ab_agent = ab.alphabeta_agent()
-    markov_agent = mk.markovagent(model = model,utilities_file = Path(util.HISTORY_DIR / 'updated_utility.json'),depth = 3 )
+    markov_agent = mk.markovagent(model = model,utilities_file = Path(util.HISTORY_DIR / 'updated_utility.json'),depth = 3, eval_model = eval_model)
     games_won = {'Markov Agent': 0, 'Alphabeta Agent':0, 'Draw':0}
 
     for i in range(num_iter):
@@ -124,10 +124,10 @@ def depth_3_test(model, num_iter = 10):
     util.log('COMPLETED: Testing depth 3', logger_str="train_sess", msg_type=2, write_to_console=False, path = util.HISTORY_DIR, filename = 'game_logs.log')
 
 
-def depth_4_test(model, num_iter = 10):
+def depth_4_test(model,eval_model, num_iter = 10):
     util.log('Testing depth 4 started', logger_str="train_sess", msg_type=2, write_to_console=False, path = util.HISTORY_DIR, filename = 'game_logs.log')
     ab_agent = ab.alphabeta_agent()
-    markov_agent = mk.markovagent(model = model,utilities_file = Path(util.HISTORY_DIR / 'updated_utility.json'), depth = 4 )
+    markov_agent = mk.markovagent(model = model,utilities_file = Path(util.HISTORY_DIR / 'updated_utility.json'), depth = 4 , eval_model = eval_model)
     games_won = {'Markov Agent': 0, 'Alphabeta Agent':0, 'Draw':0}
 
     for i in range(num_iter):
@@ -165,9 +165,9 @@ if __name__ == "__main__":
     data = prec.transform()
     model.fit(data)
     model.write_file(Path(util.HISTORY_DIR / 'model_3.pkl'))
-
-    depth_1_test(model, 10)
-    depth_2_test(model, 10)
-    depth_3_test(model, 10)
-    depth_4_test(model, 10)
+    eval_model = md.svm(filename = Path(util.HISTORY_DIR / 'eval_model1.pkl'), historic = True)
+    depth_1_test(model,eval_model = eval_model,num_iter = 10)
+    depth_2_test(model,eval_model = eval_model,num_iter = 10)
+    depth_3_test(model,eval_model = eval_model,num_iter = 10)
+    depth_4_test(model,eval_model = eval_model, num_iter =10)
 

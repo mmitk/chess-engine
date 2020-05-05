@@ -12,7 +12,7 @@ import eval
 
 
 class markovagent:
-    def __init__(self, historic = False, filename=None, model = None, utilities_file = None, depth = 1):
+    def __init__(self, historic = False, filename=None, model = None, utilities_file = None, depth = 1, eval_model = None):
         self.type = 4
         self.data = list()
         if not model is None:
@@ -27,7 +27,7 @@ class markovagent:
             with open(utilities_file, 'r') as f:
                 self.utilities = json.load(f)
         self.depth = depth
-
+        self.eval_model = eval_model
     
     def alphabeta( self, alpha, beta, depthleft, board ):
         bestscore = -9999
@@ -53,7 +53,8 @@ class markovagent:
             stand_pat = self.utilities[board.fen()]
         except Exception:
             #print('@',end='')
-            stand_pat = eval.evaluate_board(board)
+            #stand_pat = eval.evaluate_board(board)
+            stand_pat = predict_eval(board)
         if( stand_pat >= beta ):
             return beta
         if( alpha < stand_pat ):
@@ -100,6 +101,13 @@ class markovagent:
         prec.fit(raw_data = data)
         data = prec.transform(predict = True)
         return self.model.predict_proba(data)
+
+    def predict_eval(self, board):
+        data=[{'state': board.fen()}]
+        prec = md.preprocessor()
+        prec.fit(raw_data = data)
+        data = prec.transform(predict = True, eval = True)
+        return self.model.predict(data)
 
 
     def value_iteration(self,history_file, gamma = 0.7, num_iter = 100):

@@ -12,7 +12,11 @@ import util
 class svm():
     
     def __init__(self, filename = None, historic = False, gam = 1/69):
-        if filename is None:
+        if eval is True:
+            #gam = 1/64
+            self._model = sv.SVR(kernel = 'rbf')
+            
+        elif filename is None:
                 self._model = sv.SVC(kernel = 'rbf', gamma=gam, probability = True)
 
 
@@ -28,7 +32,6 @@ class svm():
         # placeholder!!!
         else: 
             self._model = sv.SVC(kernel = 'rbf', gamma=gam)
-      
     
     def fit(self, dataset, formatted = True):
         dataset = dataset.drop_duplicates()
@@ -70,11 +73,13 @@ class preprocessor(object):
     def __init__(self):
         super().__init__
 
-    def fit(self, filename = None, raw_data = None):
+    def fit(self, filename = None, raw_data = None, dataframe = None):
         if filename is not None:
             self.raw_data = pd.read_csv(filename)
         elif raw_data is not None:
             self.raw_data = pd.DataFrame(raw_data)
+        else:
+            self.raw_data = dataframe
         return self.raw_data
 
     def transform(self, predict = False):
@@ -82,27 +87,35 @@ class preprocessor(object):
         if not predict:
             class_ = data.pop('class')
         data['state'] = data['state'].apply(self.serialize2)
-        data = pd.concat([data['state'].apply(pd.Series), data['move']], axis = 1)
-        move = data.pop('move')
-        move = move.apply(self.listify).apply(pd.Series)
+        if not eval:
+            data = pd.concat([data['state'].apply(pd.Series), data['move']], axis = 1)
+            move = data.pop('move')
+            move = move.apply(self.listify).apply(pd.Series)
 
         #data = pd.concat([data,move.apply(self.listify).apply(pd.Series)], axis = 1)
-        move = pd.DataFrame(move).rename(columns = {0:'m1',1:'m2',2:'m3',3:'m4',4:'m5'})
+            move = pd.DataFrame(move).rename(columns = {0:'m1',1:'m2',2:'m3',3:'m4',4:'m5'})
 
-        try:
-            move['m5'] = move['m5'].apply(self.encode_move)
-        except Exception:
-            move['m5'] = 0
+            try:
+                move['m5'] = move['m5'].apply(self.encode_move)
+            except Exception:
+                move['m5'] = 0
 
-        move['m1'] = move['m1'].apply(self.encode_move)
-        move['m2'] = move['m2'].apply(self.encode_move)
-        move['m3'] = move['m3'].apply(self.encode_move)
-        move['m4'] = move['m4'].apply(self.encode_move)
+            move['m1'] = move['m1'].apply(self.encode_move)
+            move['m2'] = move['m2'].apply(self.encode_move)
+            move['m3'] = move['m3'].apply(self.encode_move)
+            move['m4'] = move['m4'].apply(self.encode_move)
 
         
-        data = pd.concat([data,move], axis = 1)
-        if not predict:
-            data = pd.concat([data,class_], axis = 1)
+            data = pd.concat([data,move], axis = 1)
+            if not predict:
+                data = pd.concat([data,class_], axis = 1)
+            return data
+        
+        else:
+            if not predict:
+                data = pd.concat([data['state'].apply(pd.Series), class_], axis = 1)
+            else:
+                data = data['state'].apply(pd.Series)
         return data
     
     def encode_move(self,m):
