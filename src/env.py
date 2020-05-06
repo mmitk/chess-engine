@@ -118,16 +118,19 @@ class chessGame:
         # Now add to historic dataset of moves made by each agent
         if self.winner == Winner.WHITE:
             winner = self.agent1.type
+            self.winner_type = winner
             print('Agent 1 Won!')
             self.agent1.write_data(history_file, did_win = 1)
             self.agent2.write_data(history_file, did_win = int(0))
         elif self.winner == Winner.BLACK:
             winner = self.agent2.type
+            self.winner_type = winner
             print('Agent 2 Won!')
             self.agent1.write_data(history_file, did_win = int(0))
             self.agent2.write_data(history_file, did_win = 1)
         else:
             winner = -1
+            self.winner_type = winner
             print('Draw!')
             #self.agent1.write_data('history.csv', did_win = int(0))
             #self.agent2.write_data('history.csv', did_win = int(0))
@@ -169,9 +172,4 @@ class chessGame:
             json.dump(totals, f)
     
     def get_winner(self):
-        if self.winner == Winner.WHITE:
-            return 0
-        elif self.winner == Winner.BLACK:
-            return 1
-        else:
-            return -1
+       return self.winner_type

@@ -49,7 +49,7 @@ class mcts_agent(object):
             return None
                  
 
-    def monte_carlo_value(self, board, N = 100):
+    def monte_carlo_value(self, board, N = 5):
         try:
             scores = []
             with Pool() as p:

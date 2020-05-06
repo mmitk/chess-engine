@@ -6,6 +6,7 @@ from models import model as md
 import util
 from env import chessGame
 import json
+from mcts import mcts_agent
 
 def update_vals(depth, num_wins, num_losses):
     # map of depths to key values in json file
@@ -24,23 +25,23 @@ def update_vals(depth, num_wins, num_losses):
 
 def depth_1_test(model, num_iter = 10):
     util.log('Testing depth 1 started', logger_str="train_sess", msg_type=2, write_to_console=False, path = util.HISTORY_DIR, filename = 'game_logs.log')
-    ab_agent = ab.alphabeta_agent()
+    mc_agent = mcts_agent()
     markov_agent = mk.markovagent(model = model)
     games_won = {'Markov Agent': 0, 'Alphabeta Agent':0, 'Draw':0}
 
     for i in range(num_iter):
         print('#',end='')
         board = chess.Board()
-        game = chessGame(ab_agent, markov_agent)
+        game = chessGame(mc_agent, markov_agent)
         game.set_board(board)
         game.play_out(history_file = 'test_depth_1.csv', train = False)
 
         winner = game.get_winner()
 
         # mark whether model based agent won
-        if winner == 1:
+        if winner == markov_agent.type:
             games_won['Markov Agent'] += 1
-        elif winner == 0:
+        elif winner == mc_agent.type:
             games_won['Alphabeta Agent'] += 1
 
         # reset the game
@@ -52,14 +53,14 @@ def depth_1_test(model, num_iter = 10):
 
 def depth_2_test(model, num_iter = 10):
     util.log('Testing depth 1 started', logger_str="train_sess", msg_type=2, write_to_console=False, path = util.HISTORY_DIR, filename = 'game_logs.log')
-    ab_agent = ab.alphabeta_agent()
+    mc_agent = mcts_agent()
     markov_agent = mk.markovagent(model = model)
     games_won = {'Markov Agent': 0, 'Alphabeta Agent':0, 'Draw':0}
 
     for i in range(num_iter):
         print('#',end='')
         board = chess.Board()
-        game = chessGame(ab_agent, markov_agent)
+        game = chessGame(mc_agent, markov_agent)
         game.set_board(board)
         game.play_out(history_file = 'test_depth_1.csv', depth = 2, train = False)
 
@@ -80,14 +81,14 @@ def depth_2_test(model, num_iter = 10):
 
 def depth_3_test(model, num_iter = 10):
     util.log('Testing depth 1 started', logger_str="train_sess", msg_type=2, write_to_console=False, path = util.HISTORY_DIR, filename = 'game_logs.log')
-    ab_agent = ab.alphabeta_agent()
+    mc_agent = mcts_agent()
     markov_agent = mk.markovagent(model = model)
     games_won = {'Markov Agent': 0, 'Alphabeta Agent':0, 'Draw':0}
 
     for i in range(num_iter):
         print('#',end='')
         board = chess.Board()
-        game = chessGame(ab_agent, markov_agent)
+        game = chessGame(mc_agent, markov_agent)
         game.set_board(board)
         game.play_out(history_file = 'test_depth_1.csv', depth = 3, train = False)
 
@@ -108,14 +109,14 @@ def depth_3_test(model, num_iter = 10):
 
 def depth_4_test(model, num_iter = 10):
     util.log('Testing depth 1 started', logger_str="train_sess", msg_type=2, write_to_console=False, path = util.HISTORY_DIR, filename = 'game_logs.log')
-    ab_agent = ab.alphabeta_agent()
+    mc_agent = mcts_agent()
     markov_agent = mk.markovagent(model = model)
     games_won = {'Markov Agent': 0, 'Alphabeta Agent':0, 'Draw':0}
 
     for i in range(num_iter):
         print('#',end='')
         board = chess.Board()
-        game = chessGame(ab_agent, markov_agent)
+        game = chessGame(mc_agent, markov_agent)
         game.set_board(board)
         game.play_out(history_file = 'test_depth_1.csv', depth = 4, train = False)
 
