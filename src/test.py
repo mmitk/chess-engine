@@ -7,6 +7,7 @@ import util
 from env import chessGame
 import json
 from mcts import mcts_agent
+from multiprocessing import Manager
 
 def update_vals(depth, num_wins, num_losses):
     # map of depths to key values in json file
@@ -24,8 +25,9 @@ def update_vals(depth, num_wins, num_losses):
         json.dump(totals, f)
 
 def depth_1_test(model, num_iter = 10):
+    manager = Manager()
     util.log('Testing depth 1 started', logger_str="train_sess", msg_type=2, write_to_console=False, path = util.HISTORY_DIR, filename = 'game_logs.log')
-    mc_agent = mcts_agent()
+    mc_agent = mcts_agent(manager = manager)
     markov_agent = mk.markovagent(model = model)
     games_won = {'Markov Agent': 0, 'Alphabeta Agent':0, 'Draw':0}
 
@@ -52,8 +54,9 @@ def depth_1_test(model, num_iter = 10):
 
 
 def depth_2_test(model, num_iter = 10):
+    manager = Manager()
     util.log('Testing depth 1 started', logger_str="train_sess", msg_type=2, write_to_console=False, path = util.HISTORY_DIR, filename = 'game_logs.log')
-    mc_agent = mcts_agent()
+    mc_agent = mcts_agent(manager = manager)
     markov_agent = mk.markovagent(model = model)
     games_won = {'Markov Agent': 0, 'Alphabeta Agent':0, 'Draw':0}
 
@@ -80,8 +83,9 @@ def depth_2_test(model, num_iter = 10):
 
 
 def depth_3_test(model, num_iter = 10):
+    manager = Manager()
     util.log('Testing depth 1 started', logger_str="train_sess", msg_type=2, write_to_console=False, path = util.HISTORY_DIR, filename = 'game_logs.log')
-    mc_agent = mcts_agent()
+    mc_agent = mcts_agent(manager = manager)
     markov_agent = mk.markovagent(model = model)
     games_won = {'Markov Agent': 0, 'Alphabeta Agent':0, 'Draw':0}
 
@@ -108,8 +112,9 @@ def depth_3_test(model, num_iter = 10):
 
 
 def depth_4_test(model, num_iter = 10):
+    manager = Manager()
     util.log('Testing depth 1 started', logger_str="train_sess", msg_type=2, write_to_console=False, path = util.HISTORY_DIR, filename = 'game_logs.log')
-    mc_agent = mcts_agent()
+    mc_agent = mcts_agent(manager = manager)
     markov_agent = mk.markovagent(model = model)
     games_won = {'Markov Agent': 0, 'Alphabeta Agent':0, 'Draw':0}
 

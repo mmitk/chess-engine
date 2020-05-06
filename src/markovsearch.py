@@ -58,7 +58,7 @@ class markovagent:
                     alpha = score  
         return alpha
 
-    def make_move(self, board):
+    def make_move(self, board, depth = 1):
         if board.is_checkmate():
             print('.',end = '')
             return None
@@ -69,7 +69,7 @@ class markovagent:
         for move in board.legal_moves:
             theta = self.predict_probability(board, move)
             board.push(move)
-            boardValue = theta*(- self.alphabeta(-beta, -alpha, 0,board))
+            boardValue = theta*(- self.alphabeta(-beta, -alpha, depth - 1,board))
             if boardValue > bestValue:
                 bestValue = boardValue
                 bestMove = move

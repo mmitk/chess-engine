@@ -27,7 +27,7 @@ class mcts_agent(object):
         if not model is None:
             self.model = model
         else:
-            self.model = md.svm(filename = filename, historic = historic)
+            self.model = None
         
         
 
@@ -63,12 +63,12 @@ class mcts_agent(object):
         if board.is_checkmate():
             return None
         for move in board.legal_moves:
-            theta = self.predict_probability(board, move)
+            #theta = self.predict_probability(board, move)
             board.push(move)
-            val = theta*-self.monte_carlo_value(board, N = 100)
+            val = -self.monte_carlo_value(board, N = 100)
             if val is None:
                 return None
-            actions[move] = theta *  (-val)
+            actions[move] = (-val)
             board.pop()
 
         

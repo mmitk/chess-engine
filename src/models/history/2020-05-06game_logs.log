@@ -1,0 +1,130 @@
+00:19:33:INFO:[train_sess]:Testing depth 1 started
+00:19:33:INFO:[game_play]:Game Started: 2 as white, 4 as black
+00:20:00:INFO:[game_play]:GAME OVER: 2 as white, 4 as black, 4 won
+ EXECUTION: 26.873567819595337 seconds
+00:20:00:INFO:[game_play]:Game Started: 2 as white, 4 as black
+00:20:41:INFO:[game_play]:GAME OVER: 2 as white, 4 as black, 4 won
+ EXECUTION: 40.670620918273926 seconds
+00:20:41:INFO:[game_play]:Game Started: 2 as white, 4 as black
+00:21:21:INFO:[game_play]:GAME OVER: 2 as white, 4 as black, 4 won
+ EXECUTION: 39.425402879714966 seconds
+00:21:21:INFO:[game_play]:Game Started: 2 as white, 4 as black
+00:22:05:INFO:[game_play]:GAME OVER: 2 as white, 4 as black, 4 won
+ EXECUTION: 44.316444635391235 seconds
+00:22:05:INFO:[game_play]:Game Started: 2 as white, 4 as black
+00:22:48:INFO:[game_play]:GAME OVER: 2 as white, 4 as black, 4 won
+ EXECUTION: 42.841632604599 seconds
+00:22:48:INFO:[game_play]:Game Started: 2 as white, 4 as black
+00:23:22:INFO:[game_play]:GAME OVER: 2 as white, 4 as black, 4 won
+ EXECUTION: 33.53481435775757 seconds
+00:23:22:INFO:[game_play]:Game Started: 2 as white, 4 as black
+00:24:13:INFO:[game_play]:GAME OVER: 2 as white, 4 as black, 4 won
+ EXECUTION: 50.91372227668762 seconds
+00:24:13:INFO:[game_play]:Game Started: 2 as white, 4 as black
+00:24:51:INFO:[game_play]:GAME OVER: 2 as white, 4 as black, 4 won
+ EXECUTION: 38.396894454956055 seconds
+00:24:51:INFO:[game_play]:Game Started: 2 as white, 4 as black
+00:26:14:INFO:[game_play]:GAME OVER: 2 as white, 4 as black, 4 won
+ EXECUTION: 82.74311661720276 seconds
+00:26:14:INFO:[game_play]:Game Started: 2 as white, 4 as black
+00:26:54:INFO:[game_play]:GAME OVER: 2 as white, 4 as black, 4 won
+ EXECUTION: 40.05811357498169 seconds
+00:26:54:INFO:[train_sess]:COMPLETED: Testing depth 1
+00:26:54:INFO:[train_sess]:Testing depth 1 started
+00:26:54:INFO:[game_play]:Game Started: 2 as white, 4 as black
+00:28:41:INFO:[game_play]:GAME OVER: 2 as white, 4 as black, 4 won
+ EXECUTION: 106.42914843559265 seconds
+00:28:41:INFO:[game_play]:Game Started: 2 as white, 4 as black
+00:29:40:INFO:[game_play]:GAME OVER: 2 as white, 4 as black, 4 won
+ EXECUTION: 59.42409825325012 seconds
+00:29:40:INFO:[game_play]:Game Started: 2 as white, 4 as black
+00:31:42:INFO:[game_play]:ERROR WITH MCTS
+00:31:42:INFO:[game_play]:GAME OVER: 2 as white, 4 as black, -1 won
+ EXECUTION: 122.13444876670837 seconds
+00:31:42:INFO:[game_play]:Game Started: 2 as white, 4 as black
+00:32:57:INFO:[game_play]:GAME OVER: 2 as white, 4 as black, 4 won
+ EXECUTION: 74.20056986808777 seconds
+00:32:57:INFO:[game_play]:Game Started: 2 as white, 4 as black
+00:34:21:INFO:[game_play]:GAME OVER: 2 as white, 4 as black, 4 won
+ EXECUTION: 84.05660367012024 seconds
+00:34:21:INFO:[game_play]:Game Started: 2 as white, 4 as black
+00:37:07:INFO:[game_play]:GAME OVER: 2 as white, 4 as black, 4 won
+ EXECUTION: 166.46060156822205 seconds
+00:37:07:INFO:[game_play]:Game Started: 2 as white, 4 as black
+00:38:07:INFO:[game_play]:GAME OVER: 2 as white, 4 as black, 4 won
+ EXECUTION: 59.25741529464722 seconds
+00:38:07:INFO:[game_play]:Game Started: 2 as white, 4 as black
+00:39:17:INFO:[game_play]:GAME OVER: 2 as white, 4 as black, 4 won
+ EXECUTION: 70.67954564094543 seconds
+00:39:17:INFO:[game_play]:Game Started: 2 as white, 4 as black
+00:44:43:INFO:[game_play]:GAME OVER: 2 as white, 4 as black, 4 won
+ EXECUTION: 325.2492594718933 seconds
+00:44:43:INFO:[game_play]:Game Started: 2 as white, 4 as black
+00:45:35:INFO:[game_play]:GAME OVER: 2 as white, 4 as black, 4 won
+ EXECUTION: 52.057512283325195 seconds
+00:45:35:INFO:[train_sess]:COMPLETED: Testing depth 1
+00:45:35:INFO:[train_sess]:Testing depth 1 started
+00:45:35:INFO:[game_play]:Game Started: 2 as white, 4 as black
+00:47:02:INFO:[game_play]:GAME OVER: 2 as white, 4 as black, 4 won
+ EXECUTION: 87.42206621170044 seconds
+00:47:02:INFO:[game_play]:Game Started: 2 as white, 4 as black
+00:48:06:INFO:[game_play]:GAME OVER: 2 as white, 4 as black, 4 won
+ EXECUTION: 63.424872636795044 seconds
+00:48:06:INFO:[game_play]:Game Started: 2 as white, 4 as black
+00:49:16:INFO:[game_play]:GAME OVER: 2 as white, 4 as black, 4 won
+ EXECUTION: 69.55369973182678 seconds
+00:49:16:INFO:[game_play]:Game Started: 2 as white, 4 as black
+00:49:46:INFO:[game_play]:GAME OVER: 2 as white, 4 as black, 4 won
+ EXECUTION: 30.479076385498047 seconds
+00:49:46:INFO:[game_play]:Game Started: 2 as white, 4 as black
+00:51:09:INFO:[game_play]:GAME OVER: 2 as white, 4 as black, 4 won
+ EXECUTION: 82.69192886352539 seconds
+00:51:09:INFO:[game_play]:Game Started: 2 as white, 4 as black
+00:51:52:INFO:[game_play]:GAME OVER: 2 as white, 4 as black, 4 won
+ EXECUTION: 43.3402373790741 seconds
+00:51:52:INFO:[game_play]:Game Started: 2 as white, 4 as black
+00:53:13:INFO:[game_play]:GAME OVER: 2 as white, 4 as black, 4 won
+ EXECUTION: 80.24649953842163 seconds
+00:53:13:INFO:[game_play]:Game Started: 2 as white, 4 as black
+01:09:54:INFO:[game_play]:GAME OVER: 2 as white, 4 as black, 4 won
+ EXECUTION: 1001.6231079101562 seconds
+01:09:54:INFO:[game_play]:Game Started: 2 as white, 4 as black
+01:10:28:INFO:[game_play]:GAME OVER: 2 as white, 4 as black, 4 won
+ EXECUTION: 33.480175256729126 seconds
+01:10:28:INFO:[game_play]:Game Started: 2 as white, 4 as black
+01:17:18:INFO:[game_play]:GAME OVER: 2 as white, 4 as black, 4 won
+ EXECUTION: 409.46041893959045 seconds
+01:17:18:INFO:[train_sess]:COMPLETED: Testing depth 1
+01:17:18:INFO:[train_sess]:Testing depth 1 started
+01:17:18:INFO:[game_play]:Game Started: 2 as white, 4 as black
+01:24:46:INFO:[game_play]:GAME OVER: 2 as white, 4 as black, 4 won
+ EXECUTION: 448.2627604007721 seconds
+01:24:46:INFO:[game_play]:Game Started: 2 as white, 4 as black
+01:26:50:INFO:[game_play]:GAME OVER: 2 as white, 4 as black, 4 won
+ EXECUTION: 123.99773263931274 seconds
+01:26:50:INFO:[game_play]:Game Started: 2 as white, 4 as black
+01:46:49:INFO:[game_play]:GAME OVER: 2 as white, 4 as black, 2 won
+ EXECUTION: 1198.6707968711853 seconds
+01:46:49:INFO:[game_play]:Game Started: 2 as white, 4 as black
+02:23:00:INFO:[game_play]:GAME OVER: 2 as white, 4 as black, 4 won
+ EXECUTION: 2170.7552342414856 seconds
+02:23:00:INFO:[game_play]:Game Started: 2 as white, 4 as black
+02:25:52:INFO:[game_play]:GAME OVER: 2 as white, 4 as black, 4 won
+ EXECUTION: 172.15648698806763 seconds
+02:25:52:INFO:[game_play]:Game Started: 2 as white, 4 as black
+02:56:46:INFO:[game_play]:GAME OVER: 2 as white, 4 as black, 4 won
+ EXECUTION: 1853.5949139595032 seconds
+02:56:46:INFO:[game_play]:Game Started: 2 as white, 4 as black
+03:09:05:INFO:[game_play]:ERROR WITH MCTS
+03:09:05:INFO:[game_play]:GAME OVER: 2 as white, 4 as black, -1 won
+ EXECUTION: 739.5063536167145 seconds
+03:09:05:INFO:[game_play]:Game Started: 2 as white, 4 as black
+06:53:53:INFO:[game_play]:GAME OVER: 2 as white, 4 as black, 4 won
+ EXECUTION: 13487.77824997902 seconds
+06:53:53:INFO:[game_play]:Game Started: 2 as white, 4 as black
+09:39:28:INFO:[game_play]:GAME OVER: 2 as white, 4 as black, 4 won
+ EXECUTION: 9934.925563097 seconds
+09:39:28:INFO:[game_play]:Game Started: 2 as white, 4 as black
+09:43:20:INFO:[game_play]:GAME OVER: 2 as white, 4 as black, 2 won
+ EXECUTION: 231.53567814826965 seconds
+09:43:20:INFO:[train_sess]:COMPLETED: Testing depth 1
