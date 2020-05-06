@@ -54,7 +54,7 @@ class markovagent:
         except Exception:
             #print('@',end='')
             #stand_pat = eval.evaluate_board(board)
-            stand_pat = predict_eval(board)
+            stand_pat = self.predict_eval(board)
         if( stand_pat >= beta ):
             return beta
         if( alpha < stand_pat ):
@@ -105,7 +105,7 @@ class markovagent:
     def predict_eval(self, board):
         data=[{'state': board.fen()}]
         prec = md.preprocessor()
-        prec.fit(raw_data = data)
+        prec.fit(dataframe = data)
         data = prec.transform(predict = True, eval = True)
         return self.model.predict(data)
 

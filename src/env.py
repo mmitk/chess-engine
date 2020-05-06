@@ -117,17 +117,17 @@ class chessGame:
 
         # Now add to historic dataset of moves made by each agent
         if self.winner == Winner.WHITE:
-            winner = self.agent1.type
+            self.winner = self.agent1.type
             print('Agent 1 Won!')
             self.agent1.write_data(history_file, did_win = 1)
             self.agent2.write_data(history_file, did_win = int(0))
         elif self.winner == Winner.BLACK:
-            winner = self.agent2.type
+            self.winner = self.agent2.type
             print('Agent 2 Won!')
             self.agent1.write_data(history_file, did_win = int(0))
             self.agent2.write_data(history_file, did_win = 1)
         else:
-            winner = -1
+            self.winner = -1
             print('Draw!')
             #self.agent1.write_data('history.csv', did_win = int(0))
             #self.agent2.write_data('history.csv', did_win = int(0))
@@ -139,12 +139,12 @@ class chessGame:
         for move in self.move_history:
             f.write(str(move))
             f.write('\n')
-        f.write('END OF GAME, AGENT {} ({}) won\n'.format(winner, str(self.winner)))
+        f.write('END OF GAME, AGENT {} ({}) won\n'.format(self.winner, str(self.winner)))
         f.close()
         if train:
             self.update_total(exec_time)
             print('recorded stats')
-        message = 'GAME OVER: {} as white, {} as black, {} won\n EXECUTION: {} seconds'.format(self.agent1.type,self.agent2.type,winner, exec_time)
+        message = 'GAME OVER: {} as white, {} as black, {} won\n EXECUTION: {} seconds'.format(self.agent1.type,self.agent2.type,self.winner, exec_time)
         self.log(message = message)
 
     
@@ -169,9 +169,4 @@ class chessGame:
             json.dump(totals, f)
     
     def get_winner(self):
-        if self.winner == Winner.WHITE:
-            return self.agent1.type
-        elif self.winner == Winner.BLACK:
-            return self.agent2.type
-        else:
-            return -7
+        return self.winner

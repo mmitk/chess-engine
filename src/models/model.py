@@ -82,7 +82,7 @@ class preprocessor(object):
             self.raw_data = dataframe
         return self.raw_data
 
-    def transform(self, predict = False):
+    def transform(self, predict = False, eval = False):
         data = self.raw_data
         if not predict:
             class_ = data.pop('class')

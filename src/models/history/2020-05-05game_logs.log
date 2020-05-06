@@ -1,3 +1,43 @@
 00:27:09:INFO:[val_iter]:COMPLETED: Q-Value Iteration 200 iterations
 Execution Time: 0.02221846580505371 seconds
 ********************************************************
+17:37:11:INFO:[train_sess]:Testing depth 1 started
+17:37:12:INFO:[game_play]:Game Started: 1 as white, 4 as black
+18:43:11:INFO:[train_sess]:Testing depth 1 started
+18:43:11:INFO:[game_play]:Game Started: 1 as white, 4 as black
+19:08:56:INFO:[train_sess]:Testing depth 1 started
+19:08:57:INFO:[game_play]:Game Started: 1 as white, 4 as black
+19:09:38:INFO:[game_play]:GAME OVER: 1 as white, 4 as black, -1 won
+ EXECUTION: 41.266844272613525 seconds
+19:09:38:INFO:[game_play]:Game Started: 1 as white, 4 as black
+19:10:19:INFO:[game_play]:GAME OVER: 1 as white, 4 as black, -1 won
+ EXECUTION: 41.37885499000549 seconds
+19:10:19:INFO:[game_play]:Game Started: 1 as white, 4 as black
+19:11:01:INFO:[game_play]:GAME OVER: 1 as white, 4 as black, -1 won
+ EXECUTION: 41.27796411514282 seconds
+19:11:01:INFO:[game_play]:Game Started: 1 as white, 4 as black
+19:11:42:INFO:[game_play]:GAME OVER: 1 as white, 4 as black, -1 won
+ EXECUTION: 41.17758536338806 seconds
+19:11:42:INFO:[game_play]:Game Started: 1 as white, 4 as black
+19:12:23:INFO:[game_play]:GAME OVER: 1 as white, 4 as black, -1 won
+ EXECUTION: 41.165597677230835 seconds
+19:12:23:INFO:[game_play]:Game Started: 1 as white, 4 as black
+19:13:04:INFO:[game_play]:GAME OVER: 1 as white, 4 as black, -1 won
+ EXECUTION: 41.10908007621765 seconds
+19:13:04:INFO:[game_play]:Game Started: 1 as white, 4 as black
+19:13:45:INFO:[game_play]:GAME OVER: 1 as white, 4 as black, -1 won
+ EXECUTION: 40.99920415878296 seconds
+19:13:45:INFO:[game_play]:Game Started: 1 as white, 4 as black
+19:14:26:INFO:[game_play]:GAME OVER: 1 as white, 4 as black, -1 won
+ EXECUTION: 40.97071981430054 seconds
+19:14:27:INFO:[game_play]:Game Started: 1 as white, 4 as black
+19:15:08:INFO:[game_play]:GAME OVER: 1 as white, 4 as black, -1 won
+ EXECUTION: 40.96020531654358 seconds
+19:15:08:INFO:[game_play]:Game Started: 1 as white, 4 as black
+19:15:49:INFO:[game_play]:GAME OVER: 1 as white, 4 as black, -1 won
+ EXECUTION: 40.987080574035645 seconds
+19:15:49:INFO:[train_sess]:COMPLETED: Testing depth 1
+19:15:49:INFO:[train_sess]:Testing depth 2 started
+19:15:49:INFO:[game_play]:Game Started: 1 as white, 4 as black
+20:44:35:INFO:[train_sess]:Testing depth 1 started
+20:44:35:INFO:[game_play]:Game Started: 1 as white, 4 as black

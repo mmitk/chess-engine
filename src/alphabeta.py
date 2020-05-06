@@ -30,7 +30,7 @@ class alphabeta_agent:
                 return val
             except Exception:
                 return 0
-        for move in board.psuedo_legal_moves:
+        for move in board.legal_moves:
             #theta = self.predict_probability(board, move)
             board.push(move)   
             score = float(-self.alphabeta( -beta, -alpha, depthleft - 1, board))
