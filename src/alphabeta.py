@@ -25,7 +25,7 @@ class alphabeta_agent:
     def alphabeta( self, alpha, beta, depthleft, board ):
         bestscore = -9999
         if( depthleft == 0 ):
-            return self.quiesce( alpha, beta, board )
+            return eval.evaluate_board(board)
         for move in board.legal_moves:
             #theta = self.predict_probability(board, move)
             board.push(move)   
@@ -38,26 +38,6 @@ class alphabeta_agent:
             if( score > alpha ):
                 alpha = score
         return bestscore
-
-    def quiesce( self, alpha, beta, board ):
-    # need to import evaluate.py
-        stand_pat = eval.evaluate_board(board)
-        if( stand_pat >= beta ):
-            return beta
-        if( alpha < stand_pat ):
-            alpha = stand_pat
-
-        for move in board.legal_moves:
-            if board.is_capture(move):
-                board.push(move)
-                score = -self.quiesce( -beta, -alpha, board)
-                board.pop()
-
-                if( score >= beta ):
-                    return beta
-                if( score > alpha ):
-                    alpha = score  
-        return alpha
 
     def make_move(self, depth, board):
         if board.is_checkmate():

@@ -148,8 +148,8 @@ if __name__ == "__main__":
     model.fit(data)
     model.write_file(Path(util.HISTORY_DIR / 'model_3.pkl'))
 
-    depth_1_test(model, 10)
-    depth_2_test(model, 10)
-    depth_3_test(model, 10)
-    depth_4_test(model, 10)
+    depth_1_test(model, 500)
+    depth_2_test(model, 500)
+    depth_3_test(model, 500)
+    depth_4_test(model, 500)
 

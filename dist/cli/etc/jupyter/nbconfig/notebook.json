@@ -1,0 +1,5 @@
+{
+  "load_extensions": {
+    "latex_envs/latex_envs": true
+  }
+}

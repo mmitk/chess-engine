@@ -256,21 +256,10 @@ if __name__ == "__main__":
         data = prec.transform()
         model.fit(data)
         model.write_file(Path(util.HISTORY_DIR / 'test_model_3.pkl'))
-    manager = Manager()
-    p = argparse.ArgumentParser()
-    p.add_argument("-a", "--alphabeta", action='store_true', help='changes agent to mishsearch agent, default=alphabeta (depth of 1)')
-    p.add_argument("-c", "--montecarlo", action = 'store_true')
-    args = p.parse_args()
+ 
     
-    if args.alphabeta:
-        print('**********************************************************************')
-        agent = ab.alphabeta_agent(model = model)
-    elif args.montecarlo:
-        print('######################################################################')
-        agent = mcts.mcts_agent(manager = manager, model = model)
-    else:
-        #print('**********************************************************************')
-        agent = mk.markovagent(model = model)
+
+    agent = mk.markovagent(model = model)
     
     #agent = mishagent(model = model)
     #pool = ProcessPoolExecutor()
