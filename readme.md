@@ -29,6 +29,10 @@ in order to play against the demo:
     python game.py
 (User is always the white pieces)
 
+You may first need to set up a conda environment:
+
+    conda env create -f env.yml
+
 
 The stockfish-11-linux folder contains the open source stockfish software, and was used to gather training datasets
 
