@@ -1,5 +1,5 @@
 Chess Engine built with a static evaluation and SVM
-
+(default branch is mishbranch)
 Training is done in train.py, different sessions set different oponents in order to ensure that there is variance
 in the dataset.
 Logs for training are found in scr/models/history
