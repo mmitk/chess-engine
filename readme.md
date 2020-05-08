@@ -25,7 +25,7 @@ src/models/history
 DEMO:
 
     in order to play against the demo:
-    dist/cli/cli.exe
+    python game.py
     (User is always the white pieces)
 
 
