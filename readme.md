@@ -6,12 +6,12 @@ Logs for training are found in scr/models/history
 
 also in scr/models/history:
 
-    training datasets are:
+training datasets are:
     history.csv
     history2.csv
     history3.csv
 
-    Saved Models:
+Saved Models:
     All trained models are saved to .pkl files
     best performing model is test_model_2.pkl
     In order to see how to load a .pkl file into a model object see game.py line 252
@@ -24,9 +24,10 @@ src/models/history
 
 DEMO:
 
-    in order to play against the demo:
+in order to play against the demo:
+
     python game.py
-    (User is always the white pieces)
+(User is always the white pieces)
 
 
 The stockfish-11-linux folder contains the open source stockfish software, and was used to gather training datasets
@@ -34,7 +35,6 @@ The stockfish-11-linux folder contains the open source stockfish software, and w
 utility functions are located in util.py (log function, directory structures etc.)
 
 The following files contain agents:
-
     markovsearch.py - contains the SVM driven model based chess agent, this is the main goal of the project
     alphabeta.py - contains a standard alphabeta search tree based agent using static evaluation function
     mcts.py - contains a standar monte carlo tree search based agent using static evaluation function 
@@ -45,6 +45,6 @@ The evaluation function is located in:
 
 In order to run the code in your own environment:
 
-    use spec-file.txt or env.yml to set up an anaconda environment
+use spec-file.txt or env.yml to set up an anaconda environment
 
 The test folder contains testing for data preprocessing and different ideas, some of which were not used 
