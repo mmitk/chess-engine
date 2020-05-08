@@ -58,7 +58,7 @@ class chessGame:
         self.move_history = list()
 
 
-    def play_out(self):
+    def play_out(self, depth = 1, stats_file = 'stats.json', history_file = 'history.csv', train = True):
         """
         Playout the actual game between the two agents if they exist, otherwise raise an error
         Game loop iterates until a checkmate occurs
@@ -72,7 +72,7 @@ class chessGame:
 
         while not self.board.is_checkmate():
             try:
-                move1 = self.agent1.make_move(depth = 1, board = self.board)
+                move1 = self.agent1.make_move(depth = depth, board = self.board)
             except util.MCTSException as e:
                 self.log(str(e))
                 break
@@ -84,7 +84,7 @@ class chessGame:
             
             # Now agent 2 selects and makes their move
             try:
-                move2 = self.agent2.make_move(depth = 1, board = self.board)
+                move2 = self.agent2.make_move(depth = depth, board = self.board)
             except util.MCTSException as e:
                 self.log(str(e))
                 break
@@ -118,16 +118,19 @@ class chessGame:
         # Now add to historic dataset of moves made by each agent
         if self.winner == Winner.WHITE:
             winner = self.agent1.type
+            self.winner_type = winner
             print('Agent 1 Won!')
-            self.agent1.write_data('history.csv', did_win = 1)
-            self.agent2.write_data('history.csv', did_win = int(0))
+            self.agent1.write_data(history_file, did_win = 1)
+            self.agent2.write_data(history_file, did_win = int(0))
         elif self.winner == Winner.BLACK:
             winner = self.agent2.type
+            self.winner_type = winner
             print('Agent 2 Won!')
-            self.agent1.write_data('history.csv', did_win = int(0))
-            self.agent2.write_data('history.csv', did_win = 1)
+            self.agent1.write_data(history_file, did_win = int(0))
+            self.agent2.write_data(history_file, did_win = 1)
         else:
             winner = -1
+            self.winner_type = winner
             print('Draw!')
             #self.agent1.write_data('history.csv', did_win = int(0))
             #self.agent2.write_data('history.csv', did_win = int(0))
@@ -141,7 +144,9 @@ class chessGame:
             f.write('\n')
         f.write('END OF GAME, AGENT {} ({}) won\n'.format(winner, str(self.winner)))
         f.close()
-        self.update_total(exec_time)
+        if train:
+            self.update_total(exec_time)
+            print('recorded stats')
         message = 'GAME OVER: {} as white, {} as black, {} won\n EXECUTION: {} seconds'.format(self.agent1.type,self.agent2.type,winner, exec_time)
         self.log(message = message)
 
@@ -151,8 +156,8 @@ class chessGame:
         util.log(message, logger_str="game_play", msg_type=msg_type, write_to_console=False, path = util.HISTORY_DIR, filename = 'game_logs.log')
 
     
-    def update_total(self, time = None):
-        with open(Path(util.HISTORY_DIR / 'stats.json'), 'r') as f:
+    def update_total(self, time = None, filename = 'stats.json'):
+        with open(Path(util.HISTORY_DIR / filename), 'r') as f:
             totals = json.load(f)
 
         total_time = int(totals['Total Playing Time'])
@@ -166,3 +171,5 @@ class chessGame:
         with open(Path(util.HISTORY_DIR / 'stats.json'), 'w') as f:
             json.dump(totals, f)
     
+    def get_winner(self):
+       return self.winner_type

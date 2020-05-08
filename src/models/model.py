@@ -47,7 +47,7 @@ class svm():
         try:
              return float(self._model.predict_proba(dataset)[:, np.where(self._model.classes_ == 1)].item(0))
         except Exception as e:
-            return 0.5
+            return 1
     
     def write_file(self, filename):
         with open(filename, 'wb') as file:

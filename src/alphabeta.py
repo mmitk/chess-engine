@@ -25,7 +25,7 @@ class alphabeta_agent:
     def alphabeta( self, alpha, beta, depthleft, board ):
         bestscore = -9999
         if( depthleft == 0 ):
-            return self.quiesce( alpha, beta, board )
+            return eval.evaluate_board(board)
         for move in board.legal_moves:
             #theta = self.predict_probability(board, move)
             board.push(move)   
@@ -39,26 +39,6 @@ class alphabeta_agent:
                 alpha = score
         return bestscore
 
-    def quiesce( self, alpha, beta, board ):
-    # need to import evaluate.py
-        stand_pat = eval.evaluate_board(board)
-        if( stand_pat >= beta ):
-            return beta
-        if( alpha < stand_pat ):
-            alpha = stand_pat
-
-        for move in board.legal_moves:
-            if board.is_capture(move):
-                board.push(move)
-                score = -self.quiesce( -beta, -alpha, board)
-                board.pop()
-
-                if( score >= beta ):
-                    return beta
-                if( score > alpha ):
-                    alpha = score  
-        return alpha
-
     def make_move(self, depth, board):
         if board.is_checkmate():
             return None
@@ -67,9 +47,10 @@ class alphabeta_agent:
         alpha = -100000
         beta = 100000
         for move in board.legal_moves:
-            theta = self.predict_probability(board, move)
+            #theta = self.predict_probability(board, move)
             board.push(move)
-            boardValue = theta*(- self.alphabeta(-beta, -alpha, depth-1,board))
+            #boardValue = theta*(- self.alphabeta(-beta, -alpha, depth-1,board))
+            boardValue = (- self.alphabeta(-beta, -alpha, depth-1,board))
             if boardValue > bestValue:
                 bestValue = boardValue
                 bestMove = move
@@ -88,13 +69,13 @@ class alphabeta_agent:
         data = prec.transform(predict = True)
         return self.model.predict_proba(data)
 
-    def write_data(self, filename, did_win = None):
+    def write_data(self, filename = 'history.csv', did_win = None):
         for row in self.data:
             if did_win == 1:
                 row['didWin'] = did_win
             else:
                 row['didWin'] = 0
-        p = Path(util.HISTORY_DIR / 'history.csv')
+        p = Path(util.HISTORY_DIR / filename)
 
         #df = pd.DataFrame()
         f = open(p, 'a')
